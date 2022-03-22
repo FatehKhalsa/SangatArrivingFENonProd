@@ -1,25 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
+import Home from './components/index';
+import Users from './components/user';
+import Sarava from './components/sarava';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            {/* <a class="navbar-brand" href="https://codingthesmartway.com" target="_blank">
+              <img src={logo} width="30" height="30" alt="CodingTheSmartWay.com" />
+            </a> */}
+            <Link to="/" className="navbar-brand">Home</Link>
+            <div className="collpase navbar-collapse">
+              <ul className="navbar-nav mr-auto">
+                <li className="navbar-item">
+                  <Link to="/User" className="nav-link">Users</Link>
+                </li>
+                <li className="navbar-item">
+                  <Link to="/create" className="nav-link">Sarava</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <br/>
+          <Route path="/" exact component={Home} />
+          <Route path="/User" component={Users} />
+          <Route path="/create" component={Sarava} />
+        </div>
+    </Router>
   );
 }
 
