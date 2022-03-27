@@ -14,8 +14,10 @@ export const checkAuth = (username, password) => {
            
     })
 
-    isAuthenticated && localStorage.setItem('currentUser', JSON.stringify(username));
-    currentUserSubject.next(username);
+    if(isAuthenticated) {
+        localStorage.setItem('currentUser', JSON.stringify(username));
+        currentUserSubject.next(username);
+    }
 
     return isAuthenticated;
 }
@@ -28,6 +30,12 @@ const userAuths = {
 
 
 export const authenticationService = {
+    logout,
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue() {return currentUserSubject.value}
 };
+
+function logout(){
+    localStorage.removeItem('currentUser');
+    currentUserSubject.next(null);
+}

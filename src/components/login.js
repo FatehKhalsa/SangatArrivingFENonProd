@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
         const {isInvalid} = this.state;
         return(
             <div>
-                 <h2>Login</h2>
+                 <h2>Please only admins should be logging in</h2>
                  {!isInvalid && 
                  
                  <div class="alert alert-danger" role="alert">
@@ -59,7 +59,7 @@ class LoginPage extends React.Component {
                         <label>Password</label>
                           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value={this.state.password} onChange={e=>this.getPassWord(e)}/>
                     </div>
-                    <button type="submit" class="btn btn-default" onClick={e => this.onSubmit(e)}>Submit</button>
+                    <button type="submit" class="btn btn-primary" onClick={e => this.onSubmit(e)}>Login</button>
                 </form>
             </div>
         )
