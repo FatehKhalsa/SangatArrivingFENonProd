@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+
+
 
 
 const Sarava  = () => {
 
+  
     return(
         <div>
-            Sarava
+            Sarava detailed page
         </div>
     )
 }

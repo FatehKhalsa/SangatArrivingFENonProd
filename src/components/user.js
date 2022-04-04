@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+
+
 
 
 const User  = () => {
 
+  
     return(
         <div>
-           Users
+            User profile page
         </div>
     )
 }

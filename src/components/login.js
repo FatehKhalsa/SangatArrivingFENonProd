@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
         const {isInvalid} = this.state;
         return(
             <div>
-                 <h2>Please only admins should be logging in</h2>
+                 <h3>Bulandpuri Sahib Barsi Saraava System</h3>
                  {!isInvalid && 
                  
                  <div class="alert alert-danger" role="alert">
@@ -61,6 +61,7 @@ class LoginPage extends React.Component {
                     </div>
                     <button type="submit" class="btn btn-primary" onClick={e => this.onSubmit(e)}>Login</button>
                 </form>
+                {/* <img src={"./DarbarMain.jpeg"} width="500" height="500"/> */}
             </div>
         )
     }
