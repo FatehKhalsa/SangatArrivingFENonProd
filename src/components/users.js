@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MTable from './helper/materialTable';
+
 import { useHistory } from "react-router-dom";
 
 
@@ -21,7 +22,35 @@ const Users  = () => {
         { field: "Lastname" },
         { field: "City", sortable: true, filter: true },
         { field: "DOB" },
-    ]);     
+    ]);
+    
+    // const [data, setState] = useState([])
+    // useEffect(()=>{
+    //     fetch("https://www.ag-grid.com/example-assets/olympic-winners.json").then(res=>setState(res.data))
+    // },  console.log("Data fetched", data));
+
+   
+
+    // const [columnDefs] = useState([
+    //     { field: 'athlete', minWidth: 150 },
+    //     { field: 'age', maxWidth: 90 },
+    //     { field: 'country', minWidth: 150 },
+    //     { field: 'year', maxWidth: 90 },
+    //     { field: 'date', minWidth: 150 },
+    //     { field: 'sport', minWidth: 150 },
+    //     { field: 'gold' },
+    //     { field: 'silver' },
+    //     { field: 'bronze' },
+    //     { field: 'total' },
+    // ]);
+
+    // const [defaultColDef] = useState({
+    //     flex: 1,
+    //     midWidth: 100,
+    // });
+
+    // const [rowSelection] = useState('multiple');
+    // const [rowData] = useState(null)
 
     return(
         <div>
