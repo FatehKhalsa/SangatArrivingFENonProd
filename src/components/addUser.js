@@ -9,20 +9,14 @@ const editStyling = {
 }
 
 
-const User  = (props) => {
+const AddUser  = (props) => {
 
- const userInfoArray = get(props, 'userSelected', []);
-
- const userInfo = userInfoArray[0];
-
- console.log(userInfo)
+ 
   
   const [show, setShow] = useState(true);
 
-  const handleClose = () => {
-      props.resetComponent();
-      setShow(false);
-  }
+  const handleClose = () =>  setShow(false);
+  
   const handleShow = () => setShow(true);
   
 
@@ -30,32 +24,40 @@ const User  = (props) => {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>User Info</Modal.Title>
+          <Modal.Title>Add a new user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <div style={{...editStyling}}>
                First Name
-               <input value={userInfo.Firstname} />
+               <input />
             </div>
             <div style={editStyling}>
                Last Name
-               <input value={userInfo.Lastname} />
+               <input />
             </div>
             <div style={editStyling}>
                DOB
-               <input value={userInfo.DOB} />
+               <input />
             </div>
             <div style={editStyling}>
                 Address
-               <input value={userInfo.Address} />
+                <input />
             </div>
             <div style={editStyling}>
-               Flight Info
-               <input value={'AI 183'} />
+               City
+               <input />
+            </div>
+            <div style={editStyling}>
+               State
+               <input />
             </div>
             <div style={editStyling}>
                Additional Info
-               <input value={'Allergy'} />
+               <input />
+            </div>
+            <div className="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                    Add Family
             </div>
         </Modal.Body>
         <Modal.Footer>
@@ -73,4 +75,4 @@ const User  = (props) => {
 }
 
 
-export default User;
+export default AddUser;

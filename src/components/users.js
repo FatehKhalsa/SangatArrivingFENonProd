@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import MTable from './helper/materialTable';
+import {usersMockData} from '../components/mockData/users';
 
 import { useHistory } from "react-router-dom";
+import AddUser from './addUser';
+
 
 
 
@@ -11,18 +14,22 @@ const Users  = () => {
     const history = useHistory();
   
 
-    const [rowData] = useState([
-        {Firstname: "Manjodh", Lastname: "Chahal", City: "Fresno", DOB:"10/23/89", id: '1'},
-        {Firstname: "Amanjodh", Lastname: "Chahal", City: "Surrey", DOB:"10/23/89", id: '2'},
-        {Firstname: "Singh", Lastname: "Singh", City: "Calgary", DOB:"10/23/89", id: '3'},
-    ])
+    const [rowData] = useState(usersMockData)
  
     const [columnDefs] = useState([
-        { field: "Firstname", sortable: true },
+        { field: "Firstname", sortable: true, filter: true },
         { field: "Lastname" },
         { field: "City", sortable: true, filter: true },
         { field: "DOB" },
+        { field: "FlightInfo"},
+        { field: "AllergyInfo"},
     ]);
+
+    const [showUser, setShowUser] = useState(false);
+
+    const addNewUser = () => {
+        setShowUser(true);
+    }
     
     // const [data, setState] = useState([])
     // useEffect(()=>{
@@ -54,11 +61,13 @@ const Users  = () => {
 
     return(
         <div>
-            <div style={{display: 'flex', justifyContent: 'start', marginBottom: '10px'}}>
+            {showUser && <AddUser/>}
+            <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-                <h3 style={{marginLeft: '25%'}}>Sangat List</h3>  
+                <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New User</button>
             </div>
-                <MTable rowData={rowData} columnDefs={columnDefs} />
+            <h3 style={{marginLeft: '42%'}}>Sangat List</h3>  
+                <MTable rowData={rowData} columnDefs={columnDefs} text={"User"}/>
              </div>
     )
 }

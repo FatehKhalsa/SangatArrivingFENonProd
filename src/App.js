@@ -43,7 +43,7 @@ class App extends React.Component {
     <Router history={createBrowserHistory}>
       <div className="container">
         {currentUser && 
-          <nav className="navbar navbar-expand-lg navbar-light" style={{display: 'flex', justifyContent: 'space-between', backgroundColor: '#bf88b5', borderRadius:'10px'}}>
+          <nav className="navbar navbar-expand-lg navbar-light" style={{display: 'flex', justifyContent: 'space-between', backgroundColor: '#bf88b5', borderRadius:'10px', padding: '0px 5px'}}>
               <Link to="/Home" className="navbar-brand btn-default">Home</Link>
               <button onClick={this.logout} className="nav-item nav-link btn btn-danger">Logout</button>
           </nav>

@@ -1,14 +1,21 @@
 
-export const users = [{
-    Firstname: "Manjodh",
-    Lastname: "Chahal",
-    City: "Fresno",
-    DOB: '10/23/89',
-},
-{
-Firstname: "Amanjot",
-Lastname: "Singh",
-City: "Surrey",
-DOB: '10/23/89',
-}
-]
+export const usersMockData = [
+    {Firstname: "Manjodh", Lastname: "Chahal", City: "Fresno", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
+    {Firstname: "Amanjodh", Lastname: "Chahal", City: "Surrey", DOB:"10/23/89",FlightInfo: "UA 87", AllergyInfo:"Gluten", id: '2'},
+    {Firstname: "Singh", Lastname: "Singh", City: "Calgary", DOB:"10/23/89", FlightInfo: "BA 183", AllergyInfo:"None", id: '3'},
+    {Firstname: "Sandeep", Lastname: "Auluck", City: "Fresno", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
+    {Firstname: "Jatinder", Lastname: "Brar", City: "Surrey", DOB:"10/23/89",FlightInfo: "UA 87", AllergyInfo:"Gluten", id: '2'},
+    {Firstname: "Satinder", Lastname: "Sangha", City: "Edmonton", DOB:"10/23/89", FlightInfo: "BA 183", AllergyInfo:"None", id: '3'},
+    {Firstname: "Navdeep", Lastname: "Sabhi", City: "Toronto", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
+    {Firstname: "Deep", Lastname: "Sarao", City: "Walsall", DOB:"10/23/89",FlightInfo: "UA 87", AllergyInfo:"Gluten", id: '2'},
+    {Firstname: "Hardeep", Lastname: "Sidhu", City: "Paris", DOB:"10/23/89", FlightInfo: "BA 183", AllergyInfo:"None", id: '3'},
+    {Firstname: "Palwinder", Lastname: "Bhullar", City: "Germany", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
+    {Firstname: "Manwinder", Lastname: "Cheema", City: "Kuala Lampur", DOB:"10/23/89",FlightInfo: "UA 87", AllergyInfo:"Gluten", id: '2'},
+    {Firstname: "Sukhbir", Lastname: "Singh", City: "Melbourne", DOB:"10/23/89", FlightInfo: "BA 183", AllergyInfo:"None", id: '3'},
+    {Firstname: "Sandeep", Lastname: "Kaur", City: "Te Puke", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
+    {Firstname: "Amanjodh", Lastname: "Kaur", City: "Indianapolis", DOB:"10/23/89",FlightInfo: "UA 87", AllergyInfo:"Gluten", id: '2'},
+    {Firstname: "Singh", Lastname: "Singh", City: "Detriot", DOB:"10/23/89", FlightInfo: "BA 183", AllergyInfo:"None", id: '3'},
+    {Firstname: "Manjodh", Lastname: "Chahal", City: "New York", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
+    {Firstname: "Amanjodh", Lastname: "Kaur", City: "Toronto", DOB:"10/23/89",FlightInfo: "UA 87", AllergyInfo:"Gluten", id: '2'},
+    {Firstname: "Singh", Lastname: "Singh", City: "Fresno", DOB:"10/23/89", FlightInfo: "BA 183", AllergyInfo:"None", id: '3'},
+];
