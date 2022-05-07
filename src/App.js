@@ -3,6 +3,7 @@ import Home from './components/index';
 import Users from './components/users';
 import Saravas from './components/saravas';
 import LoginPage from './components/login';
+import Asthans from './components/asthans/index';
 import "bootstrap/dist/css/bootstrap.min.css";
 import PrivateRoute from './components/PrivateRoute';
 import { createBrowserHistory } from 'history';
@@ -53,6 +54,7 @@ class App extends React.Component {
           <PrivateRoute path="/Home" exact component={Home} />
           <PrivateRoute path="/Users" component={Users} />
           <PrivateRoute path="/Saravas" component={Saravas} />
+          <PrivateRoute path="/Asthans" exact component={Asthans} />
         </div>
     </Router>
   );
