@@ -8,10 +8,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import PrivateRoute from './components/PrivateRoute';
 import { createBrowserHistory } from 'history';
 import { authenticationService } from './userAuthMocks';
+import BochumGermany from './components/asthans/BochumGermany';
+import CalgaryAB from './components/asthans/CalgaryAB';
+import EdmontonAB from './components/asthans/EdmontonAB';
+import FresnoCA from './components/asthans/FresnoCA';
+import IndianaIN from './components/asthans/IndianaIN';
+import Italy from './components/asthans/Italy';
+import Malaysia from './components/asthans/Malaysia';
+import MelbourneAus from './components/asthans/MelbourneAus';
+import MichiganDT from './components/asthans/MichiganDT';
+import NewYorkNY from './components/asthans/NewYorkNY';
+import NewZealand from './components/asthans/NewZealand';
+import ParisFrance from './components/asthans/ParisFrance';
+import SurreyBC from './components/asthans/SurreyBC';
+import TorontoON from './components/asthans/TorontoON';
+import WalsallUK from './components/asthans/WalsallUK';
+
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import './AppScss.scss';
+import NewYorkNYC from './components/asthans/NewYorkNY';
 
 let history = createBrowserHistory();
 
@@ -55,6 +72,21 @@ class App extends React.Component {
           <PrivateRoute path="/Users" component={Users} />
           <PrivateRoute path="/Saravas" component={Saravas} />
           <PrivateRoute path="/Asthans" exact component={Asthans} />
+          <PrivateRoute path="/Asthans/BochumGermany" exact component={BochumGermany} />
+          <PrivateRoute path="/Asthans/SurreyCanada" exact component={SurreyBC} />
+          <PrivateRoute path="/Asthans/EdmontonCanada" exact component={EdmontonAB} />
+          <PrivateRoute path="/Asthans/CalgaryCanada" exact component={CalgaryAB} />
+          <PrivateRoute path="/Asthans/TorontoCanada" exact component={TorontoON} />
+          <PrivateRoute path="/Asthans/FresnoUSA" exact component={FresnoCA} />
+          <PrivateRoute path="/Asthans/IndianaUSA" exact component={IndianaIN} />
+          <PrivateRoute path="/Asthans/MichiganUSA" exact component={MichiganDT} />
+          <PrivateRoute path="/Asthans/NewYorkUSA" exact component={NewYorkNYC} />
+          <PrivateRoute path="/Asthans/WalsallUK" exact component={WalsallUK} />
+          <PrivateRoute path="/Asthans/ParisFrance" exact component={ParisFrance} />
+          <PrivateRoute path="/Asthans/Italy" exact component={Italy} />
+          <PrivateRoute path="/Asthans/Malaysia" exact component={Malaysia} />
+          <PrivateRoute path="/Asthans/MelbourneAus" exact component={MelbourneAus} />
+          <PrivateRoute path="/Asthans/NewZealand" exact component={NewZealand} />
         </div>
     </Router>
   );
