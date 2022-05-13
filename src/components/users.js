@@ -5,6 +5,9 @@ import {usersMockData} from '../components/mockData/users';
 import { useHistory } from "react-router-dom";
 import AddUser from './addUser';
 
+import {HerokuURL} from '../constants';
+
+
 
 
 
@@ -31,10 +34,12 @@ const Users  = () => {
         setShowUser(true);
     }
     
-    // const [data, setState] = useState([])
-    // useEffect(()=>{
-    //     fetch("https://www.ag-grid.com/example-assets/olympic-winners.json").then(res=>setState(res.data))
-    // },  console.log("Data fetched", data));
+    const [data, setState] = useState([])
+    useEffect(()=>{
+        fetch("https://guarded-gorge-38921.herokuapp.com/api/getAllUsers", { headers: {"x-access-token" : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzM1MDU5MmM5MDc4N2YyODYzMThlMSIsImlhdCI6MTY1MjMyNDAxNCwiZXhwIjoxNjUyNDEwNDE0fQ.IECtjqpyZxBtMDdSf6eON_-xe67bxNxfEnV4K_1YgmU'} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
+    }, []);
+
+    console.log("Data", data)
 
    
 
