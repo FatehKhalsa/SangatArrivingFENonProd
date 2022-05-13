@@ -23,24 +23,24 @@ export const usersMockData = [
 
 export const hostColumns = [
     { field: "HostFirstName", sortable: true, filter: true },
-    { field: "HostLastNameName" },
+    { field: "HostLastName" },
     { field: "City", sortable: true, filter: true },
     { field: "canHoldSangat", cellStyle: params => {if(params.value==='Yes') {return {color: 'green'};} return {color: 'red'}}},
-    { field: "HowManyBedsRemaining"},
+    { field: "HowManyBedsRemaining", cellStyle: params => {if(params.value==='0') {return {color: 'red'};} return {color: 'green'}}},
     { field: "DistanceFromDarbarSahib"},
 ]
 
 
 export const hostMockdata = [
-        {HostFirstName: "Manjodh", HostLastNameName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "3", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Aman", HostLastNameName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "5", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Surinder", HostLastNameName: "singh", City: "Delta", canHoldSangat:"No", HowManyBedsRemaining: "0", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Tanveer", HostLastNameName: "singh", City: "Langley", canHoldSangat:"Yes", HowManyBedsRemaining: "83", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Manjodh", HostLastNameName: "Chahal", City: "Richmond", canHoldSangat:"Yes", HowManyBedsRemaining: "2", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Manjodh", HostLastNameName: "Chahal", City: "New Westminster", canHoldSangat:"Yes", HowManyBedsRemaining: "5", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Manjodh", HostLastNameName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "3", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Manjodh", HostLastNameName: "Chahal", City: "Delta", canHoldSangat:"Yes", HowManyBedsRemaining: "0", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Manjodh", HostLastNameName: "Chahal", City: "White Rock", canHoldSangat:"No", HowManyBedsRemaining: "10", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "3", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Aman", HostLastName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "5", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Surinder", HostLastName: "singh", City: "Delta", canHoldSangat:"No", HowManyBedsRemaining: "0", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Tanveer", HostLastName: "singh", City: "Langley", canHoldSangat:"Yes", HowManyBedsRemaining: "83", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Richmond", canHoldSangat:"Yes", HowManyBedsRemaining: "2", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "New Westminster", canHoldSangat:"Yes", HowManyBedsRemaining: "5", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "3", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Delta", canHoldSangat:"Yes", HowManyBedsRemaining: "0", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "White Rock", canHoldSangat:"No", HowManyBedsRemaining: "10", DistanceFromDarbarSahib:"None", id: '1'},
 
 
 ]
