@@ -5,8 +5,7 @@ import {usersMockData} from '../components/mockData/users';
 import { useHistory } from "react-router-dom";
 import AddUser from './addUser';
 
-
-
+import {HerokuURL} from '../constants';
 
 
 const Users  = () => {
@@ -31,10 +30,13 @@ const Users  = () => {
         setShowUser(true);
     }
     
-    // const [data, setState] = useState([])
-    // useEffect(()=>{
-    //     fetch("https://www.ag-grid.com/example-assets/olympic-winners.json").then(res=>setState(res.data))
-    // },  console.log("Data fetched", data));
+    const [data, setState] = useState([])
+    console.log(localStorage.getItem('accessToken'));
+    useEffect(()=>{
+        fetch(`${HerokuURL}api/getAllUsers`, { headers: {"x-access-token" : localStorage.getItem('accessToken')} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
+    }, []);
+
+    console.log("Data", data)
 
    
 

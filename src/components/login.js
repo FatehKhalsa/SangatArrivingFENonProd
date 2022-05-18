@@ -2,7 +2,6 @@ import React from 'react';
 import {checkAuth} from '../userAuthMocks';
 import AddUser from './addUser';
 
-
 class LoginPage extends React.Component {
     constructor(props){
         super(props);
@@ -13,6 +12,7 @@ class LoginPage extends React.Component {
             isInvalid: true,
             error: '',
             addNewUser: false,
+            loading: false,
         }
 
     }
@@ -20,17 +20,23 @@ class LoginPage extends React.Component {
 
     onSubmit = (e) =>{
         e.preventDefault();
-        if(checkAuth(this.state.userName, this.state.password)){ 
-            this.props.history.push('/Home');
-        }
-        if(this.state.userName ==''){
-         this.setState({error: 'User name cannot be empty'});}
 
-        if(this.state.password==''){
-            this.setState({error: 'Password cannot be empty'});
-        }
-     
-        this.setState({isInvalid: false})
+        if(this.state.userName ==''){
+            this.setState({error: 'User name cannot be empty', isInvalid: false});}
+   
+        else if(this.state.password==''){
+               this.setState({error: 'Password cannot be empty', isInvalid: false});
+        }   
+
+        else{
+        this.setState({loading: true});
+        Promise.resolve(checkAuth(this.state.userName, this.state.password)).then((authenticated)=>{
+                console.log("Authenticated", authenticated);
+                this.props.history.push('/Home');
+                this.setState({loading: false});
+        })
+    }
+          
     }
 
     getUserName = (e) => {
@@ -53,7 +59,7 @@ class LoginPage extends React.Component {
     }
 
     render(){
-        const {isInvalid, error, addNewUser} = this.state;
+        const {isInvalid, error, addNewUser, loading} = this.state;
         return(
             <div>
                  <h3>Bulandpuri Sahib Barsi Saraava System</h3>
@@ -65,7 +71,12 @@ class LoginPage extends React.Component {
                  <span class="sr-only">Error: </span>
                     {error !=''? error: 'Bad Login'}
                </div>
-                 }
+                }
+               {loading && 
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                } 
                  <form style={{width: '57vh'}}>
                     <div class="form-group">
                          <label>Email address</label>
