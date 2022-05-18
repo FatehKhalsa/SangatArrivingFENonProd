@@ -8,10 +8,6 @@ import AddUser from './addUser';
 import {HerokuURL} from '../constants';
 
 
-
-
-
-
 const Users  = () => {
 
     const history = useHistory();
@@ -35,8 +31,9 @@ const Users  = () => {
     }
     
     const [data, setState] = useState([])
+    console.log(localStorage.getItem('accessToken'));
     useEffect(()=>{
-        fetch("https://guarded-gorge-38921.herokuapp.com/api/getAllUsers", { headers: {"x-access-token" : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzM1MDU5MmM5MDc4N2YyODYzMThlMSIsImlhdCI6MTY1MjMyNDAxNCwiZXhwIjoxNjUyNDEwNDE0fQ.IECtjqpyZxBtMDdSf6eON_-xe67bxNxfEnV4K_1YgmU'} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
+        fetch(`${HerokuURL}api/getAllUsers`, { headers: {"x-access-token" : localStorage.getItem('accessToken')} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
     }, []);
 
     console.log("Data", data)

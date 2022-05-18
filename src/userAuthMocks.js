@@ -1,32 +1,33 @@
 import { BehaviorSubject } from 'rxjs';
-
+import {HerokuURL} from './constants';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
 
-export const checkAuth = (username, password) => {
+export const checkAuth = async (username, password) => {
     let isAuthenticated = false; 
+    let token = '';
 
-    Object.keys(userAuths).map(key=>{
-            if(key==username && password ==userAuths[username]){
-                isAuthenticated = true; 
-            }
-           
-    })
+    token = await fetchToken(username, password);
 
-    if(isAuthenticated) {
-        localStorage.setItem('currentUser', JSON.stringify(username));
-        currentUserSubject.next(username);
-    }
-
-    return isAuthenticated;
+    Promise.resolve(token).then((success) => {
+        console.log(success.accessToken);
+        success.accessToken==undefined ? isAuthenticated = false: isAuthenticated= true;
+        if(isAuthenticated){
+                localStorage.setItem('currentUser', JSON.stringify(username));
+                localStorage.setItem('accessToken', success.accessToken);
+                currentUserSubject.next(username);
+            
+        }
+        return isAuthenticated;
+    });
 }
 
-
-const userAuths = {
-    "manjodh@gmail.com": "Waheguru13",
-    "Aman@gmail.com": "BC13"
-}
+let fetchToken = async (username, password) => {
+    const bodyReq = {username: username, password: password};
+    let response = await fetch(`${HerokuURL}api/auth/signin`, {method: 'POST',  headers: {'Content-Type' : "application/json"}, body:JSON.stringify(bodyReq)}).then(res=>res.json());
+    return response;
+  };
 
 
 export const authenticationService = {
@@ -37,5 +38,6 @@ export const authenticationService = {
 
 function logout(){
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('accessToken');
     currentUserSubject.next(null);
 }
