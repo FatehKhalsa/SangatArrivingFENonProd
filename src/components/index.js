@@ -27,9 +27,14 @@ const Home = () => {
                 <div className="card-body">Sarava</div>
             </div>
         </div>
-         <div className="card" style={{...cardStyling, height: '200px', margin: '2% 30%'}} onClick={e=>routeToPage('Asthans')}>
-         <div className="card-body">Asthans</div>
-     </div>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div className="card" style={{...cardStyling, height: '350px', marginTop: '1%'}} onClick={e=>routeToPage('Asthans')}>
+             <div className="card-body">Asthans</div>
+         </div>
+         <div className="card" style={{...cardStyling,  height: '350px', marginTop: '1%'}}>
+             <div className="card-body">Barsi 2023</div>
+        </div>
+        </div>
      </>
         )
     }

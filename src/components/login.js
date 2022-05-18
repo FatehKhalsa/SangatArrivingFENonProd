@@ -1,6 +1,7 @@
 import React from 'react';
 import {checkAuth} from '../userAuthMocks';
 import AddUser from './addUser';
+import Loader from '../helper/loader';
 
 class LoginPage extends React.Component {
     constructor(props){
@@ -21,10 +22,10 @@ class LoginPage extends React.Component {
     onSubmit = (e) =>{
         e.preventDefault();
 
-        if(this.state.userName ==''){
+        if(this.state.userName ===''){
             this.setState({error: 'User name cannot be empty', isInvalid: false});}
    
-        else if(this.state.password==''){
+        else if(this.state.password===''){
                this.setState({error: 'Password cannot be empty', isInvalid: false});
         }   
 
@@ -69,13 +70,11 @@ class LoginPage extends React.Component {
                  <div class="alert alert-danger" role="alert">
                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                  <span class="sr-only">Error: </span>
-                    {error !=''? error: 'Bad Login'}
+                    {error !==''? error: 'Bad Login'}
                </div>
                 }
                {loading && 
-                <div class="spinner-grow" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
+                    <Loader/>
                 } 
                  <form style={{width: '57vh'}}>
                     <div class="form-group">
