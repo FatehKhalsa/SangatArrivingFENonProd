@@ -38,28 +38,6 @@ const Users  = () => {
 
     console.log("Data", data)
 
-   
-
-    // const [columnDefs] = useState([
-    //     { field: 'athlete', minWidth: 150 },
-    //     { field: 'age', maxWidth: 90 },
-    //     { field: 'country', minWidth: 150 },
-    //     { field: 'year', maxWidth: 90 },
-    //     { field: 'date', minWidth: 150 },
-    //     { field: 'sport', minWidth: 150 },
-    //     { field: 'gold' },
-    //     { field: 'silver' },
-    //     { field: 'bronze' },
-    //     { field: 'total' },
-    // ]);
-
-    // const [defaultColDef] = useState({
-    //     flex: 1,
-    //     midWidth: 100,
-    // });
-
-    // const [rowSelection] = useState('multiple');
-    // const [rowData] = useState(null)
 
     return(
         <div>
@@ -69,7 +47,7 @@ const Users  = () => {
                 <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New User</button>
             </div>
             <h3 style={{marginLeft: '42%'}}>Sangat List</h3>  
-                <MTable rowData={rowData} columnDefs={columnDefs} text={"User"}/>
+                <MTable rowData={rowData} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
              </div>
     )
 }

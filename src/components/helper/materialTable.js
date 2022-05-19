@@ -2,6 +2,7 @@ import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import _ from 'lodash';
 import User from '../user';
+import HostModal from '../modals/hostModal';
 
 
 class MTable extends React.Component{
@@ -12,6 +13,7 @@ class MTable extends React.Component{
         showModal: false,
         addUser: false,
         refreshList: false,
+        loadModel: '',
     }
     };
 
@@ -19,6 +21,7 @@ class MTable extends React.Component{
         let selectedNodes = this.gridApi.getSelectedNodes();
         let selectedData = selectedNodes.map((node) => node.data);
         !_.isEmpty(selectedNodes) && this.setState({userSelected: selectedData, showModal: true}, ()=>{console.log(this.state)});
+        this.mapModel(Object.keys(selectedData[0])[0]);
         return selectedData;
       };
 
@@ -27,25 +30,32 @@ class MTable extends React.Component{
         this.gridColumnApi = params.columnApi;
     }
 
-    resetComponent = () => {
-        console.log('Clicked')
-        // this.setState({refreshList: true})
+    mapModel = (modelToMap) => {
+        if(modelToMap==='Firstname'){
+          this.setState({loadModel: 'User'})
+        }
+        else if(modelToMap === 'HostFirstName'){
+          this.setState({loadModel: 'Host'})
+        }
     }
     
 
     
     render(){
-     const{rowData, columnDefs, text, customWidth} = this.props; 
+     const{rowData, columnDefs, text, customWidth, hideGetSelectedRowData} = this.props; 
 
-     const {showModal, userSelected} = this.state;
+     const {showModal, userSelected, loadModel} = this.state;
+
+     console.log('State', loadModel);
 
     return(
         <React.Fragment>
-        {showModal && <User userSelected={userSelected} resetComponent={this.resetComponent}/>}
+        {showModal && (loadModel ==='User'? <User userSelected={userSelected}/>: (loadModel==='Host' &&<HostModal userSelected={userSelected}/>))}
         <div style={{ width:'95vw', height: '10vh' }}>
-        <button onClick={this.getSelectedRowData} style={{ margin: '10 0'}} className="btn btn-secondary">
+        {hideGetSelectedRowData && <button onClick={this.getSelectedRowData} style={{ margin: '10 0'}} className="btn btn-secondary">
           Get Selected {text}
         </button>
+        }
         </div>
         <div className="ag-theme-alpine" style={{height: 400, width: customWidth? customWidth: 'auto'}}>
             <AgGridReact

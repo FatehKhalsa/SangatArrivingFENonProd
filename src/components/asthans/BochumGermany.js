@@ -18,7 +18,7 @@ const BochumGermany = () =>{
         <h3 style={{marginLeft: '42%'}}>Bochum Germany Asthan</h3>  
         <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
         <div style={{marginTop: "2%"}}>
-        <MTable rowData={rowData} columnDefs={columnDefs} text={"User"}/>
+        <MTable rowData={rowData} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
         </div>
         </>
     )

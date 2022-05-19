@@ -39,8 +39,23 @@ export const hostMockdata = [
         {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Richmond", canHoldSangat:"Yes", HowManyBedsRemaining: "2", DistanceFromDarbarSahib:"None", id: '1'},
         {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "New Westminster", canHoldSangat:"Yes", HowManyBedsRemaining: "5", DistanceFromDarbarSahib:"None", id: '1'},
         {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Surrey", canHoldSangat:"Yes", HowManyBedsRemaining: "3", DistanceFromDarbarSahib:"None", id: '1'},
-        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Delta", canHoldSangat:"Yes", HowManyBedsRemaining: "0", DistanceFromDarbarSahib:"None", id: '1'},
+        {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "Delta", canHoldSangat:"No", HowManyBedsRemaining: "0", DistanceFromDarbarSahib:"None", id: '1'},
         {HostFirstName: "Manjodh", HostLastName: "Chahal", City: "White Rock", canHoldSangat:"No", HowManyBedsRemaining: "10", DistanceFromDarbarSahib:"None", id: '1'},
 
+]
 
+
+export const sangatStayatHostMockData = [
+    {Firstname: "Manjodh", Lastname: "Chahal", City: "Fresno", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", RoomType: 'Gadda', AccomodationAllocated: 'Yes'},
+    {Firstname: "Japneet", Lastname: "Singh", City: "Toronto", DOB:"12/13/95", FlightInfo: "UA 95", AllergyInfo:"None", RoomType: 'Gadda', AccomodationAllocated: 'Yes'},
+    {Firstname: "Jaswinder", Lastname: "Brar", City: "Surrey", DOB:"05/22/65", FlightInfo: "CA 134", AllergyInfo:"Lactose", RoomType: 'Room', AccomodationAllocated: 'Yes'},
+    {Firstname: "Amarinder", Lastname: "Khangura", City: "Surrey", DOB:"09/13/96", FlightInfo: "DEL 183", AllergyInfo:"None", RoomType: 'Gadda', AccomodationAllocated: 'No'},
+]
+
+export const sangatStayatHostColumns = [
+    { field: "Firstname", sortable: true, filter: true },
+    { field: "Lastname" },
+    { field: "City", sortable: true, filter: true },
+    { field: "RoomType"},
+    { field: "AccomodationAllocated", cellStyle: params => {if(params.value==='No') {return {color: 'red'};} return {color: 'green'}}},
 ]

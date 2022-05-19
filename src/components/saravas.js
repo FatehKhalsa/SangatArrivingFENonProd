@@ -29,7 +29,7 @@ const Saravas  = () => {
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
                 <h3 style={{marginLeft: '25%'}}>Sarava List</h3>  
             </div>
-             <MTable rowData={rowData} columnDefs={columnDefs} text={"Sarava"} customWidth={'62%'}/>
+             <MTable rowData={rowData} columnDefs={columnDefs} text={"Sarava"} customWidth={'62%'} hideGetSelectedRowData={true}/>
             </div>
         )
     
