@@ -13,10 +13,17 @@ const NewYorkNYC = () =>{
 
     const [columnDefs] = useState(hostColumns);
 
+    const addNewUser = () => {
+
+    };
+
     return (
          <>
-       <h3 style={{marginLeft: '42%'}}>New York City USA Asthan</h3>  
+       <h3 style={{marginLeft: '42%'}}>New York City USA Asthan</h3>
+       <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
         <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
+        <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New Host</button>
+        </div>
         <div style={{marginTop: "2%"}}>
          <MTable rowData={rowData} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
          </div>

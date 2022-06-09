@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import {cardStylingAsthans} from '../helper/cardStyling';
+import { cardStylingAsthans } from '../helper/sharedStyling';
 
 
 

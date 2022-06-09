@@ -1,7 +1,7 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useHistory } from "react-router-dom";
-import {cardStyling} from './helper/cardStyling';
+import { cardStyling } from './helper/sharedStyling';
 
 
 

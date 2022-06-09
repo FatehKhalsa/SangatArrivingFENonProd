@@ -1,61 +1,51 @@
-import React, {useState} from 'react';
-import {get} from 'lodash';
+import React, { useState } from 'react';
+import { get } from 'lodash';
 import { Modal, Button } from 'react-bootstrap';
+import {editStyling, inputStyle} from './helper/sharedStyling';
+import ConfirmDialog from '../helper/confirmationDialog';
+
+const User = (props) => {
+
+  const userInfoArray = get(props, 'userSelected', []);
+
+  const userInfo = userInfoArray[0];
 
 
-const editStyling = {
-    display: 'flex',
-    flexDirection: 'column'
-}
-
-
-const User  = (props) => {
-
- const userInfoArray = get(props, 'userSelected', []);
-
- const userInfo = userInfoArray[0];
-
- console.log(userInfo)
-  
   const [show, setShow] = useState(true);
+  const [showDialog, setShowDialong] = useState(false);
 
   const handleClose = () => {
-      setShow(false);
+    // Add logic for confirmation
+    setShowDialong(true);
+    setShow(false);
   }
   const handleShow = () => setShow(true);
-  
+
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>User Info</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            <div style={{...editStyling}}>
-               First Name
-               <input value={userInfo.Firstname} />
-            </div>
-            <div style={editStyling}>
-               Last Name
-               <input value={userInfo.Lastname} />
-            </div>
-            <div style={editStyling}>
+        <Modal.Body style={{ backgroundColor: '#f2f2f2' }}>
+          <div style={{ ...editStyling }}>
+            First Name
+               <input style={{ ...inputStyle }} value={userInfo.Firstname} />
+                Last Name
+              <input style={{ ...inputStyle }} value={userInfo.Lastname} />
                DOB
-               <input value={userInfo.DOB} />
-            </div>
-            <div style={editStyling}>
-                Address
-               <input value={userInfo.Address} />
-            </div>
-            <div style={editStyling}>
+               <input style={{ ...inputStyle }} value={userInfo.DOB} />
+               Address
+               <input style={{ ...inputStyle }} value={'2685 N Hornet Ave, Fresno CA 93737'} />
                Flight Info
-               <input value={'AI 183'} />
-            </div>
-            <div style={editStyling}>
+               <input style={{ ...inputStyle }} value={'AI 183'} />
                Additional Info
-               <input value={'Allergy'} />
-            </div>
+               <input style={{ ...inputStyle }} value={'Allergy'} />
+               Hosted at
+               <input style={{ ...inputStyle }} value={'Swaran Singh Dhillon, Toronto'} />
+          </div>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

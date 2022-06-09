@@ -30,7 +30,7 @@ const HostModal  = (props) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal  size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Host Info</Modal.Title>
         </Modal.Header>
