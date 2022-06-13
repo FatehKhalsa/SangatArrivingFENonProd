@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { get } from 'lodash';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Alert } from 'react-bootstrap';
 import {editStyling, inputStyle} from '../helper/sharedStyling';
 import {HerokuURL} from '../../constants';
+import Loader from '../../helper/loader';
+
 
 // import ConfirmDialog from '../helper/confirmationDialog';
 
@@ -13,6 +15,10 @@ const AddNewHost = (props) => {
 //   const userInfo = userInfoArray[0];
 
   const [show, setShow] = useState(true);
+  const [hostAddedSuccess, setHostAddedSuccess] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showDialog, setShowDialong] = useState(false);
   const [hostValue, setHostValue] = useState({
       Host_Name: "",
@@ -110,7 +116,7 @@ const setHostProvidingRide = (e) => {
 }
 
 const addNewHost = async() => {
-
+    setLoading(true);
     fetch(`${HerokuURL}api/host/create`, {
       method: 'POST',
       headers: {
@@ -121,16 +127,25 @@ const addNewHost = async() => {
         hostValue
       ),
     })
-      .then((res) => res.json())
-      .catch((err) => console.log('error'))
+      .then((res) => res.json()).then((status)=>{
+        console.log("status",status)
+        setToastMessage(status.message);
+        if(status.message==='Failed! Host is already in use!'){
+          setError(true);
+        }
+        setHostAddedSuccess(true); 
 
-      setShow(false);
-  
+        setLoading(false); setShow(false);
+      })
 }
 
 
   return (
     <>
+    {hostAddedSuccess && <Alert key={'success'} variant={error? 'danger':'success'}>
+      {toastMessage}
+    </Alert>}
+    {loading && <Loader/>}
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
   <Modal.Title>Add new Host for {hostProps}</Modal.Title>
