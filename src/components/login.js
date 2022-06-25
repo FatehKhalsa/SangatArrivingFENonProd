@@ -32,7 +32,10 @@ class LoginPage extends React.Component {
         else{
         this.setState({loading: true});
         Promise.resolve(checkAuth(this.state.userName, this.state.password)).then((authenticated)=>{
-                console.log("Authenticated", authenticated);
+                if(authenticated===false){
+                    this.setState({error: "Invalid username or password", isInvalid: false, loading: false});
+                    return;
+                }
                 this.props.history.push('/Home');
                 this.setState({loading: false});
         })
@@ -64,8 +67,8 @@ class LoginPage extends React.Component {
         return(
             <div>
                  <h3>Bulandpuri Sahib Barsi Saraava System</h3>
-                 <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Add New User</button>
-                 {addNewUser && <AddUser/>}
+                 {/* <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Add New User</button>
+                 {addNewUser && <AddUser/>} */}
                  {!isInvalid && 
                  <div class="alert alert-danger" role="alert">
                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

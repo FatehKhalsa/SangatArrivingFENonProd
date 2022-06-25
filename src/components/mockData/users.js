@@ -59,3 +59,13 @@ export const sangatStayatHostColumns = [
     { field: "RoomType"},
     { field: "AccomodationAllocated", cellStyle: params => {if(params.value==='No') {return {color: 'red'};} return {color: 'green'}}},
 ]
+
+export const sangatVistingAsthan = [
+    { field: "user_firstName", sortable: true, filter: true },
+    { field: "user_firstName", sortable: true, filter: true },
+    { field: "user_city", sortable: true, filter: true },
+    { field: "user_yearOfBirth", sortable: true, filter: true },
+    { field: "user_country", sortable: true, filter: true},
+    { field: "user_phoneNumber", sortable: true, filter: true},
+    { field: "user_hasAllergy", sortable: true, filter: true},
+]

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import MTable from './helper/materialTable';
-import {usersMockData} from '../components/mockData/users';
 
 import { useHistory } from "react-router-dom";
-import AddUser from './addUser';
+import AddNewUser from './addUser';
+import {sangatVistingAsthan} from './mockData/users'
 
 import {HerokuURL} from '../constants';
 
@@ -11,18 +11,8 @@ import {HerokuURL} from '../constants';
 const Users  = () => {
 
     const history = useHistory();
-  
-
-    const [rowData] = useState(usersMockData)
- 
-    const [columnDefs] = useState([
-        { field: "Firstname", sortable: true, filter: true },
-        { field: "Lastname" },
-        { field: "City", sortable: true, filter: true },
-        { field: "DOB" },
-        { field: "FlightInfo"},
-        { field: "AllergyInfo"},
-    ]);
+   
+    const [columnDefs] = useState(sangatVistingAsthan);
 
     const [showUser, setShowUser] = useState(false);
 
@@ -31,7 +21,6 @@ const Users  = () => {
     }
     
     const [data, setState] = useState([])
-    console.log(localStorage.getItem('accessToken'));
     useEffect(()=>{
         fetch(`${HerokuURL}api/getAllUsers`, { headers: {"x-access-token" : localStorage.getItem('accessToken')} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
     }, []);
@@ -41,13 +30,13 @@ const Users  = () => {
 
     return(
         <div>
-            {showUser && <AddUser/>}
+            {showUser && <AddNewUser/>}
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-                <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New User</button>
+                <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New Sangat</button>
             </div>
             <h3 style={{marginLeft: '42%'}}>Sangat List</h3>  
-                <MTable rowData={rowData} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
+                <MTable rowData={data} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
              </div>
     )
 }

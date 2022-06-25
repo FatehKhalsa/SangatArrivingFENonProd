@@ -31,10 +31,11 @@ class MTable extends React.Component{
     }
 
     mapModel = (modelToMap) => {
+      console.log(modelToMap)
         if(modelToMap==='Firstname'){
           this.setState({loadModel: 'User'})
         }
-        else if(modelToMap === 'HostFirstName'){
+        else if(modelToMap === 'Host_Address'){
           this.setState({loadModel: 'Host'})
         }
     }

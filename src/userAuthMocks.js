@@ -10,9 +10,13 @@ export const checkAuth = async (username, password) => {
 
     token = await fetchToken(username, password);
 
+    if(token.message && token.message==='User Not found.'){
+        isAuthenticated = false;
+        return isAuthenticated;
+    }
+
     Promise.resolve(token).then((success) => {
-        console.log(success.accessToken);
-        success.accessToken==undefined ? isAuthenticated = false: isAuthenticated= true;
+        success.accessToken===undefined ? isAuthenticated = false: isAuthenticated= true;
         if(isAuthenticated){
                 localStorage.setItem('currentUser', JSON.stringify(username));
                 localStorage.setItem('accessToken', success.accessToken);
