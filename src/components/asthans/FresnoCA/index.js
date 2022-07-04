@@ -23,7 +23,7 @@ const FresnoCA = () => {
             <div className="card" style={{...cardStyling}} onClick={e=>routeToPage('Asthans/FresnoUSA/Host')}>
                 <div className="card-body">Host</div>
             </div>
-            <div className="card" style={{...cardStyling}} onClick={e=>routeToPage('Saravas')}>
+            <div className="card" style={{...cardStyling}} onClick={e=>routeToPage('Asthans/FresnoUSA/SangatAriving')}>
                 <div className="card-body">Sangat Arriving</div>
             </div>
         </div>

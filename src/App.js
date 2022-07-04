@@ -11,6 +11,7 @@ import { authenticationService } from './userAuthMocks';
 import BochumGermany from './components/asthans/BochumGermany';
 import CalgaryAB from './components/asthans/CalgaryAB';
 import MeetingBabaJi from './components/helper/meetingBabaji';
+import SangatArriving from './components/asthans/FresnoCA/FresnoCASangatArriving';
 import EdmontonAB from './components/asthans/EdmontonAB';
 import IndianaIN from './components/asthans/IndianaIN';
 import Italy from './components/asthans/Italy';
@@ -81,6 +82,7 @@ class App extends React.Component {
           <PrivateRoute path="/Asthans/TorontoCanada" exact component={TorontoON} />
           <PrivateRoute path="/Asthans/FresnoUSA" exact component={FresnoCA} />
           <PrivateRoute path="/Asthans/FresnoUSA/Host" exact component={FresnoHost} />
+          <PrivateRoute path="/Asthans/FresnoUSA/SangatAriving" exact component={SangatArriving} />
           <PrivateRoute path="/Asthans/IndianaUSA" exact component={IndianaIN} />
           <PrivateRoute path="/Asthans/MichiganUSA" exact component={MichiganDT} />
           <PrivateRoute path="/Asthans/NewYorkUSA" exact component={NewYorkNYC} />

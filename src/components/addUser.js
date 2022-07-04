@@ -172,7 +172,7 @@ const setSangatAsthan = (e) => {
             <input style={{ ...inputStyle }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
             Allergies
             <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
-            Arriving Flight Info
+            {/* Arriving Flight Info
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setSangatArrivingFlight(e)} />
             Arriving Airport
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingAirport} onChange = {e=>setSangatArrivingAirport(e)} />
@@ -181,7 +181,7 @@ const setSangatAsthan = (e) => {
             Departing Airport
             <input style={{ ...inputStyle }} value={sangatValue.user_departingAirport} onChange = {e=>setSangatDepartingAirport(e)} />
             Visiting Asthan
-            <input style={{ ...inputStyle }} value={sangatValue.user_goingToAsthan} onChange = {e=>setSangatAsthan(e)} />
+            <input style={{ ...inputStyle }} value={sangatValue.user_goingToAsthan} onChange = {e=>setSangatAsthan(e)} /> */}
           </div>
 
         </Modal.Body>

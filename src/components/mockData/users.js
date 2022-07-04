@@ -69,3 +69,11 @@ export const sangatVistingAsthan = [
     { field: "user_phoneNumber", sortable: true, filter: true},
     { field: "user_hasAllergy", sortable: true, filter: true},
 ]
+
+export const sangatMeetingBabaJiMock = [
+    {Firstname: "Manjodh", Lastname: "Chahal", City: "Fresno", AppointmentDate: "07/19/22", PhoneNumber: '5593931823'},
+    {Firstname: "Manjit", Lastname: "Singh", City: "Clovis", AppointmentDate: "07/19/22", PhoneNumber: '5593021921'},
+    {Firstname: "Gurmeet", Lastname: "Brar", City: "Fowler", AppointmentDate: "07/21/22", PhoneNumber: '8180283823'},
+    {Firstname: "Karan", Lastname: "Singh", City: "Fremont", AppointmentDate: "07/22/22", PhoneNumber: '5103929392'},
+    {Firstname: "Sukhwinder", Lastname: "Dhaliwal", City: "Fresno", AppointmentDate: "07/23/22", PhoneNumber: '5593931823'}
+];

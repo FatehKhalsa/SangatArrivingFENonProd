@@ -49,7 +49,7 @@ const FresnoHost = () =>{
         <button className="btn btn-primary" onClick={()=>addNewHost()}>Add New Host</button>
         </div>
         <div style={{marginTop: "2%"}}>
-         <MTable rowData={data} columnDefs={hostColumns} text={"User"} hideGetSelectedRowData={true}/>
+         <MTable rowData={data} columnDefs={hostColumns} text={"Host"} hideGetSelectedRowData={true}/>
          </div>
         </>
     )

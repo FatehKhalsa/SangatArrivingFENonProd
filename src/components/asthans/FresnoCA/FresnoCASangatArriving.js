@@ -1,27 +1,24 @@
 import React, { useState} from 'react';
-import MTable from '../helper/materialTable';
+import MTable from '../../helper/materialTable';
 import { useHistory } from "react-router-dom";
-import {sangatMeetingBabaJiMock} from '../../components/mockData/users';
+import {usersMockData} from '../../../components/mockData/users';
 
-
-
-
-
-const BabaJiAppt = (props) => {
+const SangatArriving = (props) => {
 
     const history = useHistory();
 
 
     // const {asthan} = this.props; 
 
-    const [rowData] = useState(sangatMeetingBabaJiMock)
+    const [rowData] = useState(usersMockData)
  
     const [columnDefs] = useState([
         { field: "Firstname", sortable: true, filter: true },
         { field: "Lastname" },
         { field: "City", sortable: true, filter: true },
-        { field: "AppointmentDate" },
-        { field: "PhoneNumber"},
+        { field: "DOB" },
+        { field: "FlightInfo"},
+        { field: "AllergyInfo"},
     ]);
 
     return(
@@ -30,7 +27,7 @@ const BabaJiAppt = (props) => {
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
                 <button className="btn btn-primary">Add New Sangat</button>
             </div>
-    <h3 style={{marginLeft: '42%'}}>Sangat Meeting BabaJi</h3>  
+    <h3 style={{marginLeft: '42%'}}>Sangat Arriving at Fresno</h3>  
                 <MTable rowData={rowData} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
              </div>
     )
@@ -38,4 +35,4 @@ const BabaJiAppt = (props) => {
 
 }
 
-export default BabaJiAppt;
+export default SangatArriving;
