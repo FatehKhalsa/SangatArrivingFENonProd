@@ -12,6 +12,8 @@ const User = (props) => {
 
   const userInfo = userInfoArray[0];
 
+  console.log("PROPS COMING IN TO USER:", userInfo)
+
 
   const [show, setShow] = useState(true);
   const [showDialog, setShowDialong] = useState(false);
@@ -20,15 +22,15 @@ const User = (props) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [sangatValue, setSangatValue] = useState({
-    user_firstName:"",
-    user_lastName:"",
-    user_yearOfBirth:"",
-    user_gender:"",
-    user_city:"",
-    user_country:"",
-    user_allergy:"",
+    user_firstName: userInfo.user_firstName,
+    user_lastName: userInfo.user_lastName,
+    user_yearOfBirth:userInfo.user_yearOfBirth,
+    user_gender:userInfo.user_gender,
+    user_city:userInfo.user_city,
+    user_country:userInfo.user_country,
+    user_allergy:userInfo.user_allergy,
     user_hasAllergy:false,
-    user_phoneNumber:"",
+    user_phoneNumber:userInfo.user_phoneNumber,
     user_arrivingFlight: "",
     user_arrivingAirport:"",
     user_departingFlight: "",
@@ -160,8 +162,6 @@ const setSangatAsthan = (e) => {
             <input style={{ ...inputStyle }}  value ={sangatValue.user_firstName} onChange ={e=>setSangatFirstName(e)}/>
             Last Name
             <input style={{ ...inputStyle }}  value ={sangatValue.user_lastName} onChange ={e=>setSangatLastName(e)}/>
-            Gender
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_gender} onChange ={e=>setSangatGender(e)}/>
             DOB
             <input style={{ ...inputStyle }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             City
@@ -172,16 +172,6 @@ const setSangatAsthan = (e) => {
             <input style={{ ...inputStyle }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
             Allergies
             <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
-            Arriving Flight Info
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setSangatArrivingFlight(e)} />
-            Arriving Airport
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingAirport} onChange = {e=>setSangatArrivingAirport(e)} />
-            Departing Flight
-            <input style={{ ...inputStyle }} value={sangatValue.user_departingFlight} onChange = {e=>setSangatDepartingFlight(e)} />
-            Departing Airport
-            <input style={{ ...inputStyle }} value={sangatValue.user_departingAirport} onChange = {e=>setSangatDepartingAirport(e)} />
-            Visting Asthan
-            <input style={{ ...inputStyle }} value={sangatValue.setSangatAsthan} onChange = {e=>setSangatAsthan(e)} />
           </div>
 
         </Modal.Body>
@@ -190,7 +180,7 @@ const setSangatAsthan = (e) => {
             Close
           </Button>
           <Button variant="primary" onClick={addNewSangat}>
-            Save Changes
+            Update
           </Button>
         </Modal.Footer>
       </Modal>

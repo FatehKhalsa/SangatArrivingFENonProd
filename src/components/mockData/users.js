@@ -62,7 +62,7 @@ export const sangatStayatHostColumns = [
 
 export const sangatVistingAsthan = [
     { field: "user_firstName", sortable: true, filter: true },
-    { field: "user_firstName", sortable: true, filter: true },
+    { field: "user_lastName", sortable: true, filter: true },
     { field: "user_city", sortable: true, filter: true },
     { field: "user_yearOfBirth", sortable: true, filter: true },
     { field: "user_country", sortable: true, filter: true},

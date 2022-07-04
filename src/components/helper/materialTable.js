@@ -21,7 +21,7 @@ class MTable extends React.Component{
         let selectedNodes = this.gridApi.getSelectedNodes();
         let selectedData = selectedNodes.map((node) => node.data);
         !_.isEmpty(selectedNodes) && this.setState({userSelected: selectedData, showModal: true}, ()=>{console.log(this.state)});
-        this.mapModel(Object.keys(selectedData[0])[0]);
+        this.mapModel(Object.keys(selectedData[0])[1]);
         return selectedData;
       };
 
@@ -31,11 +31,11 @@ class MTable extends React.Component{
     }
 
     mapModel = (modelToMap) => {
-      console.log(modelToMap)
-        if(modelToMap==='Firstname'){
+      console.log("Check Switch ",modelToMap)
+        if(modelToMap==='user_firstName'){
           this.setState({loadModel: 'User'})
         }
-        else if(modelToMap === 'Host_Address'){
+        else if(modelToMap === 'Host_Availability'){
           this.setState({loadModel: 'Host'})
         }
     }
