@@ -42,7 +42,7 @@ const Sarava  = (props) => {
                <input value={userInfo.Lastname} />
             </div>
             <div style={editStyling}>
-            Remaning
+            Remaning Capacity
                <input value={userInfo.DOB} />
             </div>
         </Modal.Body>
