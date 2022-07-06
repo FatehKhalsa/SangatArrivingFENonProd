@@ -24,7 +24,7 @@ const Home = () => {
                 <div className="card-body">Sangat</div>
             </div>
             <div className="card" style={{...cardStyling}} onClick={e=>routeToPage('Saravas')}>
-                <div className="card-body">Sarava</div>
+                <div className="card-body">GurPurab November 2022</div>
             </div>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>

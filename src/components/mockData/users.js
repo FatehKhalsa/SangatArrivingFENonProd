@@ -77,3 +77,22 @@ export const sangatMeetingBabaJiMock = [
     {Firstname: "Karan", Lastname: "Singh", City: "Fremont", AppointmentDate: "07/22/22", PhoneNumber: '5103929392'},
     {Firstname: "Sukhwinder", Lastname: "Dhaliwal", City: "Fresno", AppointmentDate: "07/23/22", PhoneNumber: '5593931823'}
 ];
+
+
+export const sangatVistingGurpurab = [
+    { field: "user_firstName", headerName: "First Name", sortable: true, filter: true },
+    { field: "user_middleName", headerName: "Middle Name", sortable: true, filter: true },
+    { field: "user_lastName", headerName: "Last Name", sortable: true, filter: true },
+    { field: "user_city", headerName: "City", sortable: true, filter: true },
+    { field: "user_state", headerName: "State", sortable: true, filter: true },
+    { field: "user_yearOfBirth", headerName: "DOB", sortable: true, filter: true },
+    { field: "user_gender", headerName: "Gender", sortable: true, filter: true },
+    { field: "user_country", headerName: "Country", sortable: true, filter: true},
+    { field: "user_phoneNumber", headerName: "Phone Number", sortable: true, filter: true},
+    { field: "user_arrivingFlight", headerName: "Arriving Flight #", sortable: true, filter: true},
+    { field: "user_arrivingAirport", headerName: "Arrivng Airport", sortable: true, filter: true},
+    { field: "user_email", headerName: "Email", sortable: true, filter: true},
+    { field: "user_comments", headerName: "Comments", sortable: true, filter: true, resizable: true},
+    { field: "user_emergencyContact", headerName: "Emergency Contact", sortable: true, filter: true, resizable: true},
+    { field: "user_allergy", headerName: "Allergy Info", sortable: true, filter: true},
+]
