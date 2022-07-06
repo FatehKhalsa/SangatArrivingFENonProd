@@ -150,7 +150,7 @@ const setSangatAsthan = (e) => {
       {toastMessage}
     </Alert>}
     {loading && <Loader/>}
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose} backdrop='static'>
         <Modal.Header closeButton>
           <Modal.Title>User Info</Modal.Title>
         </Modal.Header>
