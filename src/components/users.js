@@ -33,7 +33,7 @@ const Users  = () => {
             {showUser && <AddNewUser/>}
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-                <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New Sangat</button>
+                <button id='addSangat' className="btn btn-primary" onClick={()=>addNewUser()}>Add New Sangat</button>
             </div>
             <h3 style={{marginLeft: '42%'}}>Sangat List</h3>  
                 <MTable rowData={data} columnDefs={columnDefs} text={"User"} hideGetSelectedRowData={true}/>
