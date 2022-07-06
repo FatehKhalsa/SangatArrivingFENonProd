@@ -150,7 +150,7 @@ const setSangatAsthan = (e) => {
       {toastMessage}
     </Alert>}
     {loading && <Loader/>}
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose} backdrop='static'>
         <Modal.Header closeButton>
           <Modal.Title>User Info</Modal.Title>
         </Modal.Header>
@@ -163,7 +163,7 @@ const setSangatAsthan = (e) => {
             Gender
             <input style={{ ...inputStyle }}  value ={sangatValue.user_gender} onChange ={e=>setSangatGender(e)}/>
             DOB
-            <input style={{ ...inputStyle }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
+            <input type="date" style={{ ...inputStyle }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             City
             <input style={{ ...inputStyle }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
             Country
