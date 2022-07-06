@@ -141,7 +141,7 @@ const setSangatAsthan = (e) => {
   setSangatValue({...sangatValue, user_goingToAsthan: e.target.value});
 }
 
-
+document.getElementById('addSangat').addEventListener('click', handleShow)
 
 
   return (
