@@ -32,7 +32,7 @@ const Saravas  = () => {
                 {showUser && <AddNewUser/>}
                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-                <button className="btn btn-primary" onClick={()=>addNewUser()}>Add New Sangat</button> 
+                <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button> 
                 </div>
             <h3 style={{marginLeft: '42%'}}>Arriving Sangat List </h3>  
                 <MTable rowData={data} columnDefs={columnDefs} text={"Sangat Gurpurab"} hideGetSelectedRowData={true}/>

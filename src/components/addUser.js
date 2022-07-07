@@ -141,7 +141,9 @@ const setSangatAsthan = (e) => {
   setSangatValue({...sangatValue, user_goingToAsthan: e.target.value});
 }
 
-document.getElementById('addSangat').addEventListener('click', handleShow)
+//document.getElementsByClassName('addSangat').addEventListener('click', handleShow)
+const dselect = document.querySelectorAll('.addSangat');
+dselect.forEach(el => el.addEventListener('click', handleShow));
 
 
   return (
