@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { get } from 'lodash';
-import { Modal, Button, Alert } from 'react-bootstrap';
+import { Modal, Button, Alert, Form,  InputGroup} from 'react-bootstrap';
 import {editStyling, inputStyle} from './helper/sharedStyling';
 import {HerokuURL} from '../constants';
 import Loader from '../helper/loader';
@@ -51,6 +51,7 @@ const AddNewUser = (props) => {
   const handleShow = () => setShow(true);
 
   const addNewSangat = async() => {
+    
     setLoading(true);
     fetch(`${HerokuURL}api/user/create`, {
       method: 'POST',
