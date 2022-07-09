@@ -8,11 +8,6 @@ import ConfirmDialog from '../helper/confirmationDialog';
 
 const AddNewUser = (props) => {
 
-  const userInfoArray = get(props, 'userSelected', []);
-
-  const userInfo = userInfoArray[0];
-
-
   const [show, setShow] = useState(true);
   const [showDialog, setShowDialong] = useState(false);
   const [hostAddedSuccess, setHostAddedSuccess] = useState(false);
@@ -103,6 +98,11 @@ const setSangatGender = (e) => {
 const setSangatCity = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_city: e.target.value});
+}
+
+const setSangatState = (e) => {
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_state: e.target.value});
 }
 
 const setSangatArrivingFlight = (e) => {
@@ -197,7 +197,7 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             City * 
             <input style={{ ...inputStyle }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
             State/Province * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
+            <input style={{ ...inputStyle }}  value ={sangatValue.user_state} onChange ={e=>setSangatState(e)}/>
             Country * 
             <input style={{ ...inputStyle }}  value ={sangatValue.user_country} onChange ={e=>setSangatCountry(e)}/>
             Phone Number (Whatsapp) * 
@@ -227,7 +227,7 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addNewSangat} disabled={sangatValue.user_firstName==="" || sangatValue.user_lastName==="" || sangatValue.user_yearOfBirth==="" || sangatValue.user_email==="" || sangatValue.user_phoneNumber===""}>
+          <Button variant="primary" onClick={addNewSangat} disabled={sangatValue.user_firstName==="" || sangatValue.user_lastName==="" || sangatValue.user_yearOfBirth==="" || sangatValue.user_city===""|| sangatValue.user_state==="" || sangatValue.user_email==="" || sangatValue.user_phoneNumber===""}>
             Save Changes
           </Button>
         </Modal.Footer>
