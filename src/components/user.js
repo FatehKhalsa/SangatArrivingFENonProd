@@ -46,10 +46,11 @@ const User = (props) => {
   }
   const handleShow = () => setShow(true);
 
-  const addNewSangat = async() => {
+  const updateSangat = async() => {
+
     setLoading(true);
-    fetch(`${HerokuURL}api/user/create`, {
-      method: 'POST',
+    fetch(`${HerokuURL}api/user/update`, {
+      method: 'PUT',
       headers: {
         "x-access-token" : localStorage.getItem('accessToken'),
         'Content-Type': 'application/json',
@@ -60,8 +61,9 @@ const User = (props) => {
     })
       .then((res) => res.json()).then((status)=>{
         console.log("status",status)
+        console.log(sangatValue)
         setToastMessage(status.message);
-        if(status.message==='Failed! User is already in use!'){
+        if(status.message==='Failed to update!'){
           setError(true);
         }
         setHostAddedSuccess(true); 
@@ -179,7 +181,7 @@ const setSangatAsthan = (e) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addNewSangat}>
+          <Button variant="primary" onClick={updateSangat}>
             Update
           </Button>
         </Modal.Footer>
