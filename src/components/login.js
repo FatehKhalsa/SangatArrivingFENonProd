@@ -59,7 +59,7 @@ class LoginPage extends React.Component {
 
     addNewUser = (e) => {
         e.preventDefault();
-        this.setState({addNewUser: true})
+       // this.setState({addNewUser: true})
     }
 
     render(){
@@ -67,8 +67,8 @@ class LoginPage extends React.Component {
         return(
             <div>
                  <h3>Bulandpuri Sahib Barsi Saraava System</h3>
-                 {/* <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Add New User</button>
-                 {addNewUser && <AddUser/>} */}
+                 <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Edit your profile</button>
+                 {addNewUser && <AddUser/>}
                  {!isInvalid && 
                  <div class="alert alert-danger" role="alert">
                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

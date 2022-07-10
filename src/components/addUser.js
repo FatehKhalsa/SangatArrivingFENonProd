@@ -168,6 +168,7 @@ const setSangatComments = (e) => {
   setSangatValue({...sangatValue, user_comments: e.target.value});
 }
 
+
 //document.getElementsByClassName('addSangat').addEventListener('click', handleShow)
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
@@ -185,25 +186,25 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
         <Modal.Body style={{ backgroundColor: '#f2f2f2' }}>
           <div style={{ ...editStyling }}>
             First Name * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_firstName} onChange ={e=>setSangatFirstName(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_firstName===""? 'red':"" }}  value ={sangatValue.user_firstName} onChange ={e=>setSangatFirstName(e)}/>
             Middle Name
             <input style={{ ...inputStyle }} value ={sangatValue.user_middleName} onChange ={e=>setSangatMiddletName(e)}/>
             Last Name *
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_lastName} onChange ={e=>setSangatLastName(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_lastName===""? 'red':""  }}  value ={sangatValue.user_lastName} onChange ={e=>setSangatLastName(e)}/>
             Gender
             <input style={{ ...inputStyle }}  value ={sangatValue.user_gender} onChange ={e=>setSangatGender(e)}/>
             DOB *
-            <input type="date" style={{ ...inputStyle }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
+            <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             City * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_city===""? 'red':""  }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
             State/Province * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_state} onChange ={e=>setSangatState(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_state===""? 'red':""  }}  value ={sangatValue.user_state} onChange ={e=>setSangatState(e)}/>
             Country * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_country} onChange ={e=>setSangatCountry(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_country===""? 'red':""  }}  value ={sangatValue.user_country} onChange ={e=>setSangatCountry(e)}/>
             Phone Number (Whatsapp) * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_phoneNumber===""? 'red':""  }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
             Email * 
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
+            <input style={{ ...inputStyle, borderColor: sangatValue.user_email===""? 'red':""  }}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
             Allergies
             <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
             Arriving Flight Info
