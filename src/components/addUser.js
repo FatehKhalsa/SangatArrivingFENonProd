@@ -61,7 +61,7 @@ const AddNewUser = (props) => {
     })
       .then((res) => res.json()).then((status)=>{
         setToastMessage(status.message);
-        if(status.message==='Failed! User is already in use!'){
+        if(status.message==='Failed! User is already in System!'){
           setError(true);
         }
         setHostAddedSuccess(true); 
@@ -234,11 +234,11 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             <input style={{ ...inputStyle, borderColor: sangatValue.user_email===""? 'red':""  }}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
             Allergies
             <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
-            Arriving Flight Info
+            Arriving Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setSangatArrivingFlight(e)} />
             Arriving Airport
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingAirport} onChange = {e=>setSangatArrivingAirport(e)} />
-            Departing Flight
+            Departing Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_departingFlight} onChange = {e=>setSangatDepartingFlight(e)} />
             Departing Airport
             <input style={{ ...inputStyle }} value={sangatValue.user_departingAirport} onChange = {e=>setSangatDepartingAirport(e)} />
