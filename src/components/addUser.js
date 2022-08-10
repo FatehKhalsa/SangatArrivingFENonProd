@@ -35,6 +35,7 @@ const AddNewUser = (props) => {
     user_goingToAsthan: "",
     user_emergencyContact: "",
     user_comments: "",
+    user_age: 0,
   });
 
   const handleClose = () => {
@@ -46,7 +47,7 @@ const AddNewUser = (props) => {
   const handleShow = () => setShow(true);
 
   const addNewSangat = async() => {
-    
+
     setLoading(true);
     fetch(`${HerokuURL}api/user/create`, {
       method: 'POST',
@@ -59,7 +60,6 @@ const AddNewUser = (props) => {
       ),
     })
       .then((res) => res.json()).then((status)=>{
-        console.log("status",status)
         setToastMessage(status.message);
         if(status.message==='Failed! User is already in use!'){
           setError(true);
@@ -87,12 +87,38 @@ const setSangatLastName = (e) => {
 
 const setSangatYearOfBirth = (e) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_yearOfBirth: e.target.value});
+  const currentDate = new Date();
+
+  const age = calculateAge(e.target.value, currentDate);
+
+  
+  setSangatValue({...sangatValue, user_yearOfBirth: e.target.value, user_age: age});
+  
 }
 
 const setSangatGender = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_gender: e.target.value});
+}
+
+const calculateAge = (s, date) =>{
+  
+  const dateSplitted = s.split("-");
+  const year = dateSplitted[0];
+  const month = dateSplitted[1];
+  
+  const currentYearSplitted = date.toLocaleDateString().split(" ")[0];
+  
+  const currentYear = currentYearSplitted.split("/")[2];
+  const currentMonth = currentYearSplitted.split("/")[1];
+
+  let age = currentYear - year; 
+  
+  if(currentMonth<month){
+    	age++;
+  }
+  
+  return age;
 }
 
 const setSangatCity = (e) => {
@@ -173,9 +199,10 @@ const setSangatComments = (e) => {
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
 
+
   return (
     <>
-     {hostAddedSuccess && <Alert key={'success'} variant={error? 'danger':'success'}>
+     {hostAddedSuccess && <Alert key={error? 'danger':'success'} variant={error? 'danger':'success'}>
       {toastMessage}
     </Alert>}
     {loading && <Loader/>}

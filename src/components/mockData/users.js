@@ -85,7 +85,7 @@ export const sangatVistingGurpurab = [
     { field: "user_lastName", headerName: "Last Name", sortable: true, filter: true },
     { field: "user_city", headerName: "City", sortable: true, filter: true },
     { field: "user_state", headerName: "State", sortable: true, filter: true },
-    { field: "user_yearOfBirth", headerName: "DOB", sortable: true, filter: true },
+    { field: "user_age", headerName: "age", sortable: true, filter: true },
     { field: "user_gender", headerName: "Gender", sortable: true, filter: true },
     { field: "user_country", headerName: "Country", sortable: true, filter: true},
     { field: "user_phoneNumber", headerName: "Phone Number", sortable: true, filter: true},
