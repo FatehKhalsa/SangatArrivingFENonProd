@@ -35,6 +35,7 @@ const AddNewUser = (props) => {
     user_goingToAsthan: "",
     user_emergencyContact: "",
     user_comments: "",
+    user_age: 0,
   });
 
   const handleClose = () => {
@@ -46,7 +47,7 @@ const AddNewUser = (props) => {
   const handleShow = () => setShow(true);
 
   const addNewSangat = async() => {
-    
+
     setLoading(true);
     fetch(`${HerokuURL}api/user/create`, {
       method: 'POST',
@@ -59,9 +60,8 @@ const AddNewUser = (props) => {
       ),
     })
       .then((res) => res.json()).then((status)=>{
-        console.log("status",status)
         setToastMessage(status.message);
-        if(status.message==='Failed! User is already in use!'){
+        if(status.message==='Failed! User is already in System!'){
           setError(true);
         }
         setHostAddedSuccess(true); 
@@ -87,13 +87,39 @@ const setSangatLastName = (e) => {
 
 const setSangatYearOfBirth = (e) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_yearOfBirth: e.target.value});
+  const currentDate = new Date();
+
+  const age = calculateAge(e.target.value, currentDate);
+
+  
+  setSangatValue({...sangatValue, user_yearOfBirth: e.target.value, user_age: age});
+  
 }
 
 const setSangatGender = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_gender: e.target.value});
   console.log(e.target.value)
+}
+
+const calculateAge = (s, date) =>{
+  
+  const dateSplitted = s.split("-");
+  const year = dateSplitted[0];
+  const month = dateSplitted[1];
+  
+  const currentYearSplitted = date.toLocaleDateString().split(" ")[0];
+  
+  const currentYear = currentYearSplitted.split("/")[2];
+  const currentMonth = currentYearSplitted.split("/")[1];
+
+  let age = currentYear - year; 
+  
+  if(currentMonth<month){
+    	age++;
+  }
+  
+  return age;
 }
 
 const setSangatCity = (e) => {
@@ -174,9 +200,10 @@ const setSangatComments = (e) => {
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
 
+
   return (
     <>
-     {hostAddedSuccess && <Alert key={'success'} variant={error? 'danger':'success'}>
+     {hostAddedSuccess && <Alert key={error? 'danger':'success'} variant={error? 'danger':'success'}>
       {toastMessage}
     </Alert>}
     {loading && <Loader/>}
@@ -460,11 +487,11 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             <input type="email" style={{ ...inputStyle, borderColor: sangatValue.user_email===""? 'red':""  }}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
             Allergies
             <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
-            Arriving Flight Info
+            Arriving Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setSangatArrivingFlight(e)} />
             Arriving Airport
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingAirport} onChange = {e=>setSangatArrivingAirport(e)} />
-            Departing Flight
+            Departing Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_departingFlight} onChange = {e=>setSangatDepartingFlight(e)} />
             Departing Airport
             <input style={{ ...inputStyle }} value={sangatValue.user_departingAirport} onChange = {e=>setSangatDepartingAirport(e)} />
