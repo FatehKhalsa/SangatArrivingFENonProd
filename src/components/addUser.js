@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { get } from 'lodash';
 import { Modal, Button, Alert, Form,  InputGroup} from 'react-bootstrap';
-import {editStyling, inputStyle} from './helper/sharedStyling';
+import {editStyling, floatchild, inputStyle, floatcontainer} from './helper/sharedStyling';
 import {HerokuURL} from '../constants';
 import Loader from '../helper/loader';
 import ConfirmDialog from '../helper/confirmationDialog';
@@ -219,12 +219,13 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             Last Name *
             <input style={{ ...inputStyle, borderColor: sangatValue.user_lastName===""? 'red':""  }}  value ={sangatValue.user_lastName} onChange ={e=>setSangatLastName(e)}/>
             Gender:
-            <div style={{borderColor:sangatValue.user_gender===""? 'red':""}}>
-              <input type="radio" id="Singh" name= "genderSelect" style={{ ...inputStyle }}  value ="Singh" onChange ={e=>setSangatGender(e)}/>
-              <label for="Singh"> Singh</label>
-            
+            <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
+              <div style={{...floatchild}}>
+              <input type="radio" id="Singh" name= "genderSelect" style={{...inputStyle }}  value ="Singh" onChange ={e=>setSangatGender(e)}/>
+              <label for="Singh" style={{top:'50%'}}> Singh</label></div>
+              <div style={{...floatchild}}>
               <input type="radio" id="Kaur" name= "genderSelect" style={{ ...inputStyle }}  value ="Kaur" onChange ={e=>setSangatGender(e)}/>
-              <label for="Kaur"> Kaur</label>
+              <label for="Kaur"> Kaur</label></div>
             </div>
             DOB *
             <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />

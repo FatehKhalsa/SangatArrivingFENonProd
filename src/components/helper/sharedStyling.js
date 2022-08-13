@@ -30,3 +30,14 @@ export const inputStyle = {
     height: '4vh',
     width: '50%'
   }
+
+
+export const floatcontainer = {
+  padding: '5px',
+}
+
+export const floatchild = {
+  width: '50%',
+  float: 'left',
+  padding: '5px',
+}  
