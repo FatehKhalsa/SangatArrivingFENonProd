@@ -34,7 +34,7 @@ const Saravas  = () => {
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
                 <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button> 
                 </div>
-            <h3 style={{marginLeft: '42%'}}>Arriving Sangat List </h3>  
+            <h3 style={{marginLeft: '30%'}}>Arriving Sangat List for 2022 Gurpurab </h3>  
                 <MTable rowData={data} columnDefs={columnDefs} text={"Sangat Gurpurab"} hideGetSelectedRowData={true}/>
             </div>
         )

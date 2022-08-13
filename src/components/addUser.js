@@ -27,10 +27,14 @@ const AddNewUser = (props) => {
     user_hasAllergy:false,
     user_phoneNumber:"",
     user_email: "",
-    user_arrivingFlight: "",
-    user_arrivingAirport:"",
-    user_departingFlight: "",
-    user_departingAirport: "",
+    user_arrivingFlightNumber: "",
+    user_arrivingFlightName: "",
+    user_arrivingFlightAirport: "",
+    user_arrivingFlightDate: "",
+    user_departingFlightNumber: "",
+    user_departingFlightName: "",
+    user_departingFlightAirport: "",
+    user_departingFlightDate: "",
     user_hostedby:"",
     user_goingToAsthan: "",
     user_emergencyContact: "",
@@ -131,26 +135,45 @@ const setSangatState = (e) => {
   setSangatValue({...sangatValue, user_state: e.target.value});
 }
 
-const setSangatArrivingFlight = (e) => {
+const setArrivingFlightNumber = (e) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_arrivingFlight: e.target.value});
+  setSangatValue({...sangatValue, user_arrivingFlightNumber: e.target.value}) 
 }
 
-const setSangatArrivingAirport = (e) => {
+const setArrivingFlightName = (e) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_arrivingAirport: e.target.value});
+  setSangatValue({...sangatValue, user_arrivingFlightName: e.target.value}) 
 }
 
-const setSangatDepartingFlight = (e) => {
+const setArrivingFlightAirport = (e) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_departingFlight: e.target.value});
+  setSangatValue({...sangatValue, user_arrivingFlightAirport: e.target.value}) 
 }
 
-const setSangatDepartingAirport = (e) => {
+const setArrivingFlightDate = (e) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_departingAirport: e.target.value});
+  setSangatValue({...sangatValue, user_arrivingFlightDate: e.target.value}) 
 }
 
+const setDepartingFlightNumber = (e) => {
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_departingFlightNumber: e.target.value}) 
+}
+
+const setDepartingFlightName = (e) => {
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_departingFlightName: e.target.value}) 
+}
+
+const setDepartingFlightAirport = (e) => {
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_departingFlightAirport: e.target.value}) 
+}
+
+const setDepartingFlightDate = (e) => {
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_departingFlightDate: e.target.value}) 
+}
 
 const setSangatCountry = (e) => {
   e.preventDefault();
@@ -242,14 +265,22 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             Allergies
             <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
             Arriving Flight Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setSangatArrivingFlight(e)} />
-            Arriving Airport
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingAirport} onChange = {e=>setSangatArrivingAirport(e)} />
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightNumber(e)} />
+            Arriving Airline Name
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
+            Arriving Flight Date
+            <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
+            Arriving Flight Airport
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightAirport(e)} />
             Departing Flight Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_departingFlight} onChange = {e=>setSangatDepartingFlight(e)} />
-            Departing Airport
-            <input style={{ ...inputStyle }} value={sangatValue.user_departingAirport} onChange = {e=>setSangatDepartingAirport(e)} />
-            Visiting Asthan
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
+            Departing Airline Name
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightName(e)} />
+            Departing Flight Date
+            <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
+            Departing Flight Airport
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightAirport(e)} />
+            closest Asthan
             <input style={{ ...inputStyle }} value={sangatValue.user_goingToAsthan} onChange = {e=>setSangatAsthan(e)} /> 
             Emergency Contact
             <input style={{ ...inputStyle }} value={sangatValue.user_emergencyContact} onChange = {e=>setSangatEmergencyContact(e)} /> 
