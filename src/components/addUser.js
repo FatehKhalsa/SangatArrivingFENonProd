@@ -99,7 +99,6 @@ const setSangatYearOfBirth = (e) => {
 const setSangatGender = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_gender: e.target.value});
-  console.log(e.target.value)
 }
 
 const calculateAge = (s, date) =>{
