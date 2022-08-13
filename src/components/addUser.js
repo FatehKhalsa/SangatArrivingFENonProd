@@ -236,7 +236,7 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             Coutry *
             <input style={{ ...inputStyle, borderColor: sangatValue.user_country===""? 'red':""  }}  value ={sangatValue.user_country} onChange ={e=>setSangatCountry(e)}/> 
             Phone Number (Whatsapp) * 
-            <input style={{ ...inputStyle, borderColor: sangatValue.user_phoneNumber===""? 'red':""  }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
+            <input onkeyup="value=isNaN(parseFloat(value))||value<0||value>9000?1000:value" type="number" style={{ ...inputStyle, borderColor: sangatValue.user_phoneNumber===""? 'red':""  }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
             Email * 
             <input type="email" style={{ ...inputStyle, borderColor: sangatValue.user_email===""? 'red':""  }}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
             Allergies
