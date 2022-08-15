@@ -60,11 +60,23 @@ class MTable extends React.Component{
               onClick={() => this.onBtExport()}
               style={{ marginBottom: '5px', fontWeight: 'bold' }}
             >
-              CVS download
+              Download current data view
             </button>
+            <button
+             
+              style={{ marginBottom: '5px', fontWeight: 'bold' }}
+            >
+              Taxi Report
+            </button>
+            <button
+             
+             style={{ marginBottom: '5px', fontWeight: 'bold' }}
+           >
+             Arriving Sangat list
+           </button>
         <div style={{ width:'95vw', height: '10vh' }}>
         {hideGetSelectedRowData && <button onClick={this.getSelectedRowData} style={{ margin: '10 0'}} className="btn btn-secondary">
-          Get Selected {text}
+          Edit Selected Sangat Information {text}
         </button>
         }
         </div>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { get } from 'lodash';
-import { Modal, Button, Alert, Form,  InputGroup} from 'react-bootstrap';
+import { Modal, Button, Alert, Form,  InputGroup, Dropdown} from 'react-bootstrap';
+
 import {editStyling, floatchild, inputStyle, floatcontainer} from './helper/sharedStyling';
 import {HerokuURL} from '../constants';
 import Loader from '../helper/loader';
 import ConfirmDialog from '../helper/confirmationDialog';
+import RenderCountries from '../components/helper/renderCountries';
+import RenderStates from '../components/helper/renderStates';
 
 const AddNewUser = (props) => {
 
@@ -14,6 +16,7 @@ const AddNewUser = (props) => {
   const [toastMessage, setToastMessage] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [closestAsthan, setClosestAsthan] = useState("");
   const [sangatValue, setSangatValue] = useState({
     user_firstName:"",
     user_middleName: "",
@@ -40,6 +43,7 @@ const AddNewUser = (props) => {
     user_emergencyContact: "",
     user_comments: "",
     user_age: 0,
+    user_ride_from_airport: false,
   });
 
   const handleClose = () => {
@@ -145,9 +149,9 @@ const setArrivingFlightName = (e) => {
   setSangatValue({...sangatValue, user_arrivingFlightName: e.target.value}) 
 }
 
-const setArrivingFlightAirport = (e) => {
+const setArrivingFlightAirport = (e, value) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_arrivingFlightAirport: e.target.value}) 
+  setSangatValue({...sangatValue, user_arrivingFlightAirport: value}) 
 }
 
 const setArrivingFlightDate = (e) => {
@@ -165,9 +169,9 @@ const setDepartingFlightName = (e) => {
   setSangatValue({...sangatValue, user_departingFlightName: e.target.value}) 
 }
 
-const setDepartingFlightAirport = (e) => {
+const setDepartingFlightAirport = (e, value) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_departingFlightAirport: e.target.value}) 
+  setSangatValue({...sangatValue, user_departingFlightAirport: value}) 
 }
 
 const setDepartingFlightDate = (e) => {
@@ -217,11 +221,52 @@ const setSangatComments = (e) => {
   setSangatValue({...sangatValue, user_comments: e.target.value});
 }
 
+const setCountrySelection = (e, value) =>{
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_country: value});
+}
+
+const setStateSelection = (e, value) =>{
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_state: value});
+}
+
+const getClosestAsthan = (e) =>{
+  e.preventDefault();
+  let closestAsthan = ""
+
+  if(user_country==="USA"){
+    if(user_state==="California"){
+      closestAsthan = "Fresno"
+    }
+    else if(user_state==="Indiana"){
+      closestAsthan = "Indiana"
+    }
+    else if(user_state==="Michigan"){
+      closestAsthan = "Michigan"
+    }
+    else if(user_state==="New York"){
+      closestAsthan = "New York"
+    }
+  }
+  
+  setClosestAsthan(closestAsthan);
+}
+
+const setUserRideFromAirport = (e, value) =>{
+  e.preventDefault();
+  let boolCheck = false;
+  value==="Yes"?boolCheck=true: boolCheck=false;
+  setSangatValue({...sangatValue, user_ride_from_airport: boolCheck})
+}
 
 //document.getElementsByClassName('addSangat').addEventListener('click', handleShow)
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
 
+const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightDate, user_ride_from_airport} = sangatValue
+
+console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_emergencyContact);
 
   return (
     <>
@@ -244,46 +289,80 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
             Gender:
             <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
               <div style={{...floatchild}}>
-              <input type="radio" id="Singh" name= "genderSelect" style={{...inputStyle }}  value ="Singh" onChange ={e=>setSangatGender(e)}/>
-              <label for="Singh" style={{top:'50%'}}> Singh</label></div>
+              <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle }}  value ="Male" onChange ={e=>setSangatGender(e)}/>
+              <label for="Male" style={{top:'50%'}}> Male</label></div>
               <div style={{...floatchild}}>
-              <input type="radio" id="Kaur" name= "genderSelect" style={{ ...inputStyle }}  value ="Kaur" onChange ={e=>setSangatGender(e)}/>
-              <label for="Kaur"> Kaur</label></div>
+              <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)}/>
+              <label for="Female"> Female</label></div>
             </div>
-            DOB *
+            Date of Birth *
             <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
+            Country *
+            <RenderCountries sangatValue={sangatValue} setCountry={setCountrySelection}/>
+           State/Province *
+           <RenderStates sangatValue={sangatValue} setState={setStateSelection}/>
+           {user_state!=="" &&
+            <Button style={{width:"161px", margin: "5px 0px"}} onClick={e=>{getClosestAsthan(e)}}>Get closest asthan</Button>}
+            <div>Closest asthan from your place: {closestAsthan}</div>
             City * 
             <input style={{ ...inputStyle, borderColor: sangatValue.user_city===""? 'red':""  }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
-            State/Province * 
-            <input style={{ ...inputStyle, borderColor: sangatValue.user_state===""? 'red':""  }}  value ={sangatValue.user_state} onChange ={e=>setSangatState(e)}/>
-            Country *
-            <input style={{ ...inputStyle, borderColor: sangatValue.user_country===""? 'red':""  }}  value ={sangatValue.user_country} onChange ={e=>setSangatCountry(e)}/> 
-            Phone Number (Whatsapp) * 
+            Phone Number (Whatsapp) 
+            {sangatValue.user_phoneNumber.length<10? <div style={{color: "red"}}>Phone number must be 10 digits</div>: ""}
             <input onkeyup="value=isNaN(parseFloat(value))||value<0||value>9000?1000:value" type="number" style={{ ...inputStyle, borderColor: sangatValue.user_phoneNumber===""? 'red':""  }}  value ={sangatValue.user_phoneNumber} onChange ={e=>setSangatPhoneNumber(e)}/>
-            Email * 
-            <input type="email" style={{ ...inputStyle, borderColor: sangatValue.user_email===""? 'red':""  }}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
-            Allergies
-            <input style={{ ...inputStyle }}  value ={sangatValue.user_allergy} onChange ={e=>setSangatAllergy(e)}/>
-            Arriving Flight Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightNumber(e)} />
-            Arriving Airline Name
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
+            Secondary Contact Number (Reachable phone while travelling) *
+            {sangatValue.user_phoneNumber===sangatValue.user_emergencyContact? <div style={{color: "red"}}>Must be different than primary phone number</div>: ""}
+            <input type="number" style={{ ...inputStyle }} value={sangatValue.user_emergencyContact} onChange = {e=>setSangatEmergencyContact(e)} /> 
+            Email 
+            <input type="email" style={{ ...inputStyle}}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
             Arriving Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
+            Arriving Flight Time (Change method add military time)
+            <input  style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
             Arriving Flight Airport
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightAirport(e)} />
-            Departing Flight Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
-            Departing Airline Name
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightName(e)} />
+            <Dropdown style={{paddingTop: '5px'}}>
+              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
+                 {user_arrivingFlightAirport===""?"Select Arriving Airport": user_arrivingFlightAirport}
+             </Dropdown.Toggle>
+              <Dropdown.Menu>
+                 <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Delhi")}>Delhi</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Amritsar")}>Amritsar</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Other")}>Other</Dropdown.Item>
+              </Dropdown.Menu>
+           </Dropdown>
+            Arriving Airline Name
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
+            Arriving Airline Number
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
+            Need Ride from Airport 
+            <Dropdown style={{paddingTop: '5px'}}>
+              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
+                 {user_ride_from_airport===false?"No": "Yes"}
+             </Dropdown.Toggle>
+              <Dropdown.Menu>
+                 <Dropdown.Item onClick={(e)=>setUserRideFromAirport(e, "Yes")}>Yes</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setUserRideFromAirport(e, "No")}>No</Dropdown.Item>
+              </Dropdown.Menu>
+           </Dropdown>
             Departing Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
+            Departing Flight Time (Change method add military time)
+            <input  style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
             Departing Flight Airport
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightAirport(e)} />
-            closest Asthan
-            <input style={{ ...inputStyle }} value={sangatValue.user_goingToAsthan} onChange = {e=>setSangatAsthan(e)} /> 
-            Emergency Contact
-            <input style={{ ...inputStyle }} value={sangatValue.user_emergencyContact} onChange = {e=>setSangatEmergencyContact(e)} /> 
+            <Dropdown style={{paddingTop: '5px'}}>
+              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
+                 {user_departingFlightDate===""?"Select Departing Airport": user_departingFlightDate}
+             </Dropdown.Toggle>
+              <Dropdown.Menu>
+                 <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Delhi")}>Delhi</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Amritsar")}>Amritsar</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Other")}>Other</Dropdown.Item>
+              </Dropdown.Menu>
+           </Dropdown>
+            Departing Airline Name
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightName(e)} />
+            Departing Flight Number
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
+
             Comments
             <input style={{ ...inputStyle }} value={sangatValue.user_comments} onChange = {e=>setSangatComments(e)} /> 
           </div>

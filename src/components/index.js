@@ -21,10 +21,10 @@ const Home = () => {
         <>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
             <div className="card" style={{...cardStyling}} onClick={e=>routeToPage('Users')}>
-                <div className="card-body">Sangat</div>
+                <div className="card-body">All Sangat List</div>
             </div>
             <div className="card" style={{...cardStyling}} onClick={e=>routeToPage('Saravas')}>
-                <div className="card-body">GurPurab November 2022</div>
+                <div className="card-body">Gurpurab 2022-Arriving Sangat List</div>
             </div>
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
