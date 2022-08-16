@@ -264,7 +264,7 @@ const setUserRideFromAirport = (e, value) =>{
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
 
-const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightDate, user_ride_from_airport} = sangatValue
+const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport} = sangatValue
 
 console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_emergencyContact);
 
@@ -350,7 +350,7 @@ console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_
             Departing Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
-                 {user_departingFlightDate===""?"Select Departing Airport": user_departingFlightDate}
+                 {user_departingFlightAirport===""?"Select Departing Airport": user_departingFlightAirport}
              </Dropdown.Toggle>
               <Dropdown.Menu>
                  <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Delhi")}>Delhi</Dropdown.Item>
