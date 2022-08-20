@@ -7,6 +7,10 @@ import Loader from '../helper/loader';
 import ConfirmDialog from '../helper/confirmationDialog';
 import RenderCountries from '../components/helper/renderCountries';
 import RenderStates from '../components/helper/renderStates';
+import RenderAsthans from '../components/helper/renderAsthans';
+import TimePicker from 'react-time-picker';
+import SangatArriving from './asthans/FresnoCA/FresnoCASangatArriving';
+
 
 const AddNewUser = (props) => {
 
@@ -16,7 +20,8 @@ const AddNewUser = (props) => {
   const [toastMessage, setToastMessage] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [closestAsthan, setClosestAsthan] = useState("");
+  const [value, onChange] = useState('00:00');
+  const [valueDeparture, onChangeDeparture] = useState('00:00');
   const [sangatValue, setSangatValue] = useState({
     user_firstName:"",
     user_middleName: "",
@@ -34,10 +39,12 @@ const AddNewUser = (props) => {
     user_arrivingFlightName: "",
     user_arrivingFlightAirport: "",
     user_arrivingFlightDate: "",
+    user_arrivingFlightTime: "",
     user_departingFlightNumber: "",
     user_departingFlightName: "",
     user_departingFlightAirport: "",
     user_departingFlightDate: "",
+    user_departingFlightTime: "",
     user_hostedby:"",
     user_goingToAsthan: "",
     user_emergencyContact: "",
@@ -93,6 +100,14 @@ const setSangatLastName = (e) => {
   setSangatValue({...sangatValue, user_lastName: e.target.value});
 }
 
+const setSangatArrivalTime = (value) =>{
+  setSangatValue({...sangatValue, user_arrivingFlightTime: value});
+}
+
+const setSangatDepartureTime = (value) =>{
+  setSangatValue({...sangatValue, user_departingFlightTime: value});
+}
+
 const setSangatYearOfBirth = (e) => {
   e.preventDefault();
   const currentDate = new Date();
@@ -134,14 +149,14 @@ const setSangatCity = (e) => {
   setSangatValue({...sangatValue, user_city: e.target.value});
 }
 
-const setSangatState = (e) => {
-  e.preventDefault();
-  setSangatValue({...sangatValue, user_state: e.target.value});
-}
-
 const setArrivingFlightNumber = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_arrivingFlightNumber: e.target.value}) 
+}
+
+const setArrivalTime = (e) =>{
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_arrivingFlightTime: e.target.value})
 }
 
 const setArrivingFlightName = (e) => {
@@ -206,9 +221,9 @@ const setSangatHostedBy = (e) => {
   setSangatValue({...sangatValue, user_hostedby: e.target.value});
 }
 
-const setSangatAsthan = (e) => {
+const setSangatAsthan = (e, value) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_goingToAsthan: e.target.value});
+  setSangatValue({...sangatValue, user_goingToAsthan: value});
 }
 
 const setSangatEmergencyContact = (e) => {
@@ -266,7 +281,9 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
 
 const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport} = sangatValue
 
-console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_emergencyContact);
+console.log("Arriving Time", value);
+console.log("Departure Time", valueDeparture);
+
 
   return (
     <>
@@ -301,9 +318,8 @@ console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_
             <RenderCountries sangatValue={sangatValue} setCountry={setCountrySelection}/>
            State/Province *
            <RenderStates sangatValue={sangatValue} setState={setStateSelection}/>
-           {user_state!=="" &&
-            <Button style={{width:"161px", margin: "5px 0px"}} onClick={e=>{getClosestAsthan(e)}}>Get closest asthan</Button>}
-            <div>Closest asthan from your place: {closestAsthan}</div>
+           Closest Asthan *
+           <RenderAsthans sangatValue={sangatValue} setAsthan={setSangatAsthan}/>
             City * 
             <input style={{ ...inputStyle, borderColor: sangatValue.user_city===""? 'red':""  }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
             Phone Number (Whatsapp) 
@@ -314,10 +330,14 @@ console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_
             <input type="number" style={{ ...inputStyle }} value={sangatValue.user_emergencyContact} onChange = {e=>setSangatEmergencyContact(e)} /> 
             Email 
             <input type="email" style={{ ...inputStyle}}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
+            <div style={{margin: "10px"}}>========================
+            Arriving Info ========================================</div>
             Arriving Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
-            Arriving Flight Time (Change method add military time)
-            <input  style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
+            Arriving Flight Time
+            <div style={{width: '400px'}}>
+            <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={value} />
+            </div>
             Arriving Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
@@ -332,7 +352,7 @@ console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_
             Arriving Airline Name
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
             Arriving Airline Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightNumber(e)} />
             Need Ride from Airport 
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
@@ -343,10 +363,14 @@ console.log("Primary Secondary", sangatValue.user_phoneNumber, sangatValue.user_
                  <Dropdown.Item onClick={(e)=>setUserRideFromAirport(e, "No")}>No</Dropdown.Item>
               </Dropdown.Menu>
            </Dropdown>
+           <div style={{margin: "10px"}}>========================
+            Departing Info ========================================</div>
             Departing Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
-            Departing Flight Time (Change method add military time)
-            <input  style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
+            Departing Flight Time
+            <div style={{width: '400px'}}>
+            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={valueDeparture} />
+            </div>
             Departing Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>

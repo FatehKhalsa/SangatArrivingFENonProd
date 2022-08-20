@@ -88,7 +88,7 @@ const RenderStates = (props) => {
             <Dropdown.Item onClick={(e)=>setStateSelection(e, "Prince Edward Island")}>Prince Edward Island</Dropdown.Item>
         </Dropdown.Menu>
         }
-        {user_country!=="USA" &&
+        {user_country!=="USA" && user_country!=="Canada" &&
          <Dropdown.Menu style={{overflow: "scroll"}}>
          <Dropdown.Item onClick={(e)=>setStateSelection(e, "Others")}>Others</Dropdown.Item>
          </Dropdown.Menu>

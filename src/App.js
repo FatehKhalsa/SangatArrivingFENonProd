@@ -25,6 +25,7 @@ import ParisFrance from './components/asthans/ParisFrance';
 import SurreyBC from './components/asthans/SurreyBC';
 import TorontoON from './components/asthans/TorontoON';
 import WalsallUK from './components/asthans/WalsallUK';
+import TaxiReport from './components/reporting/TaxiReport';
 
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -92,6 +93,7 @@ class App extends React.Component {
           <PrivateRoute path="/Asthans/Malaysia" exact component={Malaysia} />
           <PrivateRoute path="/Asthans/MelbourneAus" exact component={MelbourneAus} />
           <PrivateRoute path="/Asthans/NewZealand" exact component={NewZealand} />
+          <PrivateRoute path="/reporting/taxiReport" exact component={TaxiReport} />
         </div>
     </Router>
   );
