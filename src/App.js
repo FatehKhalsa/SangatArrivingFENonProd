@@ -28,6 +28,8 @@ import WalsallUK from './components/asthans/WalsallUK';
 import TaxiReport from './components/reporting/TaxiReport';
 
 
+
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import './AppScss.scss';
@@ -64,10 +66,10 @@ class App extends React.Component {
     <Router history={createBrowserHistory}>
       <div className="container">
         {currentUser && 
-          <nav className="navbar navbar-expand-lg navbar-light" style={{display: 'flex', justifyContent: 'space-between', backgroundColor: '#bf88b5', borderRadius:'10px', padding: '0px 5px'}}>
-              <Link to="/Home" className="navbar-brand btn-default">Home</Link>
-              <button onClick={this.logout} className="nav-item nav-link btn btn-danger">Logout</button>
-          </nav>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
+            <div style={{border: '1px solid black', padding: '10px', background: 'lightblue', borderRadius: '10px', width: '100px'}}><Link to="/Home">Home</Link></div>
+           <button onClick={this.logout} className="nav-item nav-link btn btn-danger">Logout</button>
+           </div>
           }
           <br/>
           <Route path="/" exact component={LoginPage} />

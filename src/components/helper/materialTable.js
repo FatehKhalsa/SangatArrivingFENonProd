@@ -58,13 +58,13 @@ class MTable extends React.Component{
         {showModal && (loadModel ==='User'? <User userSelected={userSelected}/>: (loadModel==='Host' &&<HostModal userSelected={userSelected}/>))}
         <button
               onClick={() => this.onBtExport()}
-              style={{ marginBottom: '5px', fontWeight: 'bold' }}
+              style={{ marginBottom: '5px', fontWeight: 'bold', width: '338px' }}
             >
               Download current data view
             </button>
         <div style={{ width:'95vw', height: '10vh' }}>
         {hideGetSelectedRowData && <button onClick={this.getSelectedRowData} style={{ margin: '10 0'}} className="btn btn-secondary">
-          Edit Selected Sangat Information {text}
+          Edit Selected Information {text}
         </button>
         }
         </div>
