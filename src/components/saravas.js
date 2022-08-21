@@ -41,11 +41,11 @@ const Saravas  = () => {
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
                 <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button> 
                 </div>
-                <div style={{textAlign: "Right"}}>
-                <button  onClick={e=>routeToPage('reporting/taxiReport')}>Open Taxi Report</button> 
+                <div style={{display: 'flex', flexDirection: 'row-reverse'}}>
+                <button  style={{marginLeft: '1%'}}onClick={e=>routeToPage('reporting/taxiReport')}>Open Taxi Report</button> 
                 <button  onClick={e=>routeToPage('reporting/taxiReport')}>Open Arriving Sangat Report</button> 
                 </div>
-            <h3 style={{marginLeft: '30%'}}>Arriving Sangat List for 2022 Gurpurab </h3>  
+            <h3 style={{textAlign: 'center'}}>Arriving Sangat List for 2022 Gurpurab </h3>  
                 <MTable rowData={data} columnDefs={columnDefs} text={"Sangat Gurpurab"} hideGetSelectedRowData={true}/>
             </div>
         )
