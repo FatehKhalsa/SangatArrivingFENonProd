@@ -26,7 +26,6 @@ export const inputStyle = {
     border: '1px solid #ccc',
     borderRadius: '4px',
     boxSizing: 'border-box',
-    marginLeft: '2%',
     height: '4vh',
     width: '50%'
   }

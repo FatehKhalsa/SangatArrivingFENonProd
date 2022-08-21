@@ -66,8 +66,8 @@ class LoginPage extends React.Component {
         const {isInvalid, error, addNewUser, loading} = this.state;
         return(
             <div>
-                 <h3>Bulandpuri Sahib Barsi Saraava System</h3>
-                 <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Edit your profile</button>
+                 <h3>Sangat Arriving System</h3>
+                 {/* <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Edit your profile</button> */}
                  {addNewUser && <AddUser/>}
                  {!isInvalid && 
                  <div class="alert alert-danger" role="alert">
@@ -79,7 +79,7 @@ class LoginPage extends React.Component {
                {loading && 
                     <Loader/>
                 } 
-                 <form style={{width: '57vh'}}>
+                 <form style={{width: '50vh'}}>
                     <div class="form-group">
                          <label>Email address</label>
                          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value={this.state.userName} onChange={e=>this.getUserName(e)}/>

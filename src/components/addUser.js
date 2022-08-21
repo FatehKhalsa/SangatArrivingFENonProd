@@ -4,7 +4,6 @@ import { Modal, Button, Alert, Form,  InputGroup, Dropdown} from 'react-bootstra
 import {editStyling, floatchild, inputStyle, floatcontainer} from './helper/sharedStyling';
 import {HerokuURL} from '../constants';
 import Loader from '../helper/loader';
-import ConfirmDialog from '../helper/confirmationDialog';
 import RenderCountries from '../components/helper/renderCountries';
 import RenderStates from '../components/helper/renderStates';
 import RenderAsthans from '../components/helper/renderAsthans';
@@ -281,8 +280,6 @@ dselect.forEach(el => el.addEventListener('click', handleShow));
 
 const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport} = sangatValue
 
-console.log("Arriving Time", value);
-console.log("Departure Time", valueDeparture);
 
 
   return (
@@ -318,8 +315,12 @@ console.log("Departure Time", valueDeparture);
             <RenderCountries sangatValue={sangatValue} setCountry={setCountrySelection}/>
            State/Province *
            <RenderStates sangatValue={sangatValue} setState={setStateSelection}/>
-           Closest Asthan *
+          
+           {user_country!=='India' &&
+           <div>  Closest Asthan *
            <RenderAsthans sangatValue={sangatValue} setAsthan={setSangatAsthan}/>
+           </div>
+           }
             City * 
             <input style={{ ...inputStyle, borderColor: sangatValue.user_city===""? 'red':""  }}  value ={sangatValue.user_city} onChange ={e=>setSangatCity(e)}/>
             Phone Number (Whatsapp) 
@@ -336,7 +337,7 @@ console.log("Departure Time", valueDeparture);
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
             Arriving Flight Time
             <div style={{width: '400px'}}>
-            <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={value} />
+            <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={value} format={"HH:mm"}/>
             </div>
             Arriving Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
@@ -369,7 +370,7 @@ console.log("Departure Time", valueDeparture);
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
             Departing Flight Time
             <div style={{width: '400px'}}>
-            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={valueDeparture} />
+            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={valueDeparture} format={"HH:mm"}/>
             </div>
             Departing Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
