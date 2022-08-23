@@ -8,6 +8,7 @@ import RenderCountries from '../components/helper/renderCountries';
 import RenderStates from '../components/helper/renderStates';
 import RenderAsthans from '../components/helper/renderAsthans';
 import TimePicker from 'react-time-picker';
+import RenderAirlinesDelhi from '../components/helper/renderIndiaAirlines';
 import SangatArriving from './asthans/FresnoCA/FresnoCASangatArriving';
 
 
@@ -340,7 +341,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={value} format={"HH:mm"}/>
             </div>
             Arriving Flight Airport
-            <Dropdown style={{paddingTop: '5px'}}>
+            {/* <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
                  {user_arrivingFlightAirport===""?"Select Arriving Airport": user_arrivingFlightAirport}
              </Dropdown.Toggle>
@@ -349,7 +350,8 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
                  <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Amritsar")}>Amritsar</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Other")}>Other</Dropdown.Item>
               </Dropdown.Menu>
-           </Dropdown>
+           </Dropdown> */}
+           <RenderAirlinesDelhi sangatValue={sangatValue} setAirport={setArrivingFlightAirport}/>
             Arriving Airline Name
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
             Arriving Airline Number
@@ -397,7 +399,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addNewSangat} disabled={sangatValue.user_firstName==="" || sangatValue.user_lastName==="" || sangatValue.user_yearOfBirth==="" || sangatValue.user_city===""|| sangatValue.user_state==="" || sangatValue.user_email==="" || sangatValue.user_phoneNumber===""}>
+          <Button variant="primary" onClick={addNewSangat} disabled={sangatValue.user_firstName==="" || sangatValue.user_lastName==="" || sangatValue.user_yearOfBirth==="" || sangatValue.user_city===""|| sangatValue.user_state==="" || sangatValue.user_phoneNumber===""}>
             Save Changes
           </Button>
         </Modal.Footer>
