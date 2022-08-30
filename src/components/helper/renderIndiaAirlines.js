@@ -20,7 +20,7 @@ const RenderAirlinesDelhi = (props) => {
     return(
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black', borderColor: user_arrivingFlightAirport===""? 'red':"" }}>
-                 {user_arrivingFlightAirport===""?"Select Arriving Airport": user_arrivingFlightAirport}
+                 {user_arrivingFlightAirport===""?"Select Arriving Flight": user_arrivingFlightAirport}
              </Dropdown.Toggle>
               <Dropdown.Menu style={{height: '300px', overflowY: "scroll"}}>
                  {AirportNames.map(airportName => {

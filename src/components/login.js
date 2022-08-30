@@ -67,7 +67,7 @@ class LoginPage extends React.Component {
         return(
             <div>
                  <h3>Sangat Arriving System</h3>
-                 {/* <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Edit your profile</button> */}
+                 {/* <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Enter your information</button> */}
                  {addNewUser && <AddUser/>}
                  {!isInvalid && 
                  <div class="alert alert-danger" role="alert">

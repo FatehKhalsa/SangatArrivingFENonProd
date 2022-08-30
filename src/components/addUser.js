@@ -341,7 +341,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={value} format={"HH:mm"}/>
             </div>
             Arriving Flight Airport
-            {/* <Dropdown style={{paddingTop: '5px'}}>
+            <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
                  {user_arrivingFlightAirport===""?"Select Arriving Airport": user_arrivingFlightAirport}
              </Dropdown.Toggle>
@@ -350,10 +350,9 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
                  <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Amritsar")}>Amritsar</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setArrivingFlightAirport(e, "Other")}>Other</Dropdown.Item>
               </Dropdown.Menu>
-           </Dropdown> */}
-           <RenderAirlinesDelhi sangatValue={sangatValue} setAirport={setArrivingFlightAirport}/>
+           </Dropdown>
             Arriving Airline Name
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightName(e)} />
+            <RenderAirlinesDelhi sangatValue={sangatValue} setAirport={setArrivingFlightAirport}/>
             Arriving Airline Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightNumber(e)} />
             Need Ride from Airport 
