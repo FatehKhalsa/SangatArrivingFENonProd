@@ -43,6 +43,12 @@ class MTable extends React.Component{
     onBtExport = () => {
       this.gridApi.exportDataAsCsv();
     };
+
+    onFilterTextBoxChanged = () => {
+      this.gridApi.setQuickFilter(
+        document.getElementById('filter-text-box').value
+      );
+    };
     
 
     
@@ -56,6 +62,14 @@ class MTable extends React.Component{
     return(
         <React.Fragment>
         {showModal && (loadModel ==='User'? <User userSelected={userSelected}/>: (loadModel==='Host' &&<HostModal userSelected={userSelected}/>))}
+        <div className="example-header">
+        <input
+              type="text"
+              id="filter-text-box"
+              placeholder="Search..."
+              onInput={() => this.onFilterTextBoxChanged()}
+            />
+            </div>
         <button
               onClick={() => this.onBtExport()}
               style={{ marginBottom: '5px', fontWeight: 'bold', width: '338px' }}
