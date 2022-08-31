@@ -159,9 +159,9 @@ const setArrivalTime = (e) =>{
   setSangatValue({...sangatValue, user_arrivingFlightTime: e.target.value})
 }
 
-const setArrivingFlightName = (e) => {
+const setArrivingFlightName = (e, value) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_arrivingFlightName: e.target.value}) 
+  setSangatValue({...sangatValue, user_arrivingFlightName: value}) 
 }
 
 const setArrivingFlightAirport = (e, value) => {
@@ -352,7 +352,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
               </Dropdown.Menu>
            </Dropdown>
             Arriving Airline Name
-            <RenderAirlinesDelhi sangatValue={sangatValue} setAirport={setArrivingFlightAirport}/>
+            <RenderAirlinesDelhi sangatValue={sangatValue} setAirport={setArrivingFlightName}/>
             Arriving Airline Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightNumber(e)} />
             Need Ride from Airport 
