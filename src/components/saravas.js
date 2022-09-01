@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import AddNewUser from './addUser';
 import {sangatVistingGurpurab} from './mockData/users'
 import {HerokuURL} from '../constants';
+import { authenticationService } from '../userAuthMocks';
+
 
 
 
@@ -16,6 +18,12 @@ const Saravas  = () => {
     useEffect(()=>{
         fetch(`${HerokuURL}api/getAllUsers`, { headers: {"x-access-token" : localStorage.getItem('accessToken')} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
     }, []);
+
+    if(data && data.message==="Unauthorized!"){
+        authenticationService.logout();
+        history.push('/');
+        window.location.reload();
+    }
 
     const [columnDefs] = useState(sangatVistingGurpurab);
 

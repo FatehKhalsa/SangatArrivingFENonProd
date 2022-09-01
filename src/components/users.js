@@ -4,6 +4,7 @@ import MTable from './helper/materialTable';
 import { useHistory } from "react-router-dom";
 import AddNewUser from './addUser';
 import {sangatVistingAsthan} from './mockData/users'
+import {authenticationService} from '../userAuthMocks';
 
 import {HerokuURL} from '../constants';
 
@@ -26,6 +27,12 @@ const Users  = () => {
     }, []);
 
     console.log("Data", data)
+
+    if(data && data.message==="Unauthorized!"){
+        authenticationService.logout();
+        history.push('/');
+        window.location.reload();
+    }
 
 
     return(
