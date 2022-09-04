@@ -2,6 +2,7 @@ import React from 'react';
 import {checkAuth} from '../userAuthMocks';
 import AddUser from './addUser';
 import Loader from '../helper/loader';
+import UserTravelInfoLookUp from '../components/modals/userTravelInfoLookUp';
 
 class LoginPage extends React.Component {
     constructor(props){
@@ -14,6 +15,7 @@ class LoginPage extends React.Component {
             error: '',
             addNewUser: false,
             loading: false,
+            travelInfo: false,
         }
 
     }
@@ -57,18 +59,18 @@ class LoginPage extends React.Component {
         });
     }
 
-    addNewUser = (e) => {
+    openTravelInfo = (e) => {
         e.preventDefault();
-       // this.setState({addNewUser: true})
+       this.setState({travelInfo: true})
     }
 
     render(){
-        const {isInvalid, error, addNewUser, loading} = this.state;
+        const {isInvalid, error, travelInfo, loading} = this.state;
         return(
             <div>
                  <h3>Sangat Arriving System</h3>
-                 {/* <button className="btn btn-primary" onClick={e=>this.addNewUser(e)}>Enter your information</button> */}
-                 {addNewUser && <AddUser/>}
+                 <button className="btn btn-primary" onClick={e=>this.openTravelInfo(e)}>Look up your travel info</button>
+                 {travelInfo && <UserTravelInfoLookUp/>}
                  {!isInvalid && 
                  <div class="alert alert-danger" role="alert">
                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

@@ -9,8 +9,7 @@ import RenderStates from '../components/helper/renderStates';
 import RenderAsthans from '../components/helper/renderAsthans';
 import TimePicker from 'react-time-picker';
 import RenderAirlinesDelhi from '../components/helper/renderIndiaAirlines';
-import SangatArriving from './asthans/FresnoCA/FresnoCASangatArriving';
-
+import RenderAirlinesDelhiDeparting from '../components/helper/renderIndiaDepartingAirlines';
 
 const AddNewUser = (props) => {
 
@@ -179,9 +178,9 @@ const setDepartingFlightNumber = (e) => {
   setSangatValue({...sangatValue, user_departingFlightNumber: e.target.value}) 
 }
 
-const setDepartingFlightName = (e) => {
+const setDepartingFlightName = (e, value) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_departingFlightName: e.target.value}) 
+  setSangatValue({...sangatValue, user_departingFlightName: value}) 
 }
 
 const setDepartingFlightAirport = (e, value) => {
@@ -279,7 +278,7 @@ const setUserRideFromAirport = (e, value) =>{
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
 
-const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport} = sangatValue
+const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_arrivingFlightName} = sangatValue
 
 
 
@@ -332,8 +331,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <input type="number" style={{ ...inputStyle }} value={sangatValue.user_emergencyContact} onChange = {e=>setSangatEmergencyContact(e)} /> 
             Email 
             <input type="email" style={{ ...inputStyle}}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
-            <div style={{margin: "10px"}}>========================
-            Arriving Info ========================================</div>
+            <div style={{margin: "10px"}}>===========Arriving Info ============</div>
             Arriving Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightDate(e)} />
             Arriving Flight Time
@@ -365,8 +363,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
                  <Dropdown.Item onClick={(e)=>setUserRideFromAirport(e, "No")}>No</Dropdown.Item>
               </Dropdown.Menu>
            </Dropdown>
-           <div style={{margin: "10px"}}>========================
-            Departing Info ========================================</div>
+           <div style={{margin: "10px"}}>==========Departing Info =========</div>
             Departing Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
             Departing Flight Time
@@ -385,7 +382,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
               </Dropdown.Menu>
            </Dropdown>
             Departing Airline Name
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightName(e)} />
+            <RenderAirlinesDelhiDeparting sangatValue={sangatValue} setAirport={setDepartingFlightName}/>
             Departing Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
 
