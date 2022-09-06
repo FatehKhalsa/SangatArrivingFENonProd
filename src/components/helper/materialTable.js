@@ -20,6 +20,7 @@ class MTable extends React.Component{
     getSelectedRowData = () => {
         let selectedNodes = this.gridApi.getSelectedNodes();
         let selectedData = selectedNodes.map((node) => node.data);
+
         !_.isEmpty(selectedNodes) && this.setState({userSelected: selectedData, showModal: true}, ()=>{console.log(this.state)});
         this.mapModel(Object.keys(selectedData[0])[1]);
         return selectedData;

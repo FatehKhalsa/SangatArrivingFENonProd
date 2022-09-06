@@ -56,6 +56,7 @@ const AddNewUser = (props) => {
     // Add logic for confirmation
     setShowDialong(true);
     setShow(false);
+    window.location.reload();
   }
 
   const handleShow = () => setShow(true);
@@ -79,8 +80,9 @@ const AddNewUser = (props) => {
           setError(true);
         }
         setHostAddedSuccess(true); 
-
-        setLoading(false); setShow(false);
+        setLoading(false); 
+        setShow(false);
+        setInterval(window.location.reload(), 5000);
       })
 }
 
@@ -153,11 +155,6 @@ const setArrivingFlightNumber = (e) => {
   setSangatValue({...sangatValue, user_arrivingFlightNumber: e.target.value}) 
 }
 
-const setArrivalTime = (e) =>{
-  e.preventDefault();
-  setSangatValue({...sangatValue, user_arrivingFlightTime: e.target.value})
-}
-
 const setArrivingFlightName = (e, value) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_arrivingFlightName: value}) 
@@ -193,18 +190,6 @@ const setDepartingFlightDate = (e) => {
   setSangatValue({...sangatValue, user_departingFlightDate: e.target.value}) 
 }
 
-const setSangatCountry = (e) => {
-  e.preventDefault();
-  setSangatValue({...sangatValue, user_country: e.target.value});
-}
-
-const setSangatAllergy = (e) => {
-  e.preventDefault();
-  if(e.target.value!=''){
-  setSangatValue({...sangatValue, user_allergy: e.target.value, user_hasAllergy: true});
-  }
-}
-
 const setSangatPhoneNumber = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_phoneNumber: e.target.value});
@@ -213,11 +198,6 @@ const setSangatPhoneNumber = (e) => {
 const setSangatEmail = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_email: e.target.value});
-}
-
-const setSangatHostedBy = (e) => {
-  e.preventDefault();
-  setSangatValue({...sangatValue, user_hostedby: e.target.value});
 }
 
 const setSangatAsthan = (e, value) => {
