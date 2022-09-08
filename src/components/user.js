@@ -22,7 +22,9 @@ const User = (props) => {
   const [valueDeparture, onChangeDeparture] = useState('00:00');
   const [show, setShow] = useState(true);
   const [showDialog, setShowDialong] = useState(false);
+  const [isParent, setParent] = useState(false);
   const [hostAddedSuccess, setHostAddedSuccess] = useState(false);
+  const [addFamily, setAddFamily] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -53,7 +55,8 @@ const User = (props) => {
     user_goingToAsthan: "",
     user_emergencyContact: userInfo.user_emergencyContact,
     user_comments: "",
-    user_ride_from_airport: false
+    user_ride_from_airport: false,
+    user_family_identified: "",
   });
 
   const handleClose = () => {
@@ -162,9 +165,9 @@ const setSangatPhoneNumber = (e) => {
 }
 
 
-const setSangatAsthan = (e) => {
+const setSangatAsthan = (e, value) => {
   e.preventDefault();
-  setSangatValue({...sangatValue, user_goingToAsthan: e.target.value});
+  setSangatValue({...sangatValue, user_goingToAsthan: value});
 }
 
 const setArrivingFlightAirport = (e, value) => {
@@ -230,7 +233,27 @@ const setUserRideFromAirport = (e, value) =>{
   setSangatValue({...sangatValue, user_ride_from_airport: boolCheck})
 }
 
-const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport} = sangatValue
+const setTravelingWithFamily = (e, value) =>{
+    e.preventDefault();
+    if(value==="Yes"){
+      setAddFamily(true)
+    }
+    else{
+      setAddFamily(false)
+    }
+}
+
+const setGroupFamilyUID = (e) =>{
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_family_identified: e.target.value})
+}
+
+const setParentFlag = (e, value) =>{
+  e.preventDefault();
+  value==="Yes"? setParent(true): setParent(false)
+}
+
+const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified} = sangatValue
 
   return (
     <>
@@ -281,6 +304,31 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <input type="number" style={{ ...inputStyle }} value={sangatValue.user_emergencyContact} onChange = {e=>setSangatEmergencyContact(e)} /> 
             Email 
             <input type="email" style={{ ...inputStyle}}  value ={sangatValue.user_email} onChange ={e=>setSangatEmail(e)}/>
+            Arriving with Family?
+            <Dropdown style={{paddingTop: '5px'}}>
+              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
+                {addFamily? "Yes": "No"}
+             </Dropdown.Toggle>
+              <Dropdown.Menu>
+                 <Dropdown.Item onClick={(e)=>setTravelingWithFamily(e, "Yes")}>Yes</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setTravelingWithFamily(e, "No")}>No</Dropdown.Item>
+              </Dropdown.Menu>
+           </Dropdown>
+           Is this invidiual parent? 
+           <Dropdown style={{paddingTop: '5px'}}>
+              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
+                {isParent? "Yes": "No"}
+             </Dropdown.Toggle>
+              <Dropdown.Menu>
+                 <Dropdown.Item onClick={(e)=>setParentFlag(e, "Yes")}>Yes</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setParentFlag(e, "No")}>No</Dropdown.Item>
+              </Dropdown.Menu>
+           </Dropdown>
+           {addFamily && isParent &&  `Please note down the Unique family identifier ${userInfo._id}`}
+           {!isParent && 'Add Family Group Unique identifier'}
+           {!isParent &&
+            <input style={{ ...inputStyle }} value ={sangatValue.user_family_identified} onChange ={e=>setGroupFamilyUID(e)}/>
+           }
             <div style={{margin: "10px"}}>===========Arriving Info ============</div>
             Arriving Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlightDate} onChange = {e=>setArrivingFlightDate(e)} />
@@ -335,6 +383,16 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <RenderAirlinesDelhiDeparting sangatValue={sangatValue} setAirport={setDepartingFlightName}/>
             Departing Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
+           Assign Taxi to User
+            <Dropdown style={{paddingTop: '5px'}}>
+              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
+                Yes
+             </Dropdown.Toggle>
+              <Dropdown.Menu>
+                 <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Delhi")}>Yes</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Amritsar")}>No</Dropdown.Item>
+              </Dropdown.Menu>
+           </Dropdown>
 
             Comments
             <input style={{ ...inputStyle }} value={sangatValue.user_comments} onChange = {e=>setSangatComments(e)} /> 

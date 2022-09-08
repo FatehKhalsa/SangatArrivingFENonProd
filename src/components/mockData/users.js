@@ -93,6 +93,7 @@ export const sangatVistingGurpurab = [
     { field: "user_arrivingFlightName", width: 150,  headerName: "Arriving Airline Name", sortable: true, filter: true},
     { field: "user_arrivingFlightNumber", width: 150, headerName: "Arriving Flight #", sortable: true, filter: true},
     { field: "updatedAt", headerName: "Last updated by", sortable: true, filter: true},
+    {field: "user_family_identified", headerName: "Family Grouping Iden", filter: true, sortable: true},
     // { field: "user_phoneNumber", headerName: "Phone Number", sortable: true, filter: true},
     // { field: "user_departingFlightNumber", headerName: "Departing Flight #", sortable: true, filter: true},
     // { field: "user_departingFlightName", headerName: "Departing Airline Name", sortable: true, filter: true},
