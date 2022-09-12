@@ -52,10 +52,10 @@ const User = (props) => {
     user_departingFlightDate: userInfo.user_departingFlightDate,
     user_departingFlightTime: userInfo.user_departingFlightTime,
     user_hostedby: "",
-    user_goingToAsthan: "",
+    user_goingToAsthan: userInfo.user_goingToAsthan,
     user_emergencyContact: userInfo.user_emergencyContact,
     user_comments: "",
-    user_ride_from_airport: false,
+    user_ride_from_airport: userInfo.user_ride_from_airport,
     user_family_identified: "",
   });
 
@@ -314,27 +314,12 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
                  <Dropdown.Item onClick={(e)=>setTravelingWithFamily(e, "No")}>No</Dropdown.Item>
               </Dropdown.Menu>
            </Dropdown>
-           Is this invidiual parent? 
-           <Dropdown style={{paddingTop: '5px'}}>
-              <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
-                {isParent? "Yes": "No"}
-             </Dropdown.Toggle>
-              <Dropdown.Menu>
-                 <Dropdown.Item onClick={(e)=>setParentFlag(e, "Yes")}>Yes</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setParentFlag(e, "No")}>No</Dropdown.Item>
-              </Dropdown.Menu>
-           </Dropdown>
-           {addFamily && isParent &&  `Please note down the Unique family identifier ${userInfo._id}`}
-           {!isParent && 'Add Family Group Unique identifier'}
-           {!isParent &&
-            <input style={{ ...inputStyle }} value ={sangatValue.user_family_identified} onChange ={e=>setGroupFamilyUID(e)}/>
-           }
             <div style={{margin: "10px"}}>===========Arriving Info ============</div>
             Arriving Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlightDate} onChange = {e=>setArrivingFlightDate(e)} />
             Arriving Flight Time
             <div style={{width: '400px'}}>
-            <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={sangatValue.user_arrivingFlightTime} format={"HH:mm"}/>
+            <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={sangatValue.user_arrivingFlightTime} format={"HH:mm"} disableClock={true}/>
             </div>
             Arriving Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
@@ -350,7 +335,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             Arriving Airline Name
             <RenderAirlinesDelhi sangatValue={sangatValue} setAirport={setArrivingFlightName}/>
             Arriving Airline Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setArrivingFlightNumber(e)} />
+            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlightNumber} onChange = {e=>setArrivingFlightNumber(e)} />
             Need Ride from Airport 
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
@@ -366,7 +351,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_departingFlightDate} onChange = {e=>setDepartingFlightDate(e)} />
             Departing Flight Time
             <div style={{width: '400px'}}>
-            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={sangatValue.user_departingFlightTime} format={"HH:mm"}/>
+            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={sangatValue.user_departingFlightTime} format={"HH:mm"} disableClock={true}/>
             </div>
             Departing Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
@@ -382,7 +367,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             Departing Airline Name
             <RenderAirlinesDelhiDeparting sangatValue={sangatValue} setAirport={setDepartingFlightName}/>
             Departing Flight Number
-            <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
+            <input style={{ ...inputStyle }} value={sangatValue.user_departingFlightNumber} onChange = {e=>setDepartingFlightNumber(e)} />
            Assign Taxi to User
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>

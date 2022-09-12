@@ -344,13 +344,13 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
               </Dropdown.Menu>
            </Dropdown>
            <div style={{margin: "10px"}}>==========Departing Info =========</div>
-            Departing Flight Date
+            Return Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightDate(e)} />
-            Departing Flight Time
+            Return Flight Time
             <div style={{width: '400px'}}>
-            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={valueDeparture} format={"HH:mm"}/>
+            <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={valueDeparture} format={"HH:mm"} disableClock={true} />
             </div>
-            Departing Flight Airport
+            Return Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
                  {user_departingFlightAirport===""?"Select Departing Airport": user_departingFlightAirport}
@@ -361,9 +361,9 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
                  <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Other")}>Other</Dropdown.Item>
               </Dropdown.Menu>
            </Dropdown>
-            Departing Airline Name
+            Return Airline Name
             <RenderAirlinesDelhiDeparting sangatValue={sangatValue} setAirport={setDepartingFlightName}/>
-            Departing Flight Number
+            Return Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_arrivingFlight} onChange = {e=>setDepartingFlightNumber(e)} />
 
             Comments

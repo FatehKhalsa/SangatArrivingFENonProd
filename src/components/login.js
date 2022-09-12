@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
                     this.setState({error: "Invalid username or password", isInvalid: false, loading: false});
                     return;
                 }
-                this.props.history.push('/Home');
+                this.props.history.push('/Saravas');
                 this.setState({loading: false});
         })
     }

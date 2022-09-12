@@ -14,6 +14,8 @@ const Saravas  = () => {
 
     const history = useHistory();
 
+    const Role = localStorage.getItem('userRole');
+
     const [data, setState] = useState([])
     useEffect(()=>{
         fetch(`${HerokuURL}api/getAllUsers`, { headers: {"x-access-token" : localStorage.getItem('accessToken')} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
@@ -40,13 +42,15 @@ const Saravas  = () => {
           });
     }
 
-    
+    console.log("Role", Role);
     
         return(
             <div>
                 {showUser && <AddNewUser/>}
                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
+                {Role==='ROLE_ADMIN' &&   
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
+                }
                 <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button> 
                 </div>
                 <div style={{display: 'flex', flexDirection: 'row-reverse'}}>

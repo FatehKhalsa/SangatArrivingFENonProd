@@ -19,6 +19,7 @@ const RenderCountries = (props) => {
              </Dropdown.Toggle>
               <Dropdown.Menu>
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "USA")}>USA</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Bolivia")}>Bolivia</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Canada")}>Canada</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "UK")}>UK</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Germany")}>Germany</Dropdown.Item>
@@ -28,6 +29,7 @@ const RenderCountries = (props) => {
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Australia")}>Australia</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "New Zealand")}>New Zealand</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setCountrySelection(e, "India")}>India</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Other")}>Other</Dropdown.Item>
               </Dropdown.Menu>
            </Dropdown>
     )

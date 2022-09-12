@@ -31,6 +31,8 @@ const RenderAsthans = (props) => {
                  <Dropdown.Item onClick={(e)=>setSangatAsthan(e, "Indiana")}>Indiana</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setSangatAsthan(e, "New York")}>New York</Dropdown.Item>
                  <Dropdown.Item onClick={(e)=>setSangatAsthan(e, "Michigan")}>Michigan</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setSangatAsthan(e, "Walsall")}>Walsall</Dropdown.Item>
+                 <Dropdown.Item onClick={(e)=>setSangatAsthan(e, "Bochum Germany")}>Bochum Germany</Dropdown.Item>
 
               </Dropdown.Menu>
            </Dropdown>

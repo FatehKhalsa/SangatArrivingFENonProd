@@ -17,9 +17,11 @@ export const checkAuth = async (username, password) => {
 
     Promise.resolve(token).then((success) => {
         success.accessToken===undefined ? isAuthenticated = false: isAuthenticated= true;
+        const userRole = success.roles.length>0? success.roles[0]: '';
         if(isAuthenticated){
                 localStorage.setItem('currentUser', JSON.stringify(username));
                 localStorage.setItem('accessToken', success.accessToken);
+                localStorage.setItem('userRole', userRole);
                 currentUserSubject.next(username);
             
         }
@@ -43,5 +45,6 @@ export const authenticationService = {
 function logout(){
     localStorage.removeItem('currentUser');
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('userRole');
     currentUserSubject.next(null);
 }

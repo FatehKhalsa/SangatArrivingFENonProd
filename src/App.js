@@ -39,6 +39,8 @@ import NewYorkNYC from './components/asthans/NewYorkNY';
 
 let history = createBrowserHistory();
 
+const Role = localStorage.getItem('userRole');
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -69,7 +71,9 @@ class App extends React.Component {
       <div className="container">
         {currentUser && 
         <div style={{display: "flex", justifyContent: "space-between"}}>
+          {Role==='ROLE_ADMIN' &&
             <div style={{border: '1px solid black', padding: '10px', background: 'lightblue', borderRadius: '10px', width: '100px'}}><Link to="/Home">Home</Link></div>
+          }
            <button onClick={this.logout} className="nav-item nav-link btn btn-danger">Logout</button>
            </div>
           }
