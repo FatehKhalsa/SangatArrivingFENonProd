@@ -10,11 +10,11 @@ import { authenticationService } from '../userAuthMocks';
 
 
 
-const Saravas  = () => {
+const Saravas  = (props) => {
 
     const history = useHistory();
 
-    const Role = localStorage.getItem('userRole');
+    const Role = props.location.state;
 
     const [data, setState] = useState([])
     useEffect(()=>{
@@ -47,10 +47,8 @@ const Saravas  = () => {
         return(
             <div>
                 {showUser && <AddNewUser/>}
-               <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
-                {Role==='ROLE_ADMIN' &&   
-                <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
-                }
+               <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px', height: '60px'}}>
+                {/* <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button> */}
                 <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button> 
                 </div>
                 <div style={{display: 'flex', flexDirection: 'row-reverse'}}>

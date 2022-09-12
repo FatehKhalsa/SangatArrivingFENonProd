@@ -3,6 +3,8 @@ import {HerokuURL} from './constants';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
+let role ='';
+
 
 export const checkAuth = async (username, password) => {
     let isAuthenticated = false; 
@@ -18,6 +20,7 @@ export const checkAuth = async (username, password) => {
     Promise.resolve(token).then((success) => {
         success.accessToken===undefined ? isAuthenticated = false: isAuthenticated= true;
         const userRole = success.roles.length>0? success.roles[0]: '';
+        role = userRole;
         if(isAuthenticated){
                 localStorage.setItem('currentUser', JSON.stringify(username));
                 localStorage.setItem('accessToken', success.accessToken);
@@ -34,6 +37,10 @@ let fetchToken = async (username, password) => {
     let response = await fetch(`${HerokuURL}api/auth/signin`, {method: 'POST',  headers: {'Content-Type' : "application/json"}, body:JSON.stringify(bodyReq)}).then(res=>res.json());
     return response;
   };
+
+export const userRole = () =>{
+    return role;
+}
 
 
 export const authenticationService = {

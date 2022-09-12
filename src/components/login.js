@@ -1,5 +1,5 @@
 import React from 'react';
-import {checkAuth} from '../userAuthMocks';
+import {checkAuth, userRole} from '../userAuthMocks';
 import AddUser from './addUser';
 import Loader from '../helper/loader';
 import UserTravelInfoLookUp from '../components/modals/userTravelInfoLookUp';
@@ -38,9 +38,14 @@ class LoginPage extends React.Component {
                     this.setState({error: "Invalid username or password", isInvalid: false, loading: false});
                     return;
                 }
-                this.props.history.push('/Saravas');
+                const role = userRole();
+                this.props.history.push({
+                   pathname: '/Saravas',
+                   state: role,
+                });
                 this.setState({loading: false});
         })
+        console.log('userRole',userRole());
     }
           
     }

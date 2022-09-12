@@ -77,7 +77,7 @@ class MTable extends React.Component{
             >
               Download current data view
             </button>
-        <div style={{ width:'95vw', height: '10vh' }}>
+        <div style={{ width:'95vw', height: '12vh' }}>
         {hideGetSelectedRowData && <button onClick={this.getSelectedRowData} style={{ margin: '10 0'}} className="btn btn-secondary">
           Edit Selected Information {text}
         </button>
