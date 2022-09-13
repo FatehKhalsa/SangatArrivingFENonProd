@@ -76,6 +76,16 @@ class LoginPage extends React.Component {
                  <h3>Sangat Arriving System</h3>
                  <button className="btn btn-primary" onClick={e=>this.openTravelInfo(e)}>Look up your travel info</button>
                  {travelInfo && <UserTravelInfoLookUp/>}
+                 <div style={{
+                     border: '1px solid blue',
+                     width: '370px',
+                     marginTop: '10px',
+                     padding: '5px',
+                     backgroundColor: '#0d6efd',
+                     borderRadius: '5px'
+                 }}>
+                 <a style={{color: 'white', textDecoration: 'none'}} href="mailto:sangatflights@gmail.com?Subject=Flight%20Information%20for%20%3CYOUR%20NAME%3E&Body=Ji%2C%20%0A%0AAttached%20is%20the%20flight%20for%20________.%0A%0AI%20am%20from%20%28CITY%20HERE%29%2C%20%28COUNTRY%20HERE%29.%0A%0AMy%20month%20and%20year%20of%20birth%20is%20___________.%0A%0AMy%20phone%20number%20for%20WhatsApp%20contact%20is%20________________.%0A%0APlease%20input%20my%20flight%20information%20into%20the%20flight%20system%20for%20Gurpurab%202022.%0A%0AThanks">Send Email regarding your Flight Info to Sewadar</a>
+                 </div>
                  {!isInvalid && 
                  <div class="alert alert-danger" role="alert">
                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
