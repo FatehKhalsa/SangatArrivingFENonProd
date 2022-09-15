@@ -49,7 +49,7 @@ const AddNewUser = (props) => {
     user_emergencyContact: "",
     user_comments: "",
     user_age: 0,
-    user_ride_from_airport: false,
+    user_ride_from_airport: "No",
   });
 
   const handleClose = () => {
@@ -249,9 +249,8 @@ const getClosestAsthan = (e) =>{
 
 const setUserRideFromAirport = (e, value) =>{
   e.preventDefault();
-  let boolCheck = false;
-  value==="Yes"?boolCheck=true: boolCheck=false;
-  setSangatValue({...sangatValue, user_ride_from_airport: boolCheck})
+  console.log("value", value)
+  setSangatValue({...sangatValue, user_ride_from_airport: value})
 }
 
 //document.getElementsByClassName('addSangat').addEventListener('click', handleShow)
@@ -336,7 +335,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             Need Ride from Airport 
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
-                 {user_ride_from_airport===false?"No": "Yes"}
+                 {user_ride_from_airport}
              </Dropdown.Toggle>
               <Dropdown.Menu>
                  <Dropdown.Item onClick={(e)=>setUserRideFromAirport(e, "Yes")}>Yes</Dropdown.Item>
