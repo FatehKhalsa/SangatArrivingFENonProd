@@ -181,7 +181,6 @@ const setArrivingFlightDate = (e) => {
 
 const setSangatArrivalTime = (e) =>{
   e.preventDefault();
-  console.log("hello", e.target.value);
   setSangatValue({...sangatValue, user_arrivingFlightTime: e.target.value});
 }
 
@@ -258,7 +257,7 @@ const setParentFlag = (e, value) =>{
   value==="Yes"? setParent(true): setParent(false)
 }
 
-const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified} = sangatValue
+const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified} = sangatValue
 
   return (
     <>
@@ -279,14 +278,28 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             Last Name *
             <input style={{ ...inputStyle, borderColor: sangatValue.user_lastName===""? 'red':""  }}  value ={sangatValue.user_lastName} onChange ={e=>setSangatLastName(e)}/>
             Gender:
-            <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
-              <div style={{...floatchild}}>
-              <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle}}  value ="Male" onChange ={e=>setSangatGender(e)}  />
-              <label for="Male" style={{top:'50%'}}> Male</label></div>
-              <div style={{...floatchild}}>
-              <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)} />
-              <label for="Female"> Female</label></div>
+            {
+              user_gender!=='Female' &&
+              <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle}}  value ="Male" onChange ={e=>setSangatGender(e)} checked />
+                <label for="Male" style={{top:'50%'}}> Male</label></div>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)} />
+                <label for="Female"> Female</label></div>
             </div>
+            }
+            {
+              user_gender!=='Male' &&
+              <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle}}  value ="Male" onChange ={e=>setSangatGender(e)}  />
+                <label for="Male" style={{top:'50%'}}> Male</label></div>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)} checked/>
+                <label for="Female"> Female</label></div>
+            </div>
+            }
             Date of Birth *
             <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             Country *
