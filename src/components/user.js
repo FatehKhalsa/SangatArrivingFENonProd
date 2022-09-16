@@ -179,9 +179,8 @@ const setArrivingFlightDate = (e) => {
   setSangatValue({...sangatValue, user_arrivingFlightDate: e.target.value}) 
 }
 
-const setSangatArrivalTime = (e) =>{
-  e.preventDefault();
-  setSangatValue({...sangatValue, user_arrivingFlightTime: e.target.value});
+const setSangatArrivalTime = (value) =>{
+  setSangatValue({...sangatValue, user_arrivingFlightTime: value});
 }
 
 const setDepartingFlightNumber = (e) => {
