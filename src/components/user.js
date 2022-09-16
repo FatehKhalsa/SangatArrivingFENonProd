@@ -86,9 +86,9 @@ const User = (props) => {
           setError(true);
         }
         setHostAddedSuccess(true); 
-
-        setLoading(false); setShow(false);
-        window.location.reload();
+        setLoading(false); 
+        setShow(false);
+        setInterval(window.location.reload(), 5000);
       })
 }
 
