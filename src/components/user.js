@@ -336,7 +336,9 @@ const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_de
             Arriving Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_arrivingFlightDate} onChange = {e=>setArrivingFlightDate(e)} />
             Arriving Flight Time
-            <input type="time" style={{ ...inputStyle }} onChange={e=>setSangatArrivalTime(e)} value={sangatValue.user_arrivingFlightTime}/>
+            <div style={{width: '400px'}}>
+            <TimePicker onChange={(value) => setSangatArrivalTime(value)} value={sangatValue.user_arrivingFlightTime} format={"HH:mm"} disableClock={true}/>
+            </div>
             Arriving Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
