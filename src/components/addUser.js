@@ -10,6 +10,7 @@ import RenderAsthans from '../components/helper/renderAsthans';
 import TimePicker from 'react-time-picker';
 import RenderAirlinesDelhi from '../components/helper/renderIndiaAirlines';
 import RenderAirlinesDelhiDeparting from '../components/helper/renderIndiaDepartingAirlines';
+import {countries} from '../constants';
 
 const AddNewUser = (props) => {
 
@@ -30,6 +31,7 @@ const AddNewUser = (props) => {
     user_city:"",
     user_state: "",
     user_country:"",
+    user_otherCountry: "",
     user_allergy:"",
     user_hasAllergy:false,
     user_phoneNumber:"",
@@ -64,6 +66,7 @@ const AddNewUser = (props) => {
   const addNewSangat = async() => {
 
     setLoading(true);
+
     fetch(`${HerokuURL}api/user/create`, {
       method: 'POST',
       headers: {
@@ -82,7 +85,7 @@ const AddNewUser = (props) => {
         setHostAddedSuccess(true); 
         setLoading(false); 
         setShow(false);
-        setInterval(window.location.reload(), 5000);
+       // setInterval(window.location.reload(), 5000);
       })
 }
 
@@ -225,6 +228,11 @@ const setStateSelection = (e, value) =>{
   setSangatValue({...sangatValue, user_state: value});
 }
 
+const setOtherCountrySelection =(e) =>{
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_otherCountry: e.target.value})
+}
+
 const getClosestAsthan = (e) =>{
   e.preventDefault();
   let closestAsthan = ""
@@ -249,7 +257,6 @@ const getClosestAsthan = (e) =>{
 
 const setUserRideFromAirport = (e, value) =>{
   e.preventDefault();
-  console.log("value", value)
   setSangatValue({...sangatValue, user_ride_from_airport: value})
 }
 
@@ -257,7 +264,8 @@ const setUserRideFromAirport = (e, value) =>{
 const dselect = document.querySelectorAll('.addSangat');
 dselect.forEach(el => el.addEventListener('click', handleShow));
 
-const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_arrivingFlightName} = sangatValue
+
+const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_arrivingFlightName, user_otherCountry} = sangatValue
 
 
 
@@ -292,6 +300,9 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             Country *
             <RenderCountries sangatValue={sangatValue} setCountry={setCountrySelection}/>
+            {user_country==="Other" &&
+            <input style={{ ...inputStyle, marginTop:'10px'}} value={user_otherCountry} placeholder={"Please enter country name"} onChange ={e=>setOtherCountrySelection(e)}/>
+            }
            State/Province *
            <RenderStates sangatValue={sangatValue} setState={setStateSelection}/>
           

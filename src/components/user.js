@@ -37,6 +37,7 @@ const User = (props) => {
     user_city:userInfo.user_city,
     user_state: userInfo.user_state,
     user_country: userInfo.user_country,
+    user_otherCountry: userInfo.user_otherCountry,
     user_allergy: userInfo.user_allergy,
     user_hasAllergy: false,
     user_phoneNumber: userInfo.user_phoneNumber,
@@ -234,6 +235,11 @@ const setUserRideFromAirport = (e, value) =>{
   setSangatValue({...sangatValue, user_ride_from_airport: value})
 }
 
+const setOtherCountrySelection =(e) =>{
+  e.preventDefault();
+  setSangatValue({...sangatValue, user_otherCountry: e.target.value})
+}
+
 const setTravelingWithFamily = (e, value) =>{
     e.preventDefault();
     if(value==="Yes"){
@@ -254,7 +260,7 @@ const setParentFlag = (e, value) =>{
   value==="Yes"? setParent(true): setParent(false)
 }
 
-const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified} = sangatValue
+const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified, user_otherCountry} = sangatValue
 
   return (
     <>
@@ -301,6 +307,9 @@ const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_de
             <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             Country *
             <RenderCountries sangatValue={sangatValue} setCountry={setCountrySelection}/>
+            {user_country==="Other" &&
+            <input style={{ ...inputStyle, marginTop:'10px'}} value={user_otherCountry} placeholder={"Please enter country name"} onChange ={e=>setOtherCountrySelection(e)}/>
+            }
            State/Province *
            <RenderStates sangatValue={sangatValue} setState={setStateSelection}/>
           

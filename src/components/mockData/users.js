@@ -86,6 +86,7 @@ export const sangatVistingGurpurab = [
     { field: "user_age", headerName: "age", sortable: true, filter: true },
     { field: "user_city", headerName: "City", sortable: true, filter: true },
     { field: "user_country", headerName: "Country", sortable: true, filter: true},
+    { field: "user_otherCountry", headerName: "Other Country", sortable: true, filter: true},
     { field: "user_ride_from_airport", headerName: "Ride", sortable: true, filter: true},
     { field: "user_arrivingFlightDate", headerName: "Arriving Date", sortable: true, filter: true},
     { field: "user_arrivingFlightTime", headerName: "Arriving Time", sortable: true, filter: true},
