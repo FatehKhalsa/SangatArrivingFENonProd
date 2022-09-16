@@ -1,6 +1,7 @@
 import React from 'react';
 import {Dropdown} from 'react-bootstrap';
 import { get } from 'lodash';
+import {countries} from '../../constants';
 
 
 const RenderCountries = (props) => {
@@ -17,19 +18,11 @@ const RenderCountries = (props) => {
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black', borderColor: user_country===""? 'red':"" }}>
                  {user_country===""?"Select Country": user_country}
              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "USA")}>USA</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Bolivia")}>Bolivia</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Canada")}>Canada</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "UK")}>UK</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Germany")}>Germany</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "France")}>France</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Italy")}>Italy</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Malaysia")}>Malaysia</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Australia")}>Australia</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "New Zealand")}>New Zealand</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "India")}>India</Dropdown.Item>
-                 <Dropdown.Item onClick={(e)=>setCountrySelection(e, "Other")}>Other</Dropdown.Item>
+             <Dropdown.Menu style={{height: '300px', overflowY: "scroll"}}>
+                 {countries.map((country, index) => {
+                     return(
+                     <Dropdown.Item key={index} onClick={(e)=>setCountrySelection(e, country)}>{country}</Dropdown.Item>
+                     )})}
               </Dropdown.Menu>
            </Dropdown>
     )

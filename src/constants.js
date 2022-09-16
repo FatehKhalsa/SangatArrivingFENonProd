@@ -89,3 +89,17 @@ export const AirportNames = [
     "Uzbekistan Airways"
 
 ];
+
+export const countries = [
+    "Bolivia",
+    "Canada",
+    "UK",
+    "Germany",
+    "France",
+    "Italy",
+    "Malaysia",
+    "Australia",
+    "New Zealand",
+    "India",
+    "Other",
+]
