@@ -63,6 +63,7 @@ const User = (props) => {
     // Add logic for confirmation
     setShowDialong(true);
     setShow(false);
+    window.location.reload();
   }
   const handleShow = () => setShow(true);
 
@@ -85,8 +86,9 @@ const User = (props) => {
           setError(true);
         }
         setHostAddedSuccess(true); 
-
-        setLoading(false); setShow(false);
+        setLoading(false); 
+        setShow(false);
+        setInterval(window.location.reload(), 5000);
       })
 }
 
@@ -100,9 +102,6 @@ const setSangatLastName = (e) => {
   setSangatValue({...sangatValue, user_lastName: e.target.value});
 }
 
-const setSangatArrivalTime = (value) =>{
-  setSangatValue({...sangatValue, user_arrivingFlightTime: value});
-}
 
 const setSangatDepartureTime = (value) =>{
   setSangatValue({...sangatValue, user_departingFlightTime: value});
@@ -180,6 +179,10 @@ const setArrivingFlightDate = (e) => {
   setSangatValue({...sangatValue, user_arrivingFlightDate: e.target.value}) 
 }
 
+const setSangatArrivalTime = (value) =>{
+  setSangatValue({...sangatValue, user_arrivingFlightTime: value});
+}
+
 const setDepartingFlightNumber = (e) => {
   e.preventDefault();
   setSangatValue({...sangatValue, user_departingFlightNumber: e.target.value}) 
@@ -251,7 +254,7 @@ const setParentFlag = (e, value) =>{
   value==="Yes"? setParent(true): setParent(false)
 }
 
-const{user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified} = sangatValue
+const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_departingFlightAirport, user_ride_from_airport, user_family_identified} = sangatValue
 
   return (
     <>
@@ -259,7 +262,7 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
       {toastMessage}
     </Alert>}
     {loading && <Loader/>}
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose} backdrop='static'>
         <Modal.Header closeButton>
           <Modal.Title>User Info</Modal.Title>
         </Modal.Header>
@@ -272,14 +275,28 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
             Last Name *
             <input style={{ ...inputStyle, borderColor: sangatValue.user_lastName===""? 'red':""  }}  value ={sangatValue.user_lastName} onChange ={e=>setSangatLastName(e)}/>
             Gender:
-            <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
-              <div style={{...floatchild}}>
-              <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle }}  value ="Male" onChange ={e=>setSangatGender(e)}/>
-              <label for="Male" style={{top:'50%'}}> Male</label></div>
-              <div style={{...floatchild}}>
-              <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)}/>
-              <label for="Female"> Female</label></div>
+            {
+              user_gender!=='Female' &&
+              <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle}}  value ="Male" onChange ={e=>setSangatGender(e)} checked />
+                <label for="Male" style={{top:'50%'}}> Male</label></div>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)} />
+                <label for="Female"> Female</label></div>
             </div>
+            }
+            {
+              user_gender!=='Male' &&
+              <div style={{...floatcontainer, borderColor:sangatValue.user_gender===""? 'red':""}}>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Male" name= "genderSelect" style={{...inputStyle}}  value ="Male" onChange ={e=>setSangatGender(e)}  />
+                <label for="Male" style={{top:'50%'}}> Male</label></div>
+                <div style={{...floatchild}}>
+                <input type="radio" id="Female" name= "genderSelect" style={{ ...inputStyle }}  value ="Female" onChange ={e=>setSangatGender(e)} checked/>
+                <label for="Female"> Female</label></div>
+            </div>
+            }
             Date of Birth *
             <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             Country *
@@ -345,13 +362,13 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
               </Dropdown.Menu>
            </Dropdown>
            <div style={{margin: "10px"}}>==========Departing Info =========</div>
-            Departing Flight Date
+            Return Flight Date
             <input type="date" style={{ ...inputStyle }} value={sangatValue.user_departingFlightDate} onChange = {e=>setDepartingFlightDate(e)} />
-            Departing Flight Time
+            Return Flight Time
             <div style={{width: '400px'}}>
             <TimePicker onChange={(value) => setSangatDepartureTime(value)} value={sangatValue.user_departingFlightTime} format={"HH:mm"} disableClock={true}/>
             </div>
-            Departing Flight Airport
+            Return Flight Airport
             <Dropdown style={{paddingTop: '5px'}}>
               <Dropdown.Toggle id="dropdown-basic" style={{backgroundColor: 'rgb(242, 242, 242)', color: 'black'}}>
                  {user_departingFlightAirport===""?"Select Departing Airport": user_departingFlightAirport}
@@ -362,9 +379,9 @@ const{user_country, user_state, user_arrivingFlightAirport, user_departingFlight
                  <Dropdown.Item onClick={(e)=>setDepartingFlightAirport(e, "Other")}>Other</Dropdown.Item>
               </Dropdown.Menu>
            </Dropdown>
-            Departing Airline Name
+            Return Airline Name
             <RenderAirlinesDelhiDeparting sangatValue={sangatValue} setAirport={setDepartingFlightName}/>
-            Departing Flight Number
+            Return Flight Number
             <input style={{ ...inputStyle }} value={sangatValue.user_departingFlightNumber} onChange = {e=>setDepartingFlightNumber(e)} />
            Assign Taxi to User
             <Dropdown style={{paddingTop: '5px'}}>
