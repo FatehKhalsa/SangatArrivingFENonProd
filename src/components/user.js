@@ -304,7 +304,7 @@ const{user_gender, user_country, user_state, user_arrivingFlightAirport, user_de
             </div>
             }
             Date of Birth *
-            <input type="date" style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
+            <input type="date" max={new Date().toISOString().split("T")[0]} style={{ ...inputStyle, borderColor: sangatValue.user_yearOfBirth===""? 'red':""  }} value={sangatValue.user_yearOfBirth} onChange ={e=>setSangatYearOfBirth(e)} />
             Country *
             <RenderCountries sangatValue={sangatValue} setCountry={setCountrySelection}/>
             {user_country==="Other" &&
