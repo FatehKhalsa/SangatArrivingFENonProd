@@ -101,5 +101,6 @@ export const countries = [
     "Australia",
     "New Zealand",
     "India",
+    "USA",
     "Other",
 ]
