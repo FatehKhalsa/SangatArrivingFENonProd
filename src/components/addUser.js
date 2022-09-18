@@ -85,7 +85,7 @@ const AddNewUser = (props) => {
         setHostAddedSuccess(true); 
         setLoading(false); 
         setShow(false);
-       // setInterval(window.location.reload(), 5000);
+        setTimeout(window.location.reload(), 3000);
       })
 }
 
