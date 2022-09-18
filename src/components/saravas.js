@@ -27,6 +27,10 @@ const Saravas  = (props) => {
         window.location.reload();
     }
 
+    const count = data && data.length;
+
+    console.log("Count", count);
+
     const [columnDefs] = useState(sangatVistingGurpurab);
 
     const [showUser, setShowUser] = useState(false);
@@ -46,6 +50,7 @@ const Saravas  = (props) => {
     
         return(
             <div>
+                <div style={{textAlign: 'center'}}>Total Sangat: {count}</div>
                 {showUser && <AddNewUser/>}
                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px', height: '60px'}}>
                 {/* <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button> */}
