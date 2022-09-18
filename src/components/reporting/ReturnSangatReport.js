@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import MTable from '../helper/materialTable';
 import { useHistory } from "react-router-dom";
-import {taxiReport} from '../mockData/users'
+import {returnSangatReport} from '../mockData/users'
 
 
 
 
-const TaxiReport  = (props) => {
+const ReturnSangatReport  = (props) => {
 
     const history = useHistory();
 
-    const [columnDefs] = useState(taxiReport);
-    
+    const [columnDefs] = useState(returnSangatReport);
+
     
         return(
             <div>
@@ -20,7 +20,7 @@ const TaxiReport  = (props) => {
                 </div>
                 <div style={{textAlign: "Right"}}>
                 </div>
-            <h3 style={{marginLeft: '30%'}}>Taxi report </h3>  
+            <h3 style={{marginLeft: '30%'}}>Return Sangat Report </h3>  
                 <MTable rowData={props.location.state} columnDefs={columnDefs} text={"Sangat Gurpurab"} hideGetSelectedRowData={true}/>
             </div>
         )
@@ -28,4 +28,4 @@ const TaxiReport  = (props) => {
 }
 
 
-export default TaxiReport;
+export default ReturnSangatReport;

@@ -6,21 +6,12 @@ import {taxiReport} from '../mockData/users'
 
 
 
-const SangatReport  = (props) => {
+const ArriveSangatReport  = (props) => {
 
     const history = useHistory();
 
-    console.log(props.location.state)
-
     const [columnDefs] = useState(taxiReport);
 
-
-    const addNewUser = () => {
-        setShowUser(true);
-    }
-
-    
-    
         return(
             <div>
                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
@@ -36,4 +27,4 @@ const SangatReport  = (props) => {
 }
 
 
-export default SangatReport;
+export default ArriveSangatReport;

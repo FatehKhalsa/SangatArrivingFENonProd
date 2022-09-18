@@ -125,3 +125,26 @@ export const taxiReport = [
     { field: "", headerName: "Taxi arranged", sortable: true, filter: true },
     { field: "updatedAt", headerName: "Last updated by", sortable: true, filter: true},
 ]
+
+
+export const returnSangatReport = [
+    { field: "user_departingFlightNumber", headerName: "Return Flight #", sortable: true, filter: true},
+    { field: "user_departingFlightName", headerName: "Return Airline Name", sortable: true, filter: true},
+    { field: "user_departingFlightAirport", headerName: "Return Airport Name", sortable: true, filter: true},
+    { field: "user_departingFlightDate", headerName: "Return Airport Date", sortable: true, filter: true},
+    { field: "user_departingFlightTime", headerName: "Return Time", sortable: true, filter: true},
+    { field: "updatedAt", headerName: "Last updated by (UTC Timezone)", sortable: true, filter: true},
+    { field: "user_firstName", headerName: "First Name", sortable: true, filter: true },
+    { field: "user_middleName", headerName: "Middle Name", sortable: true, filter: true },
+    { field: "user_lastName", headerName: "Last Name", sortable: true, filter: true },
+    { field: "user_gender", headerName: "Gender", sortable: true, filter: true },
+    { field: "user_age", headerName: "age", sortable: true, filter: true },
+    { field: "user_city", headerName: "City", sortable: true, filter: true },
+    { field: "user_country", headerName: "Country", sortable: true, filter: true},
+    { field: "user_otherCountry", headerName: "Other Country", sortable: true, filter: true},
+    { field: "user_phoneNumber", headerName: "Phone Number", sortable: true, filter: true},
+    { field: "user_email", headerName: "Email", sortable: true, filter: true},
+    { field: "user_comments", headerName: "Comments", sortable: true, filter: true, resizable: true},
+    { field: "user_emergencyContact", headerName: "Emergency Contact", sortable: true, filter: true, resizable: true},
+    { field: "user_state",width: 100, headerName: "State", sortable: true, filter: true },
+]

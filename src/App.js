@@ -26,7 +26,8 @@ import SurreyBC from './components/asthans/SurreyBC';
 import TorontoON from './components/asthans/TorontoON';
 import WalsallUK from './components/asthans/WalsallUK';
 import TaxiReport from './components/reporting/TaxiReport';
-import SangatReport from './components/reporting/SangatReport';
+import ArriveSangatReport from './components/reporting/ArriveSangatReport';
+import ReturnSangatReport from './components/reporting/ReturnSangatReport';
 import UserTravelInfoLookUp from './components/modals/userTravelInfoLookUp';
 
 
@@ -103,7 +104,8 @@ class App extends React.Component {
           <PrivateRoute path="/Asthans/MelbourneAus" exact component={MelbourneAus} />
           <PrivateRoute path="/Asthans/NewZealand" exact component={NewZealand} />
           <PrivateRoute path="/reporting/taxiReport" exact component={TaxiReport} />
-          <PrivateRoute path="/reporting/SangatReport" exact component={SangatReport}/>
+          <PrivateRoute path="/reporting/ArriveSangatReport" exact component={ArriveSangatReport}/>
+          <PrivateRoute path="/reporting/ReturnSangatReport" exact component={ReturnSangatReport}/>
           <PrivateRoute path="/userTravelInfo" exact component={UserTravelInfoLookUp}/>
         </div>
     </Router>
