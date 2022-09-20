@@ -21,6 +21,7 @@ const Saravas  = (props) => {
         fetch(`${HerokuURL}api/getAllUsers`, { headers: {"x-access-token" : localStorage.getItem('accessToken')} }).then(res=>res.json()).then(jsonRes=>setState(jsonRes))
     }, []);
 
+
     if(data && data.message==="Unauthorized!"){
         authenticationService.logout();
         history.push('/');
