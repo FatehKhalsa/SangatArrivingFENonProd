@@ -42,7 +42,8 @@ class MTable extends React.Component{
     }
 
     onBtExport = () => {
-      this.gridApi.exportDataAsCsv();
+      var today = new Date();
+      this.gridApi.exportDataAsCsv({fileName: today+'version.csv', prependContent: 'Export Generated On:' + today});
     };
 
     onFilterTextBoxChanged = () => {
