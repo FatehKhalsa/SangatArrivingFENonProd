@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import MTable from './helper/materialTable';
 import { useHistory } from "react-router-dom";
-import AddNewUser from './addUser';
+import AddEditUser from './addEditUserForm';
 import {sangatVistingGurpurab} from './mockData/users'
 import {HerokuURL} from '../constants';
 import { authenticationService } from '../userAuthMocks';
@@ -51,7 +51,7 @@ const Saravas  = (props) => {
         return(
             <div>
                 <div style={{textAlign: 'center'}}>Total Sangat: {count}</div>
-                {showUser && <AddNewUser/>}
+                {showUser && <AddEditUser user={{}}/>}
                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px', height: '60px'}}>
                 {/* <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button> */}
                 <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button> 
