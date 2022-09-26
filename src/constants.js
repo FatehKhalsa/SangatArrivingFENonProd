@@ -1,8 +1,10 @@
 export const HerokuURL = 'https://guarded-gorge-38921.herokuapp.com/';
+// export const HerokuURL = 'http://localhost:8080/';
+
+export const LOCAL_DATE_FORMAT = "YYYY-MM-DD";
 
 
-
-export const AirportNames = [
+export const AirlineNames = [
     "Aeroflot", 
     "Aeronomad",
     "Air Algeria", 
@@ -91,16 +93,106 @@ export const AirportNames = [
 ];
 
 export const countries = [
+    "Australia",
     "Bolivia",
     "Canada",
-    "UK",
-    "Germany",
     "France",
+    "Germany",
+    "India",
     "Italy",
     "Malaysia",
-    "Australia",
     "New Zealand",
-    "India",
+    "UK",
     "USA",
-    "Other",
+]
+
+export const asthaans = [
+   "Surrey",
+   "Edmonton",
+   "Calgary",
+   "Toronto",
+   "France",
+   "Italy",
+   "Malaysia",
+   "Australia",
+   "New Zealand",
+   "Fresno",
+   "Indiana",
+   "New York",
+   "Michigan",
+   "Walsall",
+   "Germany"
+]
+export const USA_STATES = [
+"Alabama",
+"Alaska",
+"Arkansas",   
+"Arizona",
+"California",
+"Colorado",
+"Connecticut",
+"Delaware",
+"Florida",
+"Georgia",
+"Hawaii",
+"Idaho",
+"Illinois",
+"Indiana",
+"Iowa",
+"Kansas",
+"Kentucy",
+"Louisana",
+"Maine",
+"Maryland",
+"Massachusetts",
+"Michigan",
+"Minnesota",
+"Mississppi",
+"Missouri",
+"Montana",
+"Nebraska",
+"Nevada",
+"New Hamishire",
+"New Jersey",
+"New Mexico",
+"New York",
+"North Carolina",
+"North Dakota",
+"Ohio",
+"Oklahoma",
+"Oregon",
+"Pennsylvania",
+"Rhode Island",
+"South Carolina",
+"South Dakota",
+"Tennessee",
+"Texas",
+"Utah",
+"Vermont",
+"Virginia",
+"Washington",
+"Washington DC",
+"West Virginia",
+"Wisconsin",
+"Wyoming"
+]
+
+export const CANADA_PROVINCES = [
+    "British Columbia",
+    "Alberta",
+    "Yukon",
+    "Manitoba",
+    "Ontario",
+    "Northwest Territories",
+    "Saskatchewan",
+    "New Brunswick",
+    "Newfoundland",
+    "Labrador",
+    "Nova Scotia",
+    "Prince Edward Island"
+]
+
+export const INDIA_AIRPORT_LIST = [
+    "Amritsar",
+    "Delhi"
 ]

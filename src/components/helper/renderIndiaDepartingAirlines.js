@@ -1,7 +1,7 @@
 import React from 'react';
 import {Dropdown} from 'react-bootstrap';
 import { get } from 'lodash';
-import {AirportNames} from '../../constants';
+import {AirLineNames, INDIA_AIRPORT_LIST} from '../../constants';
 
 
 const RenderAirlinesDelhiDeparting = (props) => {
@@ -23,7 +23,7 @@ const RenderAirlinesDelhiDeparting = (props) => {
                  {user_departingFlightName===""?"Select Departing Flight": user_departingFlightName}
              </Dropdown.Toggle>
               <Dropdown.Menu style={{height: '300px', overflowY: "scroll"}}>
-                 {AirportNames.map((airportName, index) => {
+                 {INDIA_AIRPORT_LIST.map((airportName, index) => {
                      return(
                      <Dropdown.Item key={index} onClick={(e)=>setDepartingFlightName(e, airportName)}>{airportName}</Dropdown.Item>
                      )})}
