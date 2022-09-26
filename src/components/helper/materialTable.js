@@ -1,7 +1,7 @@
 import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import _ from 'lodash';
-import User from '../user';
+import AddEditUser from '../addEditUserForm';
 import HostModal from '../modals/hostModal';
 
 
@@ -52,6 +52,9 @@ class MTable extends React.Component{
       );
     };
     
+    selectionChanged = (event) => {
+      // TODO: open edit user form
+    }
 
     
     render(){
@@ -63,7 +66,7 @@ class MTable extends React.Component{
 
     return(
         <React.Fragment>
-        {showModal && (loadModel ==='User'? <User userSelected={userSelected}/>: (loadModel==='Host' &&<HostModal userSelected={userSelected}/>))}
+        {showModal && (loadModel ==='User'? <AddEditUser user={userSelected[0]}/> : (loadModel==='Host' &&<HostModal userSelected={userSelected}/>))}
         <div className="example-header">
         <input
               type="text"
@@ -86,7 +89,7 @@ class MTable extends React.Component{
         </div>
         <div className="ag-theme-alpine" style={{height: 400, width: customWidth? customWidth: 'auto'}}>
             <AgGridReact
-            rowData={rowData} columnDefs={columnDefs} onGridReady={this.onGridReady} rowSelection="single">
+            onSelectionChanged={this.selectionChanged} rowData={rowData} columnDefs={columnDefs} onGridReady={this.onGridReady} rowSelection="single">
             </AgGridReact>
         </div>
         </React.Fragment>
