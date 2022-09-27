@@ -260,7 +260,6 @@ const getClosestAsthan = (e) =>{
     }
   }
   
-  setClosestAsthan(closestAsthan);
 }
 
 const setUserRideFromAirport = (e, value) =>{

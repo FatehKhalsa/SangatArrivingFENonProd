@@ -378,7 +378,7 @@ const AddEditUser = (props) => {
   }
 
   return (
-    <Dialog maxWidth={"md"} open={true} >
+    <Dialog maxWidth={"md"} open={true} onClose={handleClose} >
       <DialogTitle style={{ "borderBottom": "1px solid lightgrey" }}>{sangatValue._id ? "Edit User" : "Add User"}
         <IconButton
           aria-label="close"
