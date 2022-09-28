@@ -4,7 +4,7 @@ import { Autocomplete, Grid, TextField } from '@mui/material';
 
 
 const AutoCompleteWithOther = (props) => {
-    const OTHER = "Other";
+    const OTHER = "OTHER";
     const {
         optionsList,
         label,
@@ -25,7 +25,7 @@ const AutoCompleteWithOther = (props) => {
     const [otherValue, setOtherValue] = React.useState(value && !optionsList.includes(value) ? value : "");
 
     const handleOptionChange = (newValue) => {
-        if (newValue === OTHER) {
+        if (newValue && newValue.toUpperCase() === OTHER) {
             setShowOtherField(true);
             handleChangeCallBack(null);
         }
@@ -40,25 +40,13 @@ const AutoCompleteWithOther = (props) => {
     }
 
     const handleOtherTextChange = (event) => {
-        handleChangeCallBack(event.target.value);
-        setOtherValue(event.target.value);
+        let value = event.target.value ? event.target.value.toUpperCase() : "";
+        handleChangeCallBack(value);
+        setOtherValue(value);
     }
-
-    // useEffect(() => {
-    //     if (!value || optionsList.includes(value)) {
-    //      setSelectValue(value);
-    //      setShowOtherField(false);
-    //     } else {
-    //      setSelectValue(OTHER);
-    //      setShowOtherField(true);
-    //      setOtherValue(value);
-    //     }
-    //    }, []);
-
 
     return (
         <>
-            {/* <Grid container spacing={2}> */}
             <Grid item xs={12} md={4}>
                 <Autocomplete
                     options={optionsList}
@@ -74,7 +62,6 @@ const AutoCompleteWithOther = (props) => {
                     <TextField required error={error} helperText={helperText} value={otherValue} sx={{ width: '100%' }} hidden={!showOtherField} onChange={handleOtherTextChange} label={"Enter " + label} variant="outlined" autoComplete="p" />
                 </Grid>
             }
-            {/* </Grid> */}
         </>
     )
 

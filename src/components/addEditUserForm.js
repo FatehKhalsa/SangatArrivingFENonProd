@@ -266,15 +266,15 @@ const AddEditUser = (props) => {
   }
 
   const setSangatFirstName = (e) => {
-    setSangatValue({ ...sangatValue, user_firstName: e.target.value });
+    setSangatValue({ ...sangatValue, user_firstName: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setSangatMiddleName = (e) => {
-    setSangatValue({ ...sangatValue, user_middleName: e.target.value });
+    setSangatValue({ ...sangatValue, user_middleName: e.target.value ? e.target.value.toUpperCase() : ""  });
   }
 
   const setSangatLastName = (e) => {
-    setSangatValue({ ...sangatValue, user_lastName: e.target.value });
+    setSangatValue({ ...sangatValue, user_lastName: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setSangatArrivalTime = (value) => {
@@ -294,19 +294,19 @@ const AddEditUser = (props) => {
   }
 
   const setSangatGender = (e) => {
-    setSangatValue({ ...sangatValue, user_gender: e.target.value });
+    setSangatValue({ ...sangatValue, user_gender:  e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
 
   const setSangatCity = (e) => {
-    setSangatValue({ ...sangatValue, user_city: e.target.value });
+    setSangatValue({ ...sangatValue, user_city:  e.target.value ? e.target.value.toUpperCase() : ""});
   }
 
   const handleCountryChange = (newValue) => {
     setSangatValue({ ...sangatValue, user_country: newValue, user_state: "" });
-    if (newValue === "Canada") {
+    if (newValue && newValue.toUpperCase() === "CANADA") {
       setStateOptions(CANADA_PROVINCES);
-    } else if (newValue === "USA") {
+    } else if (newValue && newValue.toUpperCase() === "USA") {
       setStateOptions(USA_STATES);
     } else {
       setStateOptions([]);
@@ -314,40 +314,40 @@ const AddEditUser = (props) => {
   }
 
   const handleArrivingAirlineChange = (newValue) => {
-    setSangatValue({ ...sangatValue, user_arrivingFlightName: newValue });
+    setSangatValue({ ...sangatValue, user_arrivingFlightName:  newValue ? newValue.toUpperCase() : "" });
   }
 
   const handleDepartingAirlineChange = (newValue) => {
-    setSangatValue({ ...sangatValue, user_departingFlightName: newValue });
+    setSangatValue({ ...sangatValue, user_departingFlightName: newValue ? newValue.toUpperCase() : "" });
   }
 
   const handleStateChange = (newValue) => {
-    setSangatValue({ ...sangatValue, user_state: newValue });
+    setSangatValue({ ...sangatValue, user_state: newValue ? newValue.toUpperCase() : "" });
   }
 
   const handleAsthaanChange = (newValue) => {
     {/* TODO: front end and backend name mismatch */ }
-    setSangatValue({ ...sangatValue, user_goingToAsthan: newValue });
+    setSangatValue({ ...sangatValue, user_goingToAsthan: newValue ? newValue.toUpperCase() : "" });
   }
 
   const setArrivingFlightNumber = (e) => {
-    setSangatValue({ ...sangatValue, user_arrivingFlightNumber: e.target.value })
+    setSangatValue({ ...sangatValue, user_arrivingFlightNumber: e.target.value ? e.target.value.toUpperCase() : "" })
   }
 
-  const setArrivingFlightAirport = (value) => {
-    setSangatValue({ ...sangatValue, user_arrivingFlightAirport: value })
+  const setArrivingFlightAirport = (newValue) => {
+    setSangatValue({ ...sangatValue, user_arrivingFlightAirport: newValue ? newValue.toUpperCase() : "" })
   }
 
-  const setArrivingFlightDate = (value) => {
-    setSangatValue({ ...sangatValue, user_arrivingFlightDate: value })
+  const setArrivingFlightDate = (newValue) => {
+    setSangatValue({ ...sangatValue, user_arrivingFlightDate: newValue })
   }
 
   const setDepartingFlightNumber = (e) => {
-    setSangatValue({ ...sangatValue, user_departingFlightNumber: e.target.value })
+    setSangatValue({ ...sangatValue, user_departingFlightNumber: e.target.value ? e.target.value.toUpperCase() : ""})
   }
 
-  const setDepartingFlightAirport = (value) => {
-    setSangatValue({ ...sangatValue, user_departingFlightAirport: value })
+  const setDepartingFlightAirport = (newValue) => {
+    setSangatValue({ ...sangatValue, user_departingFlightAirport: newValue ? newValue.toUpperCase() : "" })
   }
 
   const setDepartingFlightDate = (newValue) => {
@@ -355,25 +355,25 @@ const AddEditUser = (props) => {
   }
 
   const setSangatPhoneNumber = (e) => {
-    setSangatValue({ ...sangatValue, user_phoneNumber: e.target.value });
+    setSangatValue({ ...sangatValue, user_phoneNumber: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setSangatEmail = (e) => {
     e.preventDefault();
-    setSangatValue({ ...sangatValue, user_email: e.target.value });
+    setSangatValue({ ...sangatValue, user_email: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setSangatEmergencyContact = (e) => {
-    setSangatValue({ ...sangatValue, user_emergencyContact: e.target.value });
+    setSangatValue({ ...sangatValue, user_emergencyContact: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setSangatComments = (e) => {
     e.preventDefault();
-    setSangatValue({ ...sangatValue, user_comments: e.target.value });
+    setSangatValue({ ...sangatValue, user_comments: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setUserRideFromAirport = (e) => {
-    setSangatValue({ ...sangatValue, user_ride_from_airport: e.target.value })
+    setSangatValue({ ...sangatValue, user_ride_from_airport: e.target.value ? e.target.value.toUpperCase() : "" })
   }
 
   return (
@@ -442,8 +442,8 @@ const AddEditUser = (props) => {
                   label="Gender"
                   onChange={setSangatGender}
                 >
-                  <MenuItem value={"Female"}>Female</MenuItem>
-                  <MenuItem value={"Male"}>Male</MenuItem>
+                  <MenuItem value={"FEMALE"}>FEMALE</MenuItem>
+                  <MenuItem value={"MALE"}>MALE</MenuItem>
 
                 </Select>
                 {!sangatValue.user_gender && showValidationMessages &&
@@ -473,7 +473,7 @@ const AddEditUser = (props) => {
                     handleAsthaanChange(newValue);
                   }}
 
-                  renderInput={(params) => <TextField error={!isValidRequiredField(sangatValue.user_goingToAsthan)} helperText={getRequiredFieldHelperText(sangatValue.user_goingToAsthan, "Closest Asthaan")} required autoComplete="p" label="Closest Asthaan" sx={{ width: '100%' }} {...params} />} />
+                  renderInput={(params) => <TextField error={!isValidRequiredField(sangatValue.user_goingToAsthan)} helperText={getRequiredFieldHelperText(sangatValue.user_goingToAsthan, "Closest Asthaan")} required autoComplete="p" label="Closest Asthaan" sx={{ width: '100%' }} {...params}  />} />
 
               </FormControl>
             </Grid>
@@ -522,6 +522,7 @@ const AddEditUser = (props) => {
                 rows={3}
                 value={sangatValue.user_comments}
                 onChange={setSangatComments}
+                
               />
             </Grid>
           </Grid>
@@ -586,8 +587,8 @@ const AddEditUser = (props) => {
                   label="Need Ride From Airport"
                   onChange={setUserRideFromAirport}
                 >
-                  <MenuItem value={"No"}>No</MenuItem>
-                  <MenuItem value={"Yes"}>Yes</MenuItem>
+                  <MenuItem value={"NO"}>NO</MenuItem>
+                  <MenuItem value={"YES"}>YES</MenuItem>
 
                 </Select>
                 <FormHelperText>{getRequiredFieldHelperText(sangatValue.user_ride_from_airport, "Need ride from airport")}</FormHelperText>
