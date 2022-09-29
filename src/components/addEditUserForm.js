@@ -224,7 +224,7 @@ const AddEditUser = (props) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            sangatValue
+            sangatValueToSave
           ),
         })
       } else {
