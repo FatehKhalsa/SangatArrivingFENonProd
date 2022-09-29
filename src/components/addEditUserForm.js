@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Alert, AlertTitle, Autocomplete, Backdrop, Box, Button, CircularProgress, Grid, InputLabel, IconButton, Select, MenuItem, TextField, FormControl, FormHelperText, Snackbar } from '@mui/material';
+import { Alert, AlertTitle, Autocomplete, Backdrop, Box, Button, CircularProgress, Grid, InputLabel, IconButton, Select, MenuItem, TextField, FormControl, Snackbar, FormHelperText } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -21,14 +21,14 @@ const AddEditUser = (props) => {
   const [stateOptions, setStateOptions] = useState(null);
   const [showValidationMessages, setShowValidationMessages] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [snack, setSnack] = useState({message: "", duration: 0, open: false, severity: ""})
+  const [snack, setSnack] = useState({message: "", duration: 0, open: false, severity: "success"})
   const [sangatValue, setSangatValue] = useState({
     _id: user ? user._id : "",
     user_firstName: user ? user.user_firstName : "",
     user_middleName: user ? user.user_middleName : "",
     user_lastName: user ? user.user_lastName : "",
     user_yearOfBirth: user && user.user_yearOfBirth ? dayjs(user.user_yearOfBirth, LOCAL_DATE_FORMAT) : null,
-    user_gender: user ? user.user_gender : null,
+    user_gender: user ? user.user_gender : '',
     user_city: user ? user.user_city : "",
     user_state: user ? user.user_state : "",
     user_country: user ? user.user_country : "",
@@ -51,7 +51,7 @@ const AddEditUser = (props) => {
     user_emergencyContact: user ? user.user_emergencyContact : "",
     user_comments: user ? user.user_comments : "",
     user_age: user ? user.user_age : 0,
-    user_ride_from_airport: user ? user.user_ride_from_airport : null,
+    user_ride_from_airport: user ? user.user_ride_from_airport : ''
   });
 
   const closeSnack = () => {
@@ -92,7 +92,7 @@ const AddEditUser = (props) => {
 
   const getEmailHelperText = (email, isRequired, fieldName) => {
     if (!showValidationMessages) {
-      return true;
+      return "";
     }
     if (isValidEmail(email, isRequired)) {
       return "";
@@ -377,7 +377,7 @@ const AddEditUser = (props) => {
   }
 
   return (
-    <Dialog maxWidth={"md"} open={open} onClose={handleClose} >
+    <Dialog maxWidth={"md"} open={true} onClose={handleClose} >
       <DialogTitle style={{ "borderBottom": "1px solid lightgrey" }}>{sangatValue._id ? "Edit User" : "Add User"}
         <IconButton
           aria-label="close"
@@ -435,6 +435,8 @@ const AddEditUser = (props) => {
               <FormControl fullWidth error={!isValidRequiredField(sangatValue.user_gender)}>
                 <InputLabel id="genderLabel">Gender *</InputLabel>
                 <Select
+                 // needed to remove warning messages about unmounted component on console
+                  defaultValue={""}
                   required
                   labelId="genderLabel"
                   id="genderSelect"
@@ -473,7 +475,7 @@ const AddEditUser = (props) => {
                     handleAsthaanChange(newValue);
                   }}
 
-                  renderInput={(params) => <TextField error={!isValidRequiredField(sangatValue.user_goingToAsthan)} helperText={getRequiredFieldHelperText(sangatValue.user_goingToAsthan, "Closest Asthaan")} required autoComplete="p" label="Closest Asthaan" sx={{ width: '100%' }} {...params}  />} />
+                  renderInput={(params) => <TextField error={!isValidRequiredField(sangatValue.user_goingToAsthan)}  required autoComplete="p" label="Closest Asthaan" sx={{ width: '100%' }} helperText={getRequiredFieldHelperText(sangatValue.user_goingToAsthan, "Closest Asthaan")} {...params}  />}  />
 
               </FormControl>
             </Grid>
@@ -506,7 +508,7 @@ const AddEditUser = (props) => {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              {/* TODO: front end and backend name mismatch */}
+             
               <TextField error={!isValidPhoneNumber(sangatValue.user_emergencyContact, false)} helperText={getPhoneHelperText(sangatValue.user_emergencyContact, false, "Secondary phone")} autoComplete="p" fullWidth label="Secondary Phone" value={sangatValue.user_emergencyContact} onChange={setSangatEmergencyContact} variant="outlined" />
             </Grid>
 
@@ -581,6 +583,8 @@ const AddEditUser = (props) => {
               <FormControl fullWidth error={!isValidRequiredField(sangatValue.user_ride_from_airport)} >
                 <InputLabel id="needArrivalRideLabel">Need Ride From Airport *</InputLabel>
                 <Select
+                  // needed to remove warning messages about unmounted component on console
+                  defaultValue={""}
                   labelId="needArrivalRideLabel"
                   id="arrivalRideSelect"
                   value={sangatValue.user_ride_from_airport}
