@@ -1,3 +1,12 @@
+import dayjs from 'dayjs';
+
+const calculateAge = (data) => {
+    if (data && data.data && data.data.user_yearOfBirth && dayjs(data.data.user_yearOfBirth).isValid()) {
+        return dayjs().diff(data.data.user_yearOfBirth, "year");
+    }
+    // dob is invalid or null, so render nothing
+    return null;
+}
 
 export const usersMockData = [
     {Firstname: "Manjodh", Lastname: "Chahal", City: "Fresno", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
@@ -83,10 +92,9 @@ export const sangatVistingGurpurab = [
     { field: "user_firstName", headerName: "First Name", sortable: true, filter: true },
     { field: "user_middleName", headerName: "Middle Name", sortable: true, filter: true },
     { field: "user_lastName", headerName: "Last Name", sortable: true, filter: true },
-    { field: "user_age", headerName: "age", sortable: true, filter: true },
+    { field: "user_age", headerName: "Age", sortable: true, filter: true, valueGetter: (data) => calculateAge(data)},
     { field: "user_city", headerName: "City", sortable: true, filter: true },
     { field: "user_country", headerName: "Country", sortable: true, filter: true},
-    { field: "user_otherCountry", headerName: "Other Country", sortable: true, filter: true},
     { field: "user_ride_from_airport", headerName: "Ride", sortable: true, filter: true},
     { field: "user_arrivingFlightDate", headerName: "Arriving Date", sortable: true, filter: true},
     { field: "user_arrivingFlightTime", headerName: "Arriving Time", sortable: true, filter: true},
@@ -104,7 +112,6 @@ export const sangatVistingGurpurab = [
     { field: "user_email", headerName: "Email", sortable: true, filter: true},
     { field: "user_comments", headerName: "Comments", sortable: true, filter: true, resizable: true},
     { field: "user_emergencyContact", headerName: "Emergency Contact", sortable: true, filter: true, resizable: true},
-    { field: "user_allergy", headerName: "Allergy Info", sortable: true, filter: true},
     { field: "user_state",width: 100, headerName: "State", sortable: true, filter: true },
     { field: "user_gender", headerName: "Gender", sortable: true, filter: true },
 ]
@@ -118,7 +125,7 @@ export const taxiReport = [
     { field: "user_firstName", width: 140, headerName: "First Name", sortable: true, filter: true },
     { field: "user_middleName", width: 100, headerName: "Middle Name", sortable: true, filter: true },
     { field: "user_lastName", width: 100,headerName: "Last Name", sortable: true, filter: true },
-    { field: "user_age", width: 75, headerName: "age", sortable: true, filter: true },
+    { field: "user_age", width: 75, headerName: "Age", sortable: true, filter: true, valueGetter: (data) => calculateAge(data)},
     { field: "user_city", width: 140, headerName: "City", sortable: true, filter: true },
     { field: "user_country", width: 100, headerName: "Country", sortable: true, filter: true},
     { field: "user_ride_from_airport", width: 85, headerName: "Ride", sortable: true, filter: true},
@@ -138,13 +145,14 @@ export const returnSangatReport = [
     { field: "user_middleName", headerName: "Middle Name", sortable: true, filter: true },
     { field: "user_lastName", headerName: "Last Name", sortable: true, filter: true },
     { field: "user_gender", headerName: "Gender", sortable: true, filter: true },
-    { field: "user_age", headerName: "age", sortable: true, filter: true },
+    { field: "user_age", headerName: "Age", sortable: true, filter: true, valueGetter: (data) => calculateAge(data) },
     { field: "user_city", headerName: "City", sortable: true, filter: true },
     { field: "user_country", headerName: "Country", sortable: true, filter: true},
-    { field: "user_otherCountry", headerName: "Other Country", sortable: true, filter: true},
     { field: "user_phoneNumber", headerName: "Phone Number", sortable: true, filter: true},
     { field: "user_email", headerName: "Email", sortable: true, filter: true},
     { field: "user_comments", headerName: "Comments", sortable: true, filter: true, resizable: true},
     { field: "user_emergencyContact", headerName: "Emergency Contact", sortable: true, filter: true, resizable: true},
     { field: "user_state",width: 100, headerName: "State", sortable: true, filter: true },
 ]
+
+
