@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import MTable from './helper/materialTable';
 
 import { useHistory } from "react-router-dom";
-import AddNewUser from './addUser';
+// import AddNewUser from './addUser';
 import {sangatVistingAsthan} from './mockData/users'
 import {authenticationService} from '../userAuthMocks';
 
@@ -37,7 +37,7 @@ const Users  = () => {
 
     return(
         <div>
-            {showUser && <AddNewUser/>}
+            {/* {showUser && <AddNewUser/>} */}
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '10px'}}>
                 <button className="btn btn-primary" onClick={() => history.goBack()}>Back</button>
                 <button className="btn btn-primary addSangat" onClick={()=>addNewUser()}>Add New Sangat</button>

@@ -2,6 +2,8 @@ import React from 'react';
 import Home from './components/index';
 import Users from './components/users';
 import Saravas from './components/saravas';
+import Sangat from './components/sangat';
+import NavBar from './components/navBar';
 import LoginPage from './components/login';
 import Asthans from './components/asthans/index';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -69,21 +71,27 @@ class App extends React.Component {
 
   return (
     <Router history={createBrowserHistory}>
-      <div className="container">
-        {currentUser && 
-        <div style={{display: "flex", justifyContent: "space-between"}}>
+      {/* <div className="container"> */}
+       {currentUser && 
+      <NavBar user={currentUser} logoutCallback={this.logout}></NavBar>
+       }  
+       {!currentUser && <NavBar ></NavBar>}
+        
+        {/* <div style={{display: "flex", justifyContent: "space-between"}}>
           {Role==='ROLE_ADMIN' &&
             <div style={{border: '1px solid black', padding: '10px', background: 'lightblue', borderRadius: '10px', width: '100px'}}><Link to="/Home">Home</Link></div>
           }
            <div style={{fontWeight: 'bold'}}>current user: {currentUser}</div>
            <button onClick={this.logout} className="nav-item nav-link btn btn-danger">Logout</button>
            </div>
-          }
+           */}
           <br/>
           <Route path="/" exact component={LoginPage} />
           <PrivateRoute path="/Home" exact component={Home} />
           <PrivateRoute path="/Users" component={Users} />
-          <PrivateRoute path="/Saravas" component={Saravas} />
+          {/* <PrivateRoute path="/Saravas" component={Saravas} /> */}
+          {/* <PrivateRoute path="/Saravas" component={Sangat} /> */}
+          <PrivateRoute path="/Sangat" component={Sangat} />
           <PrivateRoute path="/Asthans" exact component={Asthans} />
           <PrivateRoute path="/Asthans/MeetingBabaJi" exact component={MeetingBabaJi}/>
           <PrivateRoute path="/Asthans/BochumGermany" exact component={BochumGermany} />
@@ -107,7 +115,7 @@ class App extends React.Component {
           <PrivateRoute path="/reporting/ArriveSangatReport" exact component={ArriveSangatReport}/>
           <PrivateRoute path="/reporting/ReturnSangatReport" exact component={ReturnSangatReport}/>
           <PrivateRoute path="/userTravelInfo" exact component={UserTravelInfoLookUp}/>
-        </div>
+        {/* </div> */}
     </Router>
   );
 }
