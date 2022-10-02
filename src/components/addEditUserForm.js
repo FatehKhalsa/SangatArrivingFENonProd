@@ -15,7 +15,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { countries, USA_STATES, CANADA_PROVINCES, asthaans, HerokuURL, AirlineNames, INDIA_AIRPORT_LIST, LOCAL_DATE_FORMAT } from '../constants';
 import AutoCompleteWithOther from './helper/autoCompleteWithOther'
 const AddEditUser = (props) => {
-  const { user } = props;
+  const { user, handleCloseCallback } = props;
 
   const [showArrivingWithinThreeDays, setShowArrivingWithinThreeDays] = useState(false);
   const [stateOptions, setStateOptions] = useState(null);
@@ -60,6 +60,7 @@ const AddEditUser = (props) => {
   const handleClose = () => {
     // TODO: refresh table on main page without reloading page
     window.location.reload();
+    handleCloseCallback();
   }
 
   const isValidRequiredField = (fieldValue) => {
@@ -377,7 +378,7 @@ const AddEditUser = (props) => {
   }
 
   return (
-    <Dialog maxWidth={"md"} open={true} onClose={handleClose} >
+    <Dialog maxWidth={"md"} open={true} >
       <DialogTitle style={{ "borderBottom": "1px solid lightgrey" }}>{sangatValue._id ? "Edit User" : "Add User"}
         <IconButton
           aria-label="close"
@@ -652,7 +653,7 @@ const AddEditUser = (props) => {
       </DialogContent>
       <DialogActions style={{ "borderTop": "1px solid lightgrey" }}>
         {/* TODO: if form updated open dialog that tells user all changes made will be lost, are you sure you want to close */}
-        <Button variant="outlined" size="large" onClick={handleClose}>{sangatValue._id ? "Close" : "Cancel"}</Button>
+        {/* <Button variant="outlined" size="large" onClick={handleClose}>{sangatValue._id ? "Close" : "Cancel"}</Button> */}
         <Button variant="contained" size="large" onClick={addNewSangat}>Save</Button>
       </DialogActions>
     </Dialog>
