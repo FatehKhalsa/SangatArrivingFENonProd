@@ -52,7 +52,6 @@ class MTable extends React.Component {
     if (selectedNodes.length > 0) {
       this.props.selectRowCallback(selectedNodes[0].data)
     }
-    console.log("here");
   }
 
 
