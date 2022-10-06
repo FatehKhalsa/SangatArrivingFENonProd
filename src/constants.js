@@ -1,5 +1,6 @@
-export const HerokuURL = 'https://guarded-gorge-38921.herokuapp.com/';
-// export const HerokuURL = 'http://localhost:8080/';
+//export const HerokuURL = 'https://guarded-gorge-38921.herokuapp.com/';
+export const HerokuURL = 'https://sangat-arrival-backend-nonprod.herokuapp.com/';
+
 
 export const LOCAL_DATE_FORMAT = "YYYY-MM-DD";
 
