@@ -5,6 +5,7 @@ export const HerokuURL = 'https://sangat-arrival-backend-nonprod.herokuapp.com/'
 export const LOCAL_DATE_FORMAT = "YYYY-MM-DD";
 
 
+
 export const AirlineNames = [
     "AEROFLOT", 
     "AERONOMAD",
