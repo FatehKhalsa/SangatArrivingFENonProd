@@ -15,7 +15,9 @@ const PrivateRoute = ({ component: Component, roles, ...rest }) => (
         // check if route is restricted by role
        
         // authorised so return component
-        return <Component {...props} />
+        const addCurrentUser = {...props, currentUser}
+        
+        return <Component {...addCurrentUser} />
     }} />
 
 )

@@ -15,7 +15,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { countries, USA_STATES, CANADA_PROVINCES, asthaans, HerokuURL, AirlineNames, INDIA_AIRPORT_LIST, LOCAL_DATE_FORMAT } from '../constants';
 import AutoCompleteWithOther from './helper/autoCompleteWithOther'
 const AddEditUser = (props) => {
-  const { user, handleCloseCallback } = props;
+  const { user, handleCloseCallback, currentUser } = props;
 
   const [showArrivingWithinThreeDays, setShowArrivingWithinThreeDays] = useState(false);
   const [stateOptions, setStateOptions] = useState(null);
@@ -51,7 +51,8 @@ const AddEditUser = (props) => {
     user_emergencyContact: user ? user.user_emergencyContact : "",
     user_comments: user ? user.user_comments : "",
     user_age: user ? user.user_age : 0,
-    user_ride_from_airport: user ? user.user_ride_from_airport : ''
+    user_ride_from_airport: user ? user.user_ride_from_airport : '',
+    user_last_updated_by: props ? currentUser.toUpperCase(): "", 
   });
 
   const closeSnack = () => {

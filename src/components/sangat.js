@@ -19,6 +19,7 @@ const Sangat = (props) => {
     const history = useHistory();
 
     const Role = props.location.state;
+    const currentUser = props.currentUser;
 
     const [users, setUsers] = useState([])
     const [columnDefs, setColumnDefs] = useState(sangatVistingGurpurab);
@@ -81,7 +82,7 @@ const Sangat = (props) => {
     return (
         <div>
 
-            {showAddEditDialog && <AddEditUser handleCloseCallback={handleCloseModalCallback} user={userToEdit} />}
+            {showAddEditDialog && <AddEditUser handleCloseCallback={handleCloseModalCallback} user={userToEdit} currentUser={currentUser} />}
 
             <Grid container direction="row"
                 justifyContent="flex-end"
