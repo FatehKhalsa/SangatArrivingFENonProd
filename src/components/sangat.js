@@ -29,8 +29,10 @@ const Sangat = (props) => {
 
 
     const handleEditUser = (selectedUser) => {
+        if(Role!=='ROLE_USER'){
         setUserToEdit(selectedUser);
         setShowAddEditDialog(true);
+        }
     }
     const handleTableViewChange = (event, newView) => {
         switch (newView) {
@@ -87,10 +89,11 @@ const Sangat = (props) => {
             <Grid container direction="row"
                 justifyContent="flex-end"
                 alignItems="center" spacing={2}>
+            {Role!=='ROLE_USER' &&
                 <Grid item justifyContent="flex-end" xs={2}>
                     <Button style={{ float: "right", marginRight: "10px" }} onClick={() => addNewUser()} variant="contained">Add Sangat</Button>
                 </Grid>
-
+                }
             </Grid>
             <Paper sx={{ m: 1, p: 2 }}>
                 <Grid container rowSpacing={1}>
