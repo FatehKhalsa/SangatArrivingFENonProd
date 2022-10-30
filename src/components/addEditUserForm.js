@@ -206,7 +206,12 @@ const AddEditUser = (props) => {
   const addNewSangat = async () => {
     if (!isValidForm()) {
       return;
-    } else {
+    }
+    if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
+      setShowArrivingWithinThreeDays(true);
+      return;
+    }
+    else {
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
 
       {/* TODO: front end and backend name mismatch */ }
@@ -415,7 +420,7 @@ const AddEditUser = (props) => {
           {showArrivingWithinThreeDays &&
             <Alert onClose={() => { setShowArrivingWithinThreeDays(false) }} severity="error" sx={{ marginBottom: "16px" }} >
               <AlertTitle>Warning!</AlertTitle>
-              You're arriving really soon! Sevadars may not be able to arrange your taxi. Please confirm with local sevadar at Bulandpuri Sahib.
+              You're arriving really soon! Sevadars may not be able to arrange your taxi. Please confirm with local sevadar at 919501487422.
             </Alert>}
 
           <h4>
