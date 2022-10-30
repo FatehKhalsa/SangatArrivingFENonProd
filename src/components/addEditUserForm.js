@@ -17,6 +17,7 @@ import AutoCompleteWithOther from './helper/autoCompleteWithOther'
 const AddEditUser = (props) => {
   const { user, handleCloseCallback, currentUser } = props;
 
+
   const [showArrivingWithinThreeDays, setShowArrivingWithinThreeDays] = useState(false);
   const [stateOptions, setStateOptions] = useState(null);
   const [showValidationMessages, setShowValidationMessages] = useState(false);
@@ -207,9 +208,8 @@ const AddEditUser = (props) => {
     if (!isValidForm()) {
       return;
     }
-    if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
+    if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3 && currentUser!=='sandeep') {
       setShowArrivingWithinThreeDays(true);
-      return;
     }
     else {
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
