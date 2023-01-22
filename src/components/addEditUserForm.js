@@ -249,22 +249,21 @@ const AddEditUser = (props) => {
         }
         setSnack({open: true, severity: "success", durration: 6000, message: "This user was successfully saved." })
           setLoading(false);
-          document.getElementById("startForm").scrollIntoView();
-
-         const updatedSangat = {
-          ...data, user_yearOfBirth: dayjs(data.user_yearOfBirth, LOCAL_DATE_FORMAT), user_arrivingFlightDate: dayjs(data.user_arrivingFlightDate, LOCAL_DATE_FORMAT),
-          user_arrivingFlightTime: dayjs(data.user_arrivingFlightTime, "HH:mm"), user_departingFlightDate: dayjs(data.user_departingFlightDate, LOCAL_DATE_FORMAT),
-          user_departingFlightTime: dayjs(data.user_departingFlightTime, "HH:mm")
-        } 
-          setSangatValue(updatedSangat);
+          
+          setSangatValue({
+            ...data, user_yearOfBirth: dayjs(data.user_yearOfBirth, LOCAL_DATE_FORMAT), user_arrivingFlightDate: dayjs(data.user_arrivingFlightDate, LOCAL_DATE_FORMAT),
+            user_arrivingFlightTime: dayjs(data.user_arrivingFlightTime, "HH:mm"), user_departingFlightDate: dayjs(data.user_departingFlightDate, LOCAL_DATE_FORMAT),
+            user_departingFlightTime: dayjs(data.user_departingFlightTime, "HH:mm")
+          } );
 
           if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
             setShowArrivingWithinThreeDays(true);
           }
 
-          onSaveSuccessCallBack(updatedSangat);
+          onSaveSuccessCallBack(data);
           setLoading(false);
           setShowValidationMessages(false);
+          document.getElementById("startForm").scrollIntoView();
         });
     }
   }
