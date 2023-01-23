@@ -15,7 +15,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { countries, USA_STATES, CANADA_PROVINCES, asthaans, HerokuURL, AirlineNames, INDIA_AIRPORT_LIST, LOCAL_DATE_FORMAT } from '../constants';
 import AutoCompleteWithOther from './helper/autoCompleteWithOther'
 const AddEditUser = (props) => {
-  const { user, handleCloseCallback, currentUser } = props;
+  const { user, handleCloseCallback, currentUser, onSaveSuccessCallBack } = props;
 
   const [showArrivingWithinThreeDays, setShowArrivingWithinThreeDays] = useState(false);
   const [stateOptions, setStateOptions] = useState(null);
@@ -59,8 +59,6 @@ const AddEditUser = (props) => {
     setSnack({...snack, open: false});
   }
   const handleClose = () => {
-    // TODO: refresh table on main page without reloading page
-    window.location.reload();
     handleCloseCallback();
   }
 
@@ -207,6 +205,7 @@ const AddEditUser = (props) => {
     if (!isValidForm()) {
       return;
     } else {
+      setShowArrivingWithinThreeDays(false);
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
 
       {/* TODO: front end and backend name mismatch */ }
@@ -250,19 +249,21 @@ const AddEditUser = (props) => {
         }
         setSnack({open: true, severity: "success", durration: 6000, message: "This user was successfully saved." })
           setLoading(false);
-          document.getElementById("startForm").scrollIntoView();
-
+          
           setSangatValue({
             ...data, user_yearOfBirth: dayjs(data.user_yearOfBirth, LOCAL_DATE_FORMAT), user_arrivingFlightDate: dayjs(data.user_arrivingFlightDate, LOCAL_DATE_FORMAT),
             user_arrivingFlightTime: dayjs(data.user_arrivingFlightTime, "HH:mm"), user_departingFlightDate: dayjs(data.user_departingFlightDate, LOCAL_DATE_FORMAT),
             user_departingFlightTime: dayjs(data.user_departingFlightTime, "HH:mm")
-          });
+          } );
 
           if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
             setShowArrivingWithinThreeDays(true);
           }
+
+          onSaveSuccessCallBack(data);
           setLoading(false);
           setShowValidationMessages(false);
+          document.getElementById("startForm").scrollIntoView();
         });
     }
   }
@@ -400,24 +401,26 @@ const AddEditUser = (props) => {
         >
           <CircularProgress />
         </Backdrop>
-        <Box id="startForm" sx={{
+        
+          <Box  id="startForm"  sx={{
           background: '#FFFFFF',
           borderRadius: '6px',
           padding: '1rem',
           margin: '1rem',
         }}>
+          
                <Snackbar  anchorOrigin={{ vertical: "bottom", horizontal: "center" }} open={snack.open} autoHideDuration={snack.duration} onClose={closeSnack}>
         <Alert onClose={closeSnack} variant="filled" severity={snack.severity} sx={{ width: '100%' }}>
           {snack.message}
         </Alert>
       </Snackbar>
-
+      
           {showArrivingWithinThreeDays &&
-            <Alert onClose={() => { setShowArrivingWithinThreeDays(false) }} severity="error" sx={{ marginBottom: "16px" }} >
+            <Alert  onClose={() => { setShowArrivingWithinThreeDays(false) }} severity="error" sx={{ marginBottom: "16px" }} >
               <AlertTitle>Warning!</AlertTitle>
               You're arriving really soon! Sevadars may not be able to arrange your taxi. Please confirm with local sevadar at Bulandpuri Sahib.
             </Alert>}
-
+            
           <h4>
             Personal Information
           </h4>
