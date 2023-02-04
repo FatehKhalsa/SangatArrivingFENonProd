@@ -214,16 +214,22 @@ const AddEditUser = (props) => {
     if (!isValidForm()) {
       return;
     }
-    if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3 && overrideValidation) {
+    if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3 && !overrideValidation) {
       setShowArrivingWithinThreeDays(true);
     }
+
     else {
       setShowArrivingWithinThreeDays(false);
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
 
       {/* TODO: front end and backend name mismatch */ }
       let sangatValueToSave = {};
-      if (!overrideValidation) {
+
+      if (sangatValue && sangatValue._id && overrideValidation) {
+        sangatValueToSave = {}
+      }
+
+      else {
         sangatValueToSave = {
           ...sangatValue, user_yearOfBirth: dobLocalDateFormat, user_arrivingFlightDate: sangatValue.user_arrivingFlightDate.format(LOCAL_DATE_FORMAT),
           user_arrivingFlightTime: sangatValue.user_arrivingFlightTime.format("HH:mm"), user_departingFlightDate: sangatValue.user_departingFlightDate.format(LOCAL_DATE_FORMAT),
