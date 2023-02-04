@@ -56,6 +56,7 @@ const AddEditUser = (props) => {
     user_last_updated_by: props ? currentUser.toUpperCase() : "",
   });
 
+  
   const closeSnack = () => {
     setSnack({ ...snack, open: false });
   }
