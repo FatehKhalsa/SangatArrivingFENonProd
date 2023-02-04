@@ -13,7 +13,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { countries, USA_STATES, CANADA_PROVINCES, asthaans, HerokuURL, AirlineNames, INDIA_AIRPORT_LIST, LOCAL_DATE_FORMAT, OVERIDE_USER_LIST } from '../constants';
-import AutoCompleteWithOther from './helper/autoCompleteWithOther'
+import AutoCompleteWithOther from './helper/autoCompleteWithOther';
 
 const AddEditUser = (props) => {
   const { user, handleCloseCallback, currentUser, onSaveSuccessCallBack } = props;
