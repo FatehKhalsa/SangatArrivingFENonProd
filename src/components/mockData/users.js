@@ -13,7 +13,7 @@ const formatDatetTime = (data) => {
     if (data && data.data && data.data.updatedAt && dayjs(data.data.updatedAt).isValid()) {
         return dayjs(data.data.updatedAt).format(LOCAL_DATE_FORMAT + " HH:mm");
     }
-    // dob is invalid or null, so render nothing
+    // dob is invalid or null, so render nothing.
     return null;
 }
 
