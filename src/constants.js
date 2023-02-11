@@ -195,4 +195,7 @@ export const INDIA_AIRPORT_LIST = [
     "DELHI"
 ]
 
-//tess
+export const OVERIDE_USER_LIST = [
+    "sandeep",
+    "amanjodh"
+]
