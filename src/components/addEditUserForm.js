@@ -67,7 +67,7 @@ const AddEditUser = (props) => {
   }
 
   const isValidRequiredField = (fieldValue) => {
-    if (showValidationMessages && !fieldValue && overrideValidation) {
+    if (showValidationMessages && !fieldValue) {
       return false;
     }
     return true;
@@ -152,7 +152,6 @@ const AddEditUser = (props) => {
   }
 
   const isValidTime = (timeValue, isRequired) => {
-    if (overrideValidation) return true;
     if (!showValidationMessages) {
       return true;
     }
@@ -165,9 +164,6 @@ const AddEditUser = (props) => {
   }
 
   const isValidDate = (dateValue, isRequired) => {
-    if (overrideValidation) {
-      return true;
-    }
     if (!showValidationMessages) {
       return true;
     }
@@ -183,8 +179,6 @@ const AddEditUser = (props) => {
   const isValidForm = () => {
 
     // required fields
-
-    if (overrideValidation) return true;
 
     let isValid = true;
     if (!sangatValue.user_firstName || !sangatValue.user_lastName || !sangatValue.user_middleName || !sangatValue.user_gender || !sangatValue.user_yearOfBirth || !sangatValue.user_goingToAsthan || !sangatValue.user_country || !sangatValue.user_state || !sangatValue.user_city || !sangatValue.user_phoneNumber || !sangatValue.user_arrivingFlightName || !sangatValue.user_arrivingFlightNumber || !sangatValue.user_arrivingFlightDate || !sangatValue.user_arrivingFlightTime || !sangatValue.user_arrivingFlightAirport || !sangatValue.user_ride_from_airport || !sangatValue.user_departingFlightName || !sangatValue.user_departingFlightNumber || !sangatValue.user_departingFlightDate || !sangatValue.user_departingFlightTime || !sangatValue.user_departingFlightAirport) {
@@ -216,28 +210,19 @@ const AddEditUser = (props) => {
       return;
     }
     if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3 && !overrideValidation) {
-      setShowArrivingWithinThreeDays(true);
+         setShowArrivingWithinThreeDays(true);
     }
-
     else {
       setShowArrivingWithinThreeDays(false);
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
 
       {/* TODO: front end and backend name mismatch */ }
-      let sangatValueToSave = {};
 
-      if (sangatValue && sangatValue._id && overrideValidation) {
-        sangatValueToSave = {}
-      }
-
-      else {
-        sangatValueToSave = {
+      let sangatValueToSave = {
           ...sangatValue, user_yearOfBirth: dobLocalDateFormat, user_arrivingFlightDate: sangatValue.user_arrivingFlightDate.format(LOCAL_DATE_FORMAT),
           user_arrivingFlightTime: sangatValue.user_arrivingFlightTime.format("HH:mm"), user_departingFlightDate: sangatValue.user_departingFlightDate.format(LOCAL_DATE_FORMAT),
           user_departingFlightTime: sangatValue.user_departingFlightTime.format("HH:mm")
         };
-      }
-
       setLoading(true);
       let saveUserResponse;
       if (sangatValue && sangatValue._id) {
@@ -249,7 +234,7 @@ const AddEditUser = (props) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            overrideValidation ? sangatValue : sangatValueToSave
+           sangatValueToSave
           ),
         })
       } else {
@@ -274,13 +259,11 @@ const AddEditUser = (props) => {
         setSnack({ open: true, severity: "success", durration: 6000, message: "This user was successfully saved." })
         setLoading(false);
 
-        if (!overrideValidation) {
           setSangatValue({
             ...data, user_yearOfBirth: dayjs(data.user_yearOfBirth, LOCAL_DATE_FORMAT), user_arrivingFlightDate: dayjs(data.user_arrivingFlightDate, LOCAL_DATE_FORMAT),
             user_arrivingFlightTime: dayjs(data.user_arrivingFlightTime, "HH:mm"), user_departingFlightDate: dayjs(data.user_departingFlightDate, LOCAL_DATE_FORMAT),
             user_departingFlightTime: dayjs(data.user_departingFlightTime, "HH:mm")
           });
-        }
 
         if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
           setShowArrivingWithinThreeDays(true);
@@ -690,7 +673,7 @@ const AddEditUser = (props) => {
     </Dialog>
   );
 
-}
+};
 
 
 export default AddEditUser;
