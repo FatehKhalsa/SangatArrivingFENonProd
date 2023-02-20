@@ -13,9 +13,19 @@ const formatDatetTime = (data) => {
     if (data && data.data && data.data.updatedAt && dayjs(data.data.updatedAt).isValid()) {
         return dayjs(data.data.updatedAt).format(LOCAL_DATE_FORMAT + " HH:mm");
     }
-    // dob is invalid or null, so render nothing
+    // dob is invalid or null, so render nothing.
     return null;
 }
+
+const countTotal =(data) => {
+    let count = 0;
+
+
+    if(data & data.data&& data.forEach(user=>{
+        data=user.arrivingFlightDate;
+    }));
+}
+
 
 export const usersMockData = [
     {Firstname: "Manjodh", Lastname: "Chahal", City: "Fresno", DOB:"10/23/89", FlightInfo: "AI 183", AllergyInfo:"None", id: '1'},
@@ -104,6 +114,7 @@ export const sangatVistingGurpurab = [
     { field: "user_age", headerName: "Age", sortable: true, filter: true, valueGetter: (data) => calculateAge(data)},
     { field: "user_city", headerName: "City", sortable: true, filter: true },
     { field: "user_country", headerName: "Country", sortable: true, filter: true},
+    { field: "user_goingToAsthan", headerName: "Closest Asthan", sortable: true, filter: true},
     { field: "user_ride_from_airport", headerName: "Ride", sortable: true, filter: true},
     { field: "user_arrivingFlightDate", headerName: "Arriving Date", sortable: true, filter: true},
     { field: "user_arrivingFlightTime", headerName: "Arriving Time", sortable: true, filter: true},
@@ -130,10 +141,12 @@ export const arrivalReport = [
     { field: "user_firstName", headerName: "First Name", sortable: true, filter: true },
     { field: "user_middleName", headerName: "Middle Name", sortable: true, filter: true },
     { field: "user_lastName", headerName: "Last Name", sortable: true, filter: true },
+    { field: "user_phoneNumber", headerName: "Phone Number", sortable: true, filter: true},
     { field: "user_gender", headerName: "Gender", sortable: true, filter: true },
     { field: "user_age", headerName: "Age", sortable: true, filter: true, valueGetter: (data) => calculateAge(data)},
     { field: "user_city", headerName: "City", sortable: true, filter: true },
     { field: "user_country", headerName: "Country", sortable: true, filter: true},
+    { field: "user_goingToAsthan", headerName: "Closest Asthan", sortable: true, filter: true},
     { field: "user_ride_from_airport", headerName: "Ride", sortable: true, filter: true},
     { field: "user_arrivingFlightDate", headerName: "Arriving Date", sortable: true, filter: true},
     { field: "user_arrivingFlightTime", headerName: "Arriving Time", sortable: true, filter: true},
@@ -158,6 +171,11 @@ export const taxiReport = [
     { field: "user_ride_from_airport", width: 85, headerName: "Ride", sortable: true, filter: true},
     { field: "", headerName: "Taxi arranged", sortable: true, filter: true },
     { field: "updatedAt", headerName: "Last updated by", sortable: true, filter: true, valueGetter: (data) => formatDatetTime(data)},
+]
+
+export const dailyReport = [
+    { field: "user_arrivingFlightDate", width: 150, headerName: "Arriving Date", sortable: true, filter: true},
+    { field: "user_arriving", width: 150, headerName: "Sangat Arriving", sortable: true, filter: true, valueGetter: (data)=>countTotal(data)}
 ]
 
 

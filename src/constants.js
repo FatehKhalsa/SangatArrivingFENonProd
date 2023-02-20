@@ -1,6 +1,4 @@
-//export const HerokuURL = 'https://guarded-gorge-38921.herokuapp.com/';
-export const HerokuURL = 'https://sangat-arrival-backend-nonprod.herokuapp.com/';
-
+export const HerokuURL = 'https://guarded-gorge-38921.herokuapp.com/';
 
 export const LOCAL_DATE_FORMAT = "YYYY-MM-DD";
 
@@ -198,4 +196,7 @@ export const INDIA_AIRPORT_LIST = [
     "DELHI"
 ]
 
-//tess
+export const OVERIDE_USER_LIST = [
+    "sandeep",
+    "amanjodh"
+]

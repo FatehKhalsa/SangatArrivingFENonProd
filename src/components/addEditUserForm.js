@@ -12,16 +12,19 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { countries, USA_STATES, CANADA_PROVINCES, asthaans, HerokuURL, AirlineNames, INDIA_AIRPORT_LIST, LOCAL_DATE_FORMAT } from '../constants';
-import AutoCompleteWithOther from './helper/autoCompleteWithOther'
+import { countries, USA_STATES, CANADA_PROVINCES, asthaans, HerokuURL, AirlineNames, INDIA_AIRPORT_LIST, LOCAL_DATE_FORMAT, OVERIDE_USER_LIST } from '../constants';
+import AutoCompleteWithOther from './helper/autoCompleteWithOther';
+
 const AddEditUser = (props) => {
-  const { user, handleCloseCallback } = props;
+  const { user, handleCloseCallback, currentUser, onSaveSuccessCallBack } = props;
+
 
   const [showArrivingWithinThreeDays, setShowArrivingWithinThreeDays] = useState(false);
   const [stateOptions, setStateOptions] = useState(null);
+  const [overrideValidation, setOverrideValidation] = useState(OVERIDE_USER_LIST.includes(currentUser) ? true : false);
   const [showValidationMessages, setShowValidationMessages] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [snack, setSnack] = useState({message: "", duration: 0, open: false, severity: "success"})
+  const [snack, setSnack] = useState({ message: "", duration: 0, open: false, severity: "success" })
   const [sangatValue, setSangatValue] = useState({
     _id: user ? user._id : "",
     user_firstName: user ? user.user_firstName : "",
@@ -51,15 +54,15 @@ const AddEditUser = (props) => {
     user_emergencyContact: user ? user.user_emergencyContact : "",
     user_comments: user ? user.user_comments : "",
     user_age: user ? user.user_age : 0,
-    user_ride_from_airport: user ? user.user_ride_from_airport : ''
+    user_ride_from_airport: user ? user.user_ride_from_airport : '',
+    user_last_updated_by: props ? currentUser.toUpperCase() : "",
   });
 
+  
   const closeSnack = () => {
-    setSnack({...snack, open: false});
+    setSnack({ ...snack, open: false });
   }
   const handleClose = () => {
-    // TODO: refresh table on main page without reloading page
-    window.location.reload();
     handleCloseCallback();
   }
 
@@ -176,7 +179,7 @@ const AddEditUser = (props) => {
   const isValidForm = () => {
 
     // required fields
-    
+
     let isValid = true;
     if (!sangatValue.user_firstName || !sangatValue.user_lastName || !sangatValue.user_middleName || !sangatValue.user_gender || !sangatValue.user_yearOfBirth || !sangatValue.user_goingToAsthan || !sangatValue.user_country || !sangatValue.user_state || !sangatValue.user_city || !sangatValue.user_phoneNumber || !sangatValue.user_arrivingFlightName || !sangatValue.user_arrivingFlightNumber || !sangatValue.user_arrivingFlightDate || !sangatValue.user_arrivingFlightTime || !sangatValue.user_arrivingFlightAirport || !sangatValue.user_ride_from_airport || !sangatValue.user_departingFlightName || !sangatValue.user_departingFlightNumber || !sangatValue.user_departingFlightDate || !sangatValue.user_departingFlightTime || !sangatValue.user_departingFlightAirport) {
       setShowValidationMessages(true);
@@ -195,8 +198,8 @@ const AddEditUser = (props) => {
       setShowValidationMessages(true);
       isValid = false;
     }
-    if (!isValid) { 
-      setSnack({open: true, severity: "error", durration: 6000, message: "Please enter all of the required fields and make sure the information is valid." })
+    if (!isValid) {
+      setSnack({ open: true, severity: "error", durration: 6000, message: "Please enter all of the required fields and make sure the information is valid." })
     }
     return isValid;
 
@@ -205,15 +208,21 @@ const AddEditUser = (props) => {
   const addNewSangat = async () => {
     if (!isValidForm()) {
       return;
-    } else {
+    }
+    if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3 && !overrideValidation) {
+         setShowArrivingWithinThreeDays(true);
+    }
+    else {
+      setShowArrivingWithinThreeDays(false);
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
 
       {/* TODO: front end and backend name mismatch */ }
+
       let sangatValueToSave = {
-        ...sangatValue, user_yearOfBirth: dobLocalDateFormat, user_arrivingFlightDate: sangatValue.user_arrivingFlightDate.format(LOCAL_DATE_FORMAT),
-        user_arrivingFlightTime: sangatValue.user_arrivingFlightTime.format("HH:mm"), user_departingFlightDate: sangatValue.user_departingFlightDate.format(LOCAL_DATE_FORMAT),
-        user_departingFlightTime: sangatValue.user_departingFlightTime.format("HH:mm")
-      };
+          ...sangatValue, user_yearOfBirth: dobLocalDateFormat, user_arrivingFlightDate: sangatValue.user_arrivingFlightDate.format(LOCAL_DATE_FORMAT),
+          user_arrivingFlightTime: sangatValue.user_arrivingFlightTime.format("HH:mm"), user_departingFlightDate: sangatValue.user_departingFlightDate.format(LOCAL_DATE_FORMAT),
+          user_departingFlightTime: sangatValue.user_departingFlightTime.format("HH:mm")
+        };
       setLoading(true);
       let saveUserResponse;
       if (sangatValue && sangatValue._id) {
@@ -225,7 +234,7 @@ const AddEditUser = (props) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(
-            sangatValueToSave
+           sangatValueToSave
           ),
         })
       } else {
@@ -243,13 +252,12 @@ const AddEditUser = (props) => {
       saveUserResponse.then((response) => response.json()).then((data) => {
 
         if (data.message && data.message === 'Failed! User is already in System!') {
-          setSnack({open: true, severity: "error", durration: 6000, message: "This user is already in the system, and cannot be created again. Please search for them and update the information." })
+          setSnack({ open: true, severity: "error", durration: 6000, message: "This user is already in the system, and cannot be created again. Please search for them and update the information." })
           setLoading(false);
           return;
         }
-        setSnack({open: true, severity: "success", durration: 6000, message: "This user was successfully saved." })
-          setLoading(false);
-          document.getElementById("startForm").scrollIntoView();
+        setSnack({ open: true, severity: "success", durration: 6000, message: "This user was successfully saved." })
+        setLoading(false);
 
           setSangatValue({
             ...data, user_yearOfBirth: dayjs(data.user_yearOfBirth, LOCAL_DATE_FORMAT), user_arrivingFlightDate: dayjs(data.user_arrivingFlightDate, LOCAL_DATE_FORMAT),
@@ -257,12 +265,15 @@ const AddEditUser = (props) => {
             user_departingFlightTime: dayjs(data.user_departingFlightTime, "HH:mm")
           });
 
-          if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
-            setShowArrivingWithinThreeDays(true);
-          }
-          setLoading(false);
-          setShowValidationMessages(false);
-        });
+        if (Math.abs(dayjs().diff(sangatValue.user_arrivingFlightDate, 'day')) <= 3) {
+          setShowArrivingWithinThreeDays(true);
+        }
+
+        onSaveSuccessCallBack(data);
+        setLoading(false);
+        setShowValidationMessages(false);
+        document.getElementById("startForm").scrollIntoView();
+      });
     }
   }
 
@@ -271,7 +282,7 @@ const AddEditUser = (props) => {
   }
 
   const setSangatMiddleName = (e) => {
-    setSangatValue({ ...sangatValue, user_middleName: e.target.value ? e.target.value.toUpperCase() : ""  });
+    setSangatValue({ ...sangatValue, user_middleName: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const setSangatLastName = (e) => {
@@ -295,12 +306,12 @@ const AddEditUser = (props) => {
   }
 
   const setSangatGender = (e) => {
-    setSangatValue({ ...sangatValue, user_gender:  e.target.value ? e.target.value.toUpperCase() : "" });
+    setSangatValue({ ...sangatValue, user_gender: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
 
   const setSangatCity = (e) => {
-    setSangatValue({ ...sangatValue, user_city:  e.target.value ? e.target.value.toUpperCase() : ""});
+    setSangatValue({ ...sangatValue, user_city: e.target.value ? e.target.value.toUpperCase() : "" });
   }
 
   const handleCountryChange = (newValue) => {
@@ -315,7 +326,7 @@ const AddEditUser = (props) => {
   }
 
   const handleArrivingAirlineChange = (newValue) => {
-    setSangatValue({ ...sangatValue, user_arrivingFlightName:  newValue ? newValue.toUpperCase() : "" });
+    setSangatValue({ ...sangatValue, user_arrivingFlightName: newValue ? newValue.toUpperCase() : "" });
   }
 
   const handleDepartingAirlineChange = (newValue) => {
@@ -344,7 +355,7 @@ const AddEditUser = (props) => {
   }
 
   const setDepartingFlightNumber = (e) => {
-    setSangatValue({ ...sangatValue, user_departingFlightNumber: e.target.value ? e.target.value.toUpperCase() : ""})
+    setSangatValue({ ...sangatValue, user_departingFlightNumber: e.target.value ? e.target.value.toUpperCase() : "" })
   }
 
   const setDepartingFlightAirport = (newValue) => {
@@ -377,6 +388,7 @@ const AddEditUser = (props) => {
     setSangatValue({ ...sangatValue, user_ride_from_airport: e.target.value ? e.target.value.toUpperCase() : "" })
   }
 
+
   return (
     <Dialog maxWidth={"md"} open={true} onClose={handleClose} >
       <DialogTitle style={{ "borderBottom": "1px solid lightgrey" }}>{sangatValue._id ? "Edit User" : "Add User"}
@@ -399,22 +411,24 @@ const AddEditUser = (props) => {
         >
           <CircularProgress />
         </Backdrop>
+
         <Box id="startForm" sx={{
           background: '#FFFFFF',
           borderRadius: '6px',
           padding: '1rem',
           margin: '1rem',
         }}>
-               <Snackbar  anchorOrigin={{ vertical: "bottom", horizontal: "center" }} open={snack.open} autoHideDuration={snack.duration} onClose={closeSnack}>
-        <Alert onClose={closeSnack} variant="filled" severity={snack.severity} sx={{ width: '100%' }}>
-          {snack.message}
-        </Alert>
-      </Snackbar>
+
+          <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "center" }} open={snack.open} autoHideDuration={snack.duration} onClose={closeSnack}>
+            <Alert onClose={closeSnack} variant="filled" severity={snack.severity} sx={{ width: '100%' }}>
+              {snack.message}
+            </Alert>
+          </Snackbar>
 
           {showArrivingWithinThreeDays &&
             <Alert onClose={() => { setShowArrivingWithinThreeDays(false) }} severity="error" sx={{ marginBottom: "16px" }} >
               <AlertTitle>Warning!</AlertTitle>
-              You're arriving really soon! Sevadars may not be able to arrange your taxi. Please confirm with local sevadar at Bulandpuri Sahib.
+              You're arriving really soon! Sevadars may not be able to arrange your taxi. Please confirm with local sevadar at 919501487422.
             </Alert>}
 
           <h4>
@@ -436,7 +450,7 @@ const AddEditUser = (props) => {
               <FormControl fullWidth error={!isValidRequiredField(sangatValue.user_gender)}>
                 <InputLabel id="genderLabel">Gender *</InputLabel>
                 <Select
-                 // needed to remove warning messages about unmounted component on console
+                  // needed to remove warning messages about unmounted component on console
                   defaultValue={""}
                   required
                   labelId="genderLabel"
@@ -476,7 +490,7 @@ const AddEditUser = (props) => {
                     handleAsthaanChange(newValue);
                   }}
 
-                  renderInput={(params) => <TextField error={!isValidRequiredField(sangatValue.user_goingToAsthan)}  required autoComplete="p" label="Closest Asthaan" sx={{ width: '100%' }} helperText={getRequiredFieldHelperText(sangatValue.user_goingToAsthan, "Closest Asthaan")} {...params}  />}  />
+                  renderInput={(params) => <TextField error={!isValidRequiredField(sangatValue.user_goingToAsthan)} required autoComplete="p" label="Closest Asthaan" sx={{ width: '100%' }} helperText={getRequiredFieldHelperText(sangatValue.user_goingToAsthan, "Closest Asthaan")} {...params} />} />
 
               </FormControl>
             </Grid>
@@ -509,7 +523,7 @@ const AddEditUser = (props) => {
             </Grid>
 
             <Grid item xs={12} md={4}>
-             
+
               <TextField error={!isValidPhoneNumber(sangatValue.user_emergencyContact, false)} helperText={getPhoneHelperText(sangatValue.user_emergencyContact, false, "Secondary phone")} autoComplete="p" fullWidth label="Secondary Phone" value={sangatValue.user_emergencyContact} onChange={setSangatEmergencyContact} variant="outlined" />
             </Grid>
 
@@ -525,7 +539,7 @@ const AddEditUser = (props) => {
                 rows={3}
                 value={sangatValue.user_comments}
                 onChange={setSangatComments}
-                
+
               />
             </Grid>
           </Grid>
@@ -659,7 +673,7 @@ const AddEditUser = (props) => {
     </Dialog>
   );
 
-}
+};
 
 
 export default AddEditUser;

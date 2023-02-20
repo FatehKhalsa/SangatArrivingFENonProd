@@ -55,8 +55,9 @@ class MTable extends React.Component {
   }
 
 
+
   render() {
-    const { rowData, columnDefs, text, customWidth, hideGetSelectedRowData } = this.props;
+    const { rowData, columnDefs, text, customWidth, hideGetSelectedRowData, onSaveSuccessCallBack } = this.props;
 
     const { showModal, userSelected, loadModel } = this.state;
 
@@ -64,7 +65,7 @@ class MTable extends React.Component {
 
     return (
       <React.Fragment>
-        {showModal && (loadModel === 'User' ? <AddEditUser user={userSelected[0]} /> : (loadModel === 'Host' && <HostModal userSelected={userSelected} />))}
+        {showModal && (loadModel === 'User' ? <AddEditUser user={userSelected[0]} onSaveSuccessCallBack={onSaveSuccessCallBack} /> : (loadModel === 'Host' && <HostModal userSelected={userSelected} />))}
         <Grid container sx={{ mb: 1, mt:1 }}
         spacing={2}
           direction={{xs: "column", sm:"row"}}
