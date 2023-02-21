@@ -22,6 +22,7 @@ const AddEditUser = (props) => {
   const [showArrivingWithinThreeDays, setShowArrivingWithinThreeDays] = useState(false);
   const [stateOptions, setStateOptions] = useState(null);
   const [overrideValidation, setOverrideValidation] = useState(OVERIDE_USER_LIST.includes(currentUser) ? true : false);
+  const [showFlightInfomation, setShowFlightInformation] = useState(false);
   const [showValidationMessages, setShowValidationMessages] = useState(false);
   const [loading, setLoading] = useState(false);
   const [snack, setSnack] = useState({ message: "", duration: 0, open: false, severity: "success" })
@@ -181,20 +182,33 @@ const AddEditUser = (props) => {
     // required fields
 
     let isValid = true;
-    if (!sangatValue.user_firstName || !sangatValue.user_lastName || !sangatValue.user_middleName || !sangatValue.user_gender || !sangatValue.user_yearOfBirth || !sangatValue.user_goingToAsthan || !sangatValue.user_country || !sangatValue.user_state || !sangatValue.user_city || !sangatValue.user_phoneNumber || !sangatValue.user_arrivingFlightName || !sangatValue.user_arrivingFlightNumber || !sangatValue.user_arrivingFlightDate || !sangatValue.user_arrivingFlightTime || !sangatValue.user_arrivingFlightAirport || !sangatValue.user_ride_from_airport || !sangatValue.user_departingFlightName || !sangatValue.user_departingFlightNumber || !sangatValue.user_departingFlightDate || !sangatValue.user_departingFlightTime || !sangatValue.user_departingFlightAirport) {
+    // Basic User Info
+    if (!sangatValue.user_firstName || !sangatValue.user_lastName || !sangatValue.user_middleName || !sangatValue.user_gender || 
+      !sangatValue.user_yearOfBirth || !sangatValue.user_goingToAsthan || !sangatValue.user_country || !sangatValue.user_state || 
+      !sangatValue.user_city || !sangatValue.user_phoneNumber ) {
       setShowValidationMessages(true);
       isValid = false;
+    }
+
+    // Flight Info
+    if(showFlightInfomation){
+      if(!sangatValue.user_arrivingFlightName || !sangatValue.user_arrivingFlightNumber 
+        || !sangatValue.user_arrivingFlightDate || !sangatValue.user_arrivingFlightTime || !sangatValue.user_arrivingFlightAirport || 
+        !sangatValue.user_ride_from_airport || !sangatValue.user_departingFlightName || !sangatValue.user_departingFlightNumber ||
+         !sangatValue.user_departingFlightDate || !sangatValue.user_departingFlightTime || !sangatValue.user_departingFlightAirport
+         || !isValidDate(sangatValue.user_arrivingFlightDate) || !isValidDate(sangatValue.user_departingFlightDate)
+          || !isValidTime(sangatValue.user_arrivingFlightTime) || !isValidTime(sangatValue.user_departingFlightTime)
+         ){
+          setShowValidationMessages(true);
+          isValid = false;
+      }
     }
     // phones and emails
     if (!isValidPhoneNumber(sangatValue.user_phoneNumber, true) || !isValidPhoneNumber(sangatValue.user_emergencyContact, false) || !isValidEmail(sangatValue.user_email, false)) {
       setShowValidationMessages(true);
       isValid = false;
     }
-    if (!isValidDate(sangatValue.user_yearOfBirth) || !isValidDate(sangatValue.user_arrivingFlightDate) || !isValidDate(sangatValue.user_departingFlightDate)) {
-      setShowValidationMessages(true);
-      isValid = false;
-    }
-    if (!isValidTime(sangatValue.user_arrivingFlightTime) || !isValidTime(sangatValue.user_departingFlightTime)) {
+    if (!isValidDate(sangatValue.user_yearOfBirth)) {
       setShowValidationMessages(true);
       isValid = false;
     }
@@ -215,14 +229,22 @@ const AddEditUser = (props) => {
     else {
       setShowArrivingWithinThreeDays(false);
       let dobLocalDateFormat = sangatValue.user_yearOfBirth.format(LOCAL_DATE_FORMAT);
+      let sangatValueToSave = {};
 
-      {/* TODO: front end and backend name mismatch */ }
-
-      let sangatValueToSave = {
+      if(showFlightInfomation){
+        sangatValueToSave = {
           ...sangatValue, user_yearOfBirth: dobLocalDateFormat, user_arrivingFlightDate: sangatValue.user_arrivingFlightDate.format(LOCAL_DATE_FORMAT),
           user_arrivingFlightTime: sangatValue.user_arrivingFlightTime.format("HH:mm"), user_departingFlightDate: sangatValue.user_departingFlightDate.format(LOCAL_DATE_FORMAT),
           user_departingFlightTime: sangatValue.user_departingFlightTime.format("HH:mm")
         };
+      }
+      else{
+        sangatValueToSave = {
+          ...sangatValue, user_yearOfBirth: dobLocalDateFormat
+        };
+      }
+
+      {/* TODO: front end and backend name mismatch */ }
       setLoading(true);
       let saveUserResponse;
       if (sangatValue && sangatValue._id) {
@@ -385,6 +407,8 @@ const AddEditUser = (props) => {
   }
 
   const setUserRideFromAirport = (e) => {
+
+    showFlightInfomation ? setShowFlightInformation(false): setShowFlightInformation(true);
     setSangatValue({ ...sangatValue, user_ride_from_airport: e.target.value ? e.target.value.toUpperCase() : "" })
   }
 
@@ -542,9 +566,31 @@ const AddEditUser = (props) => {
 
               />
             </Grid>
+            <Grid item xs={12} md={4}>
+              <FormControl fullWidth error={!isValidRequiredField(sangatValue.user_ride_from_airport)} >
+                <InputLabel id="needArrivalRideLabel">Need Ride From Airport *</InputLabel>
+                <Select
+                  // needed to remove warning messages about unmounted component on console
+                  defaultValue={"NO"}
+                  labelId="needArrivalRideLabel"
+                  id="arrivalRideSelect"
+                  value={sangatValue.user_ride_from_airport}
+                  label="Need Ride From Airport"
+                  onChange={setUserRideFromAirport}
+                >
+                  <MenuItem value={"NO"}>NO</MenuItem>
+                  <MenuItem value={"YES"}>YES</MenuItem>
+
+                </Select>
+                <FormHelperText>{getRequiredFieldHelperText(sangatValue.user_ride_from_airport, "Need ride from airport")}</FormHelperText>
+              </FormControl>
+            </Grid>
           </Grid>
 
         </Box>
+              <div>{console.log("ShowFlightInforatiom", showFlightInfomation)}</div>
+        {showFlightInfomation && 
+        <>
         <Box sx={{
           background: '#FFFFFF',
           borderRadius: '6px',
@@ -594,25 +640,6 @@ const AddEditUser = (props) => {
             </Grid>
 
             <AutoCompleteWithOther error={!isValidRequiredField(sangatValue.user_arrivingFlightAirport)} helperText={getRequiredFieldHelperText(sangatValue.user_arrivingFlightAirport, "Arrival airport")} optionsList={INDIA_AIRPORT_LIST.sort()} label={"Arrival Airport"} value={sangatValue.user_arrivingFlightAirport} handleChangeCallBack={setArrivingFlightAirport} />
-            <Grid item xs={12} md={4}>
-              <FormControl fullWidth error={!isValidRequiredField(sangatValue.user_ride_from_airport)} >
-                <InputLabel id="needArrivalRideLabel">Need Ride From Airport *</InputLabel>
-                <Select
-                  // needed to remove warning messages about unmounted component on console
-                  defaultValue={""}
-                  labelId="needArrivalRideLabel"
-                  id="arrivalRideSelect"
-                  value={sangatValue.user_ride_from_airport}
-                  label="Need Ride From Airport"
-                  onChange={setUserRideFromAirport}
-                >
-                  <MenuItem value={"NO"}>NO</MenuItem>
-                  <MenuItem value={"YES"}>YES</MenuItem>
-
-                </Select>
-                <FormHelperText>{getRequiredFieldHelperText(sangatValue.user_ride_from_airport, "Need ride from airport")}</FormHelperText>
-              </FormControl>
-            </Grid>
           </Grid>
 
         </Box>
@@ -664,6 +691,8 @@ const AddEditUser = (props) => {
             <AutoCompleteWithOther error={!isValidRequiredField(sangatValue.user_departingFlightAirport)} helperText={getRequiredFieldHelperText(sangatValue.user_departingFlightAirport, "Return airport")} optionsList={INDIA_AIRPORT_LIST.sort()} label={"Return Airport"} value={sangatValue.user_departingFlightAirport} handleChangeCallBack={setDepartingFlightAirport} />
           </Grid>
         </Box>
+        </>
+      }
       </DialogContent>
       <DialogActions style={{ "borderTop": "1px solid lightgrey" }}>
         {/* TODO: if form updated open dialog that tells user all changes made will be lost, are you sure you want to close */}
