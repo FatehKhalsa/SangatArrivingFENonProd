@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { Modal, Button, Alert } from 'react-bootstrap';
 import {editStyling, inputStyle} from '../helper/sharedStyling';
 import {HerokuURL} from '../../constants';
-import Loader from '../../helper/loader';
+import Loader from '../helper/loader';
 
 
 // import ConfirmDialog from '../helper/confirmationDialog';
