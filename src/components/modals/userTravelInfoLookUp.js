@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {get} from 'lodash';
 import {HerokuURL} from '../../constants';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
-import Loader from '../../helper/loader';
+import Loader from '../helper/loader';
 import {editStyling, inputStyle, floatcontainer} from '../helper/sharedStyling';
 
 

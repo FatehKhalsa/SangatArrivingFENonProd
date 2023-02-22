@@ -1,7 +1,7 @@
 import React from 'react';
 import {checkAuth, userRole} from '../userAuthMocks';
 
-import Loader from '../helper/loader';
+import Loader from './helper/loader';
 import UserTravelInfoLookUp from '../components/modals/userTravelInfoLookUp';
 
 class LoginPage extends React.Component {

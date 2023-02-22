@@ -33,8 +33,6 @@ import ReturnSangatReport from './components/reporting/ReturnSangatReport';
 import UserTravelInfoLookUp from './components/modals/userTravelInfoLookUp';
 
 
-
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import './AppScss.scss';
