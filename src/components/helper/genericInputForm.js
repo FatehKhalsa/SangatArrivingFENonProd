@@ -241,7 +241,7 @@ const GenericInputForm = (props) => {
       }
       else{
         sangatValueToSave = {
-          ...sangatValue, user_yearOfBirth: dobLocalDateFormat
+          ...sangatValue, user_yearOfBirth: dobLocalDateFormat, user_arrivingFlightDate: sangatValue.user_arrivingFlightDate.format(LOCAL_DATE_FORMAT),  user_departingFlightDate: sangatValue.user_departingFlightDate.format(LOCAL_DATE_FORMAT)
         };
       }
 
@@ -374,6 +374,7 @@ const GenericInputForm = (props) => {
   }
 
   const setArrivingFlightDate = (newValue) => {
+    console.log("New Value", newValue);
     setSangatValue({ ...sangatValue, user_arrivingFlightDate: newValue })
   }
 
@@ -596,7 +597,7 @@ const GenericInputForm = (props) => {
 
         </Box>
             <div>{console.log("Show Flight Information:", showFlightInfomation)}</div>
-        {showFlightInfomation && 
+        {showFlightInfomation ? 
         <>
         <Box sx={{
           background: '#FFFFFF',
@@ -699,6 +700,43 @@ const GenericInputForm = (props) => {
           </Grid>
         </Box>
         </>
+        :
+        <Box id="startForm" sx={{
+          background: '#FFFFFF',
+          borderRadius: '6px',
+          padding: '1rem',
+          margin: '1rem',
+        }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={4}>
+              <LocalizationProvider dateAdapter={AdapterDayjs} >
+
+                <DatePicker
+                  inputFormat={LOCAL_DATE_FORMAT}
+                  label={getDateFieldLabel("Estimated Arrival Date")}
+                  value={sangatValue.user_arrivingFlightDate}
+                  onChange={(newValue) => {
+                    setArrivingFlightDate(newValue);
+                  }}
+                  renderInput={(params) => <TextField required sx={{ width: '100%' }} {...params} error={!isValidDate(sangatValue.user_arrivingFlightDate, true)} helperText={getDateHelperText(sangatValue.user_arrivingFlightDate, true, "Arrival Date")} />}
+                />
+              </LocalizationProvider>
+      </Grid>
+       <Grid item xs={12} md={4}>
+       <LocalizationProvider dateAdapter={AdapterDayjs} >
+                <DatePicker
+                  inputFormat={LOCAL_DATE_FORMAT}
+                  label={getDateFieldLabel("Estimated Return Date")}
+                  value={sangatValue.user_departingFlightDate}
+                  onChange={(newValue) => {
+                    setDepartingFlightDate(newValue)
+                  }}
+                  renderInput={(params) => <TextField required sx={{ width: '100%' }} {...params} error={!isValidDate(sangatValue.user_departingFlightDate, true)} helperText={getDateHelperText(sangatValue.user_departingFlightDate, true, "Return date")} />}
+                />
+              </LocalizationProvider>
+              </Grid>
+     </Grid>
+     </Box>
       }
       </DialogContent>
       <DialogActions style={{ "borderTop": "1px solid lightgrey" }}>
